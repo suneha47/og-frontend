@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — OG Accessories 47</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --black:#0a0a0a; --dark:#141414; --card:#1c1c1c; --border:#2a2a2a; --gold:#d4a843; --gold2:#f0c96b; --white:#f5f5f5; --muted:#888; --red:#e74c3c; }
+    body { font-family:'Nunito',sans-serif; background:var(--black); color:var(--white); min-height:100vh; display:flex; flex-direction:column; }
+    nav { background:var(--dark); border-bottom:2px solid var(--gold); padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--gold); text-decoration:none; letter-spacing:2px; }
+    .back-link { color:var(--muted); text-decoration:none; font-size:14px; font-weight:700; transition:color .2s; }
+    .back-link:hover { color:var(--gold); }
+    main { flex:1; display:flex; align-items:center; justify-content:center; padding:40px 24px; }
+    .login-box { background:var(--dark); border:1px solid var(--border); border-radius:20px; padding:40px; width:100%; max-width:420px; }
+    .login-icon { text-align:center; font-size:48px; margin-bottom:20px; }
+    .login-title { font-family:'Bebas Neue',sans-serif; font-size:34px; letter-spacing:2px; color:var(--gold); text-align:center; }
+    .login-sub { color:var(--muted); text-align:center; font-size:14px; margin-bottom:30px; }
+    .error-msg { background:rgba(231,76,60,.1); border:1px solid var(--red); border-radius:8px; padding:12px 16px; color:var(--red); font-size:14px; font-weight:700; margin-bottom:18px; display:none; text-align:center; }
+    .error-msg.show { display:block; }
+    .form-group { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+    .form-group label { font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+    .form-group input { background:var(--card); border:1px solid var(--border); border-radius:10px; color:var(--white); font-family:'Nunito',sans-serif; font-size:15px; padding:13px 15px; outline:none; transition:border-color .2s; }
+    .form-group input:focus { border-color:var(--gold); }
+    .login-btn { background:var(--gold); color:var(--black); font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; border:none; border-radius:10px; padding:15px; width:100%; cursor:pointer; margin-top:8px; transition:background .2s; }
+    .login-btn:hover { background:var(--gold2); }
+    .login-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .store-link { text-align:center; margin-top:22px; }
+    .store-link a { color:var(--muted); text-decoration:none; font-size:14px; transition:color .2s; }
+    .store-link a:hover { color:var(--gold); }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">OG 47 — Admin</a>
+  <a href="index.html" class="back-link">← Back to Store</a>
+</nav>
+<main>
+  <div class="login-box">
+    <div class="login-icon">🔐</div>
+    <div class="login-title">Admin Login</div>
+    <div class="login-sub">OG Accessories 47 — Management</div>
+    <div class="error-msg" id="errorMsg">Invalid email or password</div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="admin@ogaccessories47.com" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()" />
+    </div>
+    <button class="login-btn" id="loginBtn" onclick="login()">Sign In</button>
+    <div class="store-link"><a href="index.html">← Return to Store</a></div>
+  </div>
+</main>
+<script>
+  const API = 'https://og-backend-2-pytg.onrender.com';
+  if (localStorage.getItem('og47_token')) window.location.href = 'dashboard.html';
+
+  async function login() {
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const btn      = document.getElementById('loginBtn');
+    const err      = document.getElementById('errorMsg');
+    if (!email || !password) { err.textContent = 'Please enter email and password.'; err.classList.add('show'); return; }
+    btn.textContent = 'Signing in...'; btn.disabled = true; err.classList.remove('show');
+    try {
+      const res  = await fetch(`${API}/api/admin/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email,password}) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Login failed');
+      localStorage.setItem('og47_token', data.token);
+      window.location.href = 'dashboard.html';
+    } catch (e) {
+      err.textContent = e.message || 'Login failed. Check credentials.';
+      err.classList.add('show');
+      btn.textContent = 'Sign In'; btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
