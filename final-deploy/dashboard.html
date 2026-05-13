@@ -680,10 +680,21 @@ function showPanel(id) {
 
 function logout() { localStorage.removeItem('og47_token'); window.location.href = 'admin.html'; }
 
-// ── LOAD PRODUCTS ──
-async function loadProducts() {
+// ── LOAD PRODUCTS (with retry) ──
+async function loadProducts(retryCount = 0) {
   try {
-    const res = await fetch(`${API}/api/products`);
+    // Show loading state
+    const ovList = document.getElementById('overviewProductList');
+    if (ovList) ovList.innerHTML = '<div class="loading-state">Loading...</div>';
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+    const res = await fetch(`${API}/api/products`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) throw new Error('Server error: ' + res.status);
+
     allProducts = await res.json();
     const count = allProducts.length;
     document.getElementById('ovTotalProd').textContent = count;
@@ -695,7 +706,16 @@ async function loadProducts() {
     renderProdList(allProducts);
     renderOverviewList(allProducts.slice(0,5));
   } catch(e) {
-    document.getElementById('productList').innerHTML = '<div class="no-items">⚠️ Could not load products.</div>';
+    if (retryCount < 3) {
+      // Retry up to 3 times with 5 second delay (backend may be waking up)
+      const ovList = document.getElementById('overviewProductList');
+      if (ovList) ovList.innerHTML = `<div class="loading-state">Connecting to server... (attempt ${retryCount + 2}/4)</div>`;
+      setTimeout(() => loadProducts(retryCount + 1), 5000);
+    } else {
+      document.getElementById('productList').innerHTML = '<div class="no-items">⚠️ Could not load products. Please refresh the page.</div>';
+      const ovList = document.getElementById('overviewProductList');
+      if (ovList) ovList.innerHTML = '<div class="no-items">⚠️ Could not load products. Please refresh the page.</div>';
+    }
   }
 }
 
@@ -1199,7 +1219,8 @@ function showMsg(id, text, type) {
 }
 
 // ── INIT ──
-loadProducts();
+// Small delay to ensure page is ready before calling backend
+setTimeout(() => loadProducts(), 1000);
 </script>
 <script>
 
@@ -1395,3 +1416,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
