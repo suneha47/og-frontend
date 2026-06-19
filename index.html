@@ -1,532 +1,681 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OG Accessories 47 | Premium Wallets, Watches & More – Zira, Ferozepur</title>
-  <meta name="description" content="Shop premium fashion accessories at OG Accessories 47, Zira. Wallets, watches, bags, perfumes, sunglasses & more. Order on WhatsApp!" />
-  <link rel="icon" href="favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --black:#080808;--dark:#0f0f0f;--card:#161616;--card2:#1a1a1a;
-      --border:#222;--gold:#c9992a;--gold2:#f0c96b;
-      --goldg:linear-gradient(135deg,#c9992a,#f0c96b);
-      --white:#f0f0f0;--muted:#777;--green:#25D366;--red:#e74c3c;
-    }
-    html{scroll-behavior:smooth}
-    body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OG Accessories 47 | Premium Wallets, Watches & More – Zira, Ferozepur</title>
+<meta name="description" content="Premium fashion accessories – wallets, watches, bags, sunglasses, perfumes & apparel. Free delivery above ₹999. Order on WhatsApp. Zira, Ferozepur, Punjab."/>
+<meta property="og:title" content="OG Accessories 47 | Premium Fashion"/>
+<meta property="og:description" content="Premium fashion accessories for those who define their own standard."/>
+<meta property="og:url" content="https://ogaccessories47.netlify.app/"/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;
+  --dark:#0f0f0f;
+  --dark2:#141414;
+  --card:#181818;
+  --card2:#1e1e1e;
+  --border:#252525;
+  --border-g:rgba(201,168,76,.2);
+  --gold:#c9a84c;
+  --gold2:#e8c97a;
+  --goldg:linear-gradient(135deg,#9a7635,#c9a84c 50%,#e8c97a);
+  --white:#f0f0f0;
+  --muted:#888;
+  --muted2:#555;
+  --green:#25D366;
+  --red:#e74c3c;
+  --star:#f5a623;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none}
 
-    /* ── NAV ── */
-    nav{
-      position:fixed;top:0;left:0;right:0;z-index:500;
-      height:64px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 48px;
-      background:rgba(8,8,8,0);
-      border-bottom:1px solid transparent;
-      transition:all .4s ease;
-    }
-    nav.scrolled{background:rgba(8,8,8,.95);backdrop-filter:blur(20px);border-bottom-color:rgba(201,153,42,.15)}
-    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--white);text-decoration:none;letter-spacing:4px;display:flex;align-items:center;gap:8px}
-    .nav-logo-badge{background:var(--gold);color:var(--black);font-size:9px;font-weight:900;padding:3px 7px;border-radius:4px;letter-spacing:1px}
-    .nav-links{display:flex;gap:36px;list-style:none}
-    .nav-links a{color:rgba(240,240,240,.7);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.5px;transition:color .2s}
-    .nav-links a:hover{color:var(--white)}
-    .nav-right{display:flex;align-items:center;gap:16px}
-    .nav-wa{background:var(--green);color:#fff;font-weight:700;font-size:12px;letter-spacing:1px;padding:9px 20px;border-radius:6px;text-decoration:none;display:flex;align-items:center;gap:7px;transition:opacity .2s,transform .2s}
-    .nav-wa:hover{opacity:.9;transform:translateY(-1px)}
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;z-index:1002}
-    .hamburger span{display:block;width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
-    .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
-    .hamburger.open span:nth-child(2){opacity:0}
-    .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
-    .mobile-menu{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(8,8,8,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:20px 32px;z-index:499}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{color:var(--white);text-decoration:none;font-weight:600;font-size:16px;padding:14px 0;border-bottom:1px solid var(--border)}
-    .mobile-menu a:last-child{border:none}
-    @media(max-width:768px){.nav-links,.nav-right{display:none!important}.hamburger{display:flex!important}nav{padding:0 20px}}
+/* ── CURSOR ── */
+#cur-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#cur-ring{width:32px;height:32px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.45;transition:width .25s,height .25s,opacity .25s}
+body.ch #cur-ring{width:46px;height:46px;opacity:.85}
+@media(max-width:768px){#cur-dot,#cur-ring{display:none}body{cursor:auto}}
 
-    /* ── TICKER ── */
-    .ticker{background:var(--gold);overflow:hidden;height:34px;display:flex;align-items:center;position:relative;z-index:10}
-    .ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:tickerSlide 35s linear infinite}
-    .ticker-inner span{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--black);letter-spacing:2px}
-    @keyframes tickerSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--black);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+#ldr-logo{font-family:'Cormorant',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:.2em;background:var(--goldg);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0}
+#ldr-sub{font-size:.58rem;letter-spacing:.55em;text-transform:uppercase;color:var(--muted);opacity:0}
+#ldr-bar-w{position:absolute;bottom:2.5rem;width:160px;height:1px;background:rgba(255,255,255,.06)}
+#ldr-bar{height:100%;width:0;background:var(--gold)}
 
-    /* ── HERO (Full Screen like Salty/RAW) ── */
-    .hero{
-      position:relative;width:100%;height:100vh;min-height:600px;
-      display:flex;align-items:flex-end;
-      overflow:hidden;margin-top:0;
-    }
-    /* BIG background image from Unsplash - fashion/accessories */
-    .hero-bg-img{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;object-position:center top;
-      filter:brightness(.55);
-      transition:transform 8s ease;
-    }
-    .hero:hover .hero-bg-img{transform:scale(1.04)}
-    /* dark overlay gradient */
-    .hero-overlay{
-      position:absolute;inset:0;
-      background:linear-gradient(to top, rgba(8,8,8,.95) 0%, rgba(8,8,8,.5) 40%, rgba(8,8,8,.1) 100%);
-    }
-    /* side gradient */
-    .hero-overlay2{
-      position:absolute;inset:0;
-      background:linear-gradient(to right, rgba(8,8,8,.7) 0%, transparent 60%);
-    }
-    .hero-content{
-      position:relative;z-index:1;
-      padding:0 60px 70px;
-      max-width:700px;
-    }
-    .hero-tag{
-      display:inline-flex;align-items:center;gap:8px;
-      color:var(--gold);font-size:11px;font-weight:700;letter-spacing:3px;
-      text-transform:uppercase;margin-bottom:16px;
-      animation:fadeUp .7s ease both;
-    }
-    .hero-tag::before{content:'';width:32px;height:1px;background:var(--gold)}
-    .hero-h1{
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(70px,12vw,140px);
-      line-height:.88;letter-spacing:2px;color:var(--white);
-      animation:fadeUp .7s .12s ease both;
-    }
-    .hero-h1 .gold{color:var(--gold)}
-    .hero-h1 .outline{-webkit-text-stroke:2px var(--white);color:transparent}
-    .hero-sub{
-      color:rgba(240,240,240,.7);font-size:clamp(14px,1.8vw,17px);
-      font-weight:300;margin:20px 0 36px;line-height:1.7;max-width:440px;
-      animation:fadeUp .7s .24s ease both;
-    }
-    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .7s .36s ease both}
-    .btn-white{background:var(--white);color:var(--black);font-weight:700;font-size:13px;letter-spacing:1px;padding:14px 36px;border-radius:4px;text-decoration:none;transition:all .2s;border:2px solid var(--white)}
-    .btn-white:hover{background:transparent;color:var(--white)}
-    .btn-outline-w{background:transparent;color:var(--white);font-weight:600;font-size:13px;letter-spacing:1px;padding:13px 36px;border-radius:4px;border:2px solid rgba(255,255,255,.4);text-decoration:none;transition:all .2s}
-    .btn-outline-w:hover{border-color:var(--white)}
-    /* scroll indicator */
-    .hero-scroll{position:absolute;bottom:28px;right:48px;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:11px;letter-spacing:2px;text-transform:uppercase;animation:fadeUp .7s .6s ease both}
-    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(201,153,42,.8),transparent);animation:scrollLine 1.5s ease-in-out infinite}
-    @keyframes scrollLine{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(.5);opacity:.4}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-    @media(max-width:768px){.hero-content{padding:0 24px 50px}.hero{height:90vh}.hero-scroll{right:20px}}
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:600;background:var(--dark2)}
+.hdr-top{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid var(--border)}
+.hdr-logo{font-family:'Cormorant',serif;font-size:1.55rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.12em;white-space:nowrap;flex-shrink:0}
+.hdr-logo small{font-size:.75rem;font-style:italic;opacity:.6;font-weight:400;display:block;letter-spacing:.2em;line-height:1;margin-top:-2px}
+.hdr-search{flex:1;display:flex;max-width:800px;height:42px}
+.hdr-search-cat{background:var(--card2);border:1px solid var(--border);border-right:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.72rem;padding:0 10px;cursor:pointer;min-width:90px;outline:none;display:none}
+@media(min-width:900px){.hdr-search-cat{display:block}}
+.hdr-search input{flex:1;background:var(--white);border:none;color:var(--black);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:0 16px;outline:none}
+.hdr-search input::placeholder{color:#888}
+.hdr-search-btn{width:46px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--black);font-size:1rem;transition:background .2s;flex-shrink:0}
+.hdr-search-btn:hover{background:var(--gold2)}
+.hdr-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+.hdr-wa{background:var(--gold);color:var(--black);font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 18px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:background .2s,transform .2s;white-space:nowrap}
+.hdr-wa:hover{background:var(--gold2);transform:translateY(-1px)}
+.hdr-icon-btn{background:none;border:1px solid var(--border);color:var(--muted);width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;text-decoration:none;transition:border-color .2s,color .2s;flex-shrink:0}
+.hdr-icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;flex-shrink:0}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--white);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+@media(max-width:768px){.hamburger{display:flex}.hdr-wa{display:none}}
 
-    /* ── STATS ── */
-    .stats-bar{background:var(--dark);border-bottom:1px solid var(--border)}
-    .stats-inner{max-width:1100px;margin:0 auto;padding:28px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
-    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--gold);line-height:1}
-    .stat-label{font-size:11px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
-    @media(max-width:600px){.stats-inner{grid-template-columns:repeat(2,1fr)}.stats-inner{padding:24px 20px}}
+/* ── CATEGORY NAV BAR ── */
+.cat-nav{background:var(--dark);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-nav-inner{display:flex;align-items:center;gap:0;padding:0 16px;min-width:max-content}
+.cat-nav-item{font-size:.72rem;font-weight:500;letter-spacing:.06em;color:rgba(240,240,240,.7);padding:10px 16px;white-space:nowrap;cursor:pointer;text-decoration:none;display:block;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.cat-nav-item:hover{color:var(--white)}
+.cat-nav-item.active{color:var(--gold);border-bottom-color:var(--gold)}
+.cat-nav-divider{width:1px;height:18px;background:var(--border);flex-shrink:0}
 
-    /* ── SECTION UTILS ── */
-    .sec{padding:80px 48px;max-width:1200px;margin:0 auto}
-    .sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
-    .sec-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,58px);letter-spacing:2px;line-height:1}
-    .sec-h2 span{color:var(--gold)}
-    @media(max-width:768px){.sec{padding:60px 20px}}
+/* ── MOBILE DRAWER ── */
+.mob-drawer{display:none;position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
+.mob-drawer.open{display:block}
+.mob-panel{position:absolute;left:0;top:0;bottom:0;width:280px;background:var(--dark2);border-right:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.mob-drawer.open .mob-panel{transform:translateX(0)}
+.mob-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.mob-logo{font-family:'Cormorant',serif;font-size:1.3rem;font-weight:700;color:var(--gold)}
+.mob-close{background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer}
+.mob-links{padding:12px 0}
+.mob-links a{display:flex;align-items:center;gap:12px;padding:13px 20px;color:var(--white);text-decoration:none;font-size:.9rem;font-weight:500;border-left:2px solid transparent;transition:all .2s}
+.mob-links a:hover,.mob-links a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.04)}
+.mob-links a i{width:18px;text-align:center;color:var(--gold);font-size:.85rem}
+.mob-footer{padding:20px;border-top:1px solid var(--border);margin-top:auto}
 
-    /* ── CATEGORIES – Big card style ── */
-    #categories{padding-bottom:20px}
-    .cat-grid{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;margin-top:36px;
-    }
-    .cat-card{
-      position:relative;border-radius:12px;overflow:hidden;
-      aspect-ratio:3/4;cursor:pointer;text-decoration:none;display:block;
-      background:var(--card);border:1px solid var(--border);
-      transition:transform .3s cubic-bezier(.34,1.2,.64,1),box-shadow .3s;
-    }
-    .cat-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(201,153,42,.2)}
-    /* background image for each category */
-    .cat-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease;filter:brightness(.6)}
-    .cat-card:hover .cat-bg{transform:scale(1.08);filter:brightness(.7)}
-    /* fallback colored bg with icon */
-    .cat-bg-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:52px}
-    .cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 60%)}
-    .cat-card.active .cat-overlay{background:linear-gradient(to top,rgba(201,153,42,.7) 0%,rgba(201,153,42,.1) 60%)}
-    .cat-body{position:absolute;bottom:0;left:0;right:0;padding:16px 14px}
-    .cat-icon-badge{
-      width:36px;height:36px;border-radius:8px;
-      background:rgba(255,255,255,.15);backdrop-filter:blur(8px);
-      border:1px solid rgba(255,255,255,.2);
-      display:flex;align-items:center;justify-content:center;
-      font-size:18px;margin-bottom:8px;
-      transition:background .3s;
-    }
-    .cat-card:hover .cat-icon-badge,.cat-card.active .cat-icon-badge{background:var(--gold);border-color:var(--gold)}
-    .cat-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--white);line-height:1}
-    .cat-count{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
-    /* "All" card special */
-    .cat-all{background:linear-gradient(135deg,#1a1200,#2a1c00);border-color:rgba(201,153,42,.3)}
-    .cat-all .cat-bg-fallback{font-size:36px;color:var(--gold)}
+/* ── HERO CAROUSEL ── */
+.carousel{position:relative;overflow:hidden;background:var(--dark)}
+.carousel-track{display:flex;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.carousel-slide{min-width:100%;position:relative;height:clamp(260px,45vw,520px);overflow:hidden;flex-shrink:0}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.45)}
+.carousel-slide-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,5vw,80px)}
+.car-tag{font-size:.62rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.car-tag::before{content:'';width:24px;height:1px;background:var(--gold)}
+.car-h{font-family:'Cormorant',serif;font-size:clamp(2rem,6vw,5rem);font-weight:700;line-height:.95;color:var(--white);margin-bottom:14px}
+.car-h .gold{color:var(--gold);font-style:italic}
+.car-p{font-size:clamp(.78rem,1.4vw,.95rem);color:rgba(240,240,240,.65);margin-bottom:28px;line-height:1.7;max-width:460px}
+.car-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{background:var(--goldg);color:var(--black);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:13px 32px;text-decoration:none;border:none;cursor:pointer;display:inline-block;transition:box-shadow .3s,transform .2s,filter .2s}
+.btn-gold:hover{box-shadow:0 8px 28px rgba(201,168,76,.45);transform:translateY(-2px);filter:brightness(1.08)}
+.btn-outline-w{background:transparent;color:var(--white);font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:12px 32px;border:1px solid rgba(255,255,255,.3);text-decoration:none;display:inline-block;transition:border-color .3s,color .3s,transform .2s}
+.btn-outline-w:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.car-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+.car-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,transform .3s}
+.car-dot.active{background:var(--gold);transform:scale(1.3)}
+.car-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);color:var(--white);width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:.85rem;transition:background .2s,border-color .2s;backdrop-filter:blur(4px)}
+.car-arrow:hover{background:rgba(201,168,76,.2);border-color:var(--gold);color:var(--gold)}
+.car-arrow.prev{left:16px}.car-arrow.next{right:16px}
+@media(max-width:600px){.car-arrow{display:none}}
 
-    @media(max-width:900px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:600px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:8px}.cat-card{aspect-ratio:2/3}}
+/* ── DEAL BANNER ── */
+.deal-banner{background:linear-gradient(135deg,#0f0c00 0%,#1c1600 50%,#0f0c00 100%);border-top:1px solid var(--border-g);border-bottom:1px solid var(--border-g);padding:16px 20px;display:flex;align-items:center;gap:20px;overflow:hidden;position:relative}
+.deal-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(201,168,76,.04),transparent);animation:bannerShimmer 3s ease-in-out infinite}
+@keyframes bannerShimmer{0%,100%{opacity:0}50%{opacity:1}}
+.deal-icon{font-size:1.4rem;flex-shrink:0;color:var(--gold)}
+.deal-text{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.deal-sub{font-size:.72rem;color:var(--muted);margin-left:8px}
+.deal-cta{margin-left:auto;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:8px 20px;text-decoration:none;white-space:nowrap;transition:background .2s}
+.deal-cta:hover{background:var(--gold2)}
 
-    /* ── PRODUCTS ── */
-    #products{padding-top:20px}
-    .products-controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;align-items:center}
-    .search-wrap{flex:1;min-width:200px;position:relative}
-    .search-wrap i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px}
-    .search-box{width:100%;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px 12px 40px;outline:none;transition:border-color .2s}
-    .search-box:focus{border-color:var(--gold)}
-    .search-box::placeholder{color:var(--muted)}
-    .sort-select{background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;padding:12px 20px;outline:none;cursor:pointer}
+/* ── SECTION HEADERS ── */
+.sec-wrap{padding:36px 20px;max-width:1300px;margin:0 auto}
+.sec-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;gap:12px}
+.sec-hdr-left{}
+.sec-eyebrow{font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px}
+.sec-title{font-family:'Cormorant',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;line-height:1.1}
+.sec-title span{color:var(--gold);font-style:italic}
+.sec-see-all{font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:5px;transition:gap .2s}
+.sec-see-all:hover{gap:9px}
+.sec-divider{width:48px;height:2px;background:var(--gold);margin-top:8px}
 
-    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-    .product-card{
-      background:var(--card);border:1px solid var(--border);border-radius:12px;
-      overflow:hidden;cursor:pointer;
-      transition:transform .3s cubic-bezier(.34,1.2,.64,1),border-color .3s,box-shadow .3s;
-      opacity:0;transform:translateY(24px);
-      animation:cardIn .5s ease forwards;
-    }
-    @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
-    .product-card:hover{transform:translateY(-5px);border-color:rgba(201,153,42,.3);box-shadow:0 16px 50px rgba(0,0,0,.4)}
-    .product-img-wrap{position:relative;overflow:hidden;aspect-ratio:1}
-    .product-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-    .product-card:hover .product-img{transform:scale(1.07)}
-    .product-img-ph{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:52px;background:var(--card2)}
-    .product-cat-badge{position:absolute;top:10px;left:10px;background:rgba(8,8,8,.8);backdrop-filter:blur(6px);color:var(--gold);font-size:9px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:4px;text-transform:uppercase;border:1px solid rgba(201,153,42,.2)}
-    .product-quick-overlay{position:absolute;inset:0;background:rgba(8,8,8,.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
-    .product-card:hover .product-quick-overlay{opacity:1}
-    .quick-view-btn{background:var(--white);color:var(--black);font-weight:700;font-size:12px;letter-spacing:1px;padding:10px 24px;border-radius:4px;border:none;cursor:pointer;transform:translateY(10px);transition:transform .3s}
-    .product-card:hover .quick-view-btn{transform:translateY(0)}
-    .product-info{padding:14px 14px 6px}
-    .product-cat-txt{font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:700}
-    .product-name{font-size:14px;font-weight:600;margin:5px 0 10px;line-height:1.3}
-    .product-footer{display:flex;align-items:center;justify-content:space-between;padding:0 14px 14px}
-    .product-price{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:1px}
-    .product-wa-btn{width:38px;height:38px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:18px;text-decoration:none;transition:all .2s;flex-shrink:0}
-    .product-wa-btn:hover{background:var(--green);color:#fff;transform:scale(1.08)}
-    .no-products,.loading-text{text-align:center;padding:80px 20px;color:var(--muted);grid-column:1/-1}
-    .loading-text{display:flex;flex-direction:column;align-items:center;gap:14px}
-    .spinner{width:36px;height:36px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
+/* ── CATEGORY TILES ── */
+.cat-tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:4px}
+.cat-tile{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;text-decoration:none;display:block;border:1px solid var(--border);transition:border-color .35s,box-shadow .35s;transform-style:preserve-3d}
+.cat-tile:hover{border-color:var(--border-g);box-shadow:0 12px 40px rgba(0,0,0,.6)}
+.cat-tile img{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.7);transition:transform .6s cubic-bezier(.4,0,.2,1),filter .5s}
+.cat-tile:hover img{transform:scale(1.08);filter:brightness(.4)}
+.cat-tile-shimmer{position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(201,168,76,.1) 50%,transparent 70%);background-size:200%;opacity:0;transition:opacity .4s}
+.cat-tile:hover .cat-tile-shimmer{opacity:1;animation:shimSweep .7s ease forwards}
+@keyframes shimSweep{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.cat-tile-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9) 0%,transparent 60%)}
+.cat-tile.active .cat-tile-overlay{background:linear-gradient(to top,rgba(201,168,76,.7) 0%,rgba(201,168,76,.05) 60%)}
+.cat-tile-body{position:absolute;bottom:0;left:0;right:0;padding:12px}
+.cat-tile-icon{width:30px;height:30px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:var(--white);margin-bottom:6px;transition:background .3s,color .3s}
+.cat-tile:hover .cat-tile-icon,.cat-tile.active .cat-tile-icon{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.cat-tile-name{font-family:'Cormorant',serif;font-size:.95rem;font-weight:600;color:var(--white);letter-spacing:.04em;line-height:1}
+.cat-tile-sub{font-size:.58rem;color:rgba(255,255,255,.45);margin-top:2px;letter-spacing:.08em}
+.cat-all-tile{background:linear-gradient(135deg,#120f00,#1e1800);border-color:rgba(201,168,76,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.cat-all-tile .cat-tile-body{position:relative;padding:0;text-align:center}
+.cat-all-tile .cat-tile-name{font-size:1.1rem}
+@media(max-width:900px){.cat-tiles{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.cat-tiles{grid-template-columns:repeat(2,1fr);gap:8px}}
 
-    /* ── PROMO BANNER ── */
-    .promo{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .promo-inner{max-width:1200px;margin:0 auto;padding:70px 48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-    .promo-tag{display:inline-block;background:rgba(201,153,42,.1);border:1px solid rgba(201,153,42,.25);color:var(--gold);font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;border-radius:4px;margin-bottom:16px}
-    .promo-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,80px);line-height:.9;letter-spacing:2px}
-    .promo-h2 .gold-txt{color:var(--gold)}
-    .promo-p{color:var(--muted);font-size:15px;margin:16px 0 28px;line-height:1.8}
-    .promo-features{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .pf{background:var(--black);border:1px solid var(--border);border-radius:10px;padding:18px;transition:border-color .2s}
-    .pf:hover{border-color:rgba(201,153,42,.2)}
-    .pf-icon{font-size:22px;margin-bottom:8px}
-    .pf-title{font-weight:700;font-size:13px;margin-bottom:3px}
-    .pf-sub{font-size:12px;color:var(--muted)}
-    @media(max-width:768px){.promo-inner{grid-template-columns:1fr;gap:36px;padding:48px 20px}}
+/* ── STATS BAR ── */
+.stats-bar{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px}
+.stats-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+.stat-num{font-family:'Cormorant',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:.6rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-top:3px}
+@media(max-width:600px){.stats-inner{grid-template-columns:repeat(2,1fr)}}
 
-    /* ── CONTACT STRIP ── */
-    .cstrip{background:var(--black);border-top:1px solid var(--border)}
-    .cstrip-inner{max-width:1100px;margin:0 auto;padding:44px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
-    .ci{display:flex;align-items:center;gap:14px}
-    .ci-icon{width:42px;height:42px;border-radius:8px;background:rgba(201,153,42,.07);border:1px solid rgba(201,153,42,.12);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px;flex-shrink:0}
-    .ci-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
-    .ci-val{font-weight:600;font-size:13px;margin-top:2px}
-    .ci-val a{color:var(--white);text-decoration:none;transition:color .2s}
-    .ci-val a:hover{color:var(--gold)}
-    @media(max-width:768px){.cstrip-inner{padding:32px 20px}}
+/* ── PRODUCTS ── */
+#products-sec{background:var(--black);padding-bottom:40px}
+.prod-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.search-wrap{flex:1;min-width:220px;position:relative}
+.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem}
+.search-box{width:100%;background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.88rem;padding:11px 14px 11px 38px;outline:none;transition:border-color .2s}
+.search-box:focus{border-color:var(--gold)}
+.search-box::placeholder{color:var(--muted2)}
+.sort-select{background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.82rem;padding:11px 16px;outline:none;cursor:pointer;transition:border-color .2s}
+.sort-select:focus{border-color:var(--gold)}
+.sort-select option{background:var(--dark)}
+.filter-count{font-size:.72rem;color:var(--muted);padding:0 4px;white-space:nowrap}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 
-    /* ── FOOTER ── */
-    footer{background:var(--dark);border-top:1px solid var(--border)}
-    .ft{max-width:1100px;margin:0 auto;padding:60px 48px 40px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
-    .ft-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--white);margin-bottom:12px}
-    .ft-desc{color:var(--muted);font-size:13px;line-height:1.8;max-width:250px}
-    .ft-socials{display:flex;gap:8px;margin-top:18px}
-    .ft-socials a{width:36px;height:36px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-decoration:none;transition:all .2s}
-    .ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
-    .ft-col h4{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;margin-bottom:16px;color:var(--white)}
-    .ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .ft-col ul a{color:var(--muted);text-decoration:none;font-size:13px;transition:color .2s}
-    .ft-col ul a:hover{color:var(--gold)}
-    .ft-bottom{border-top:1px solid var(--border);padding:18px 48px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-    .ft-bottom p{color:var(--muted);font-size:12px}
-    .ft-bottom span{color:var(--gold)}
-    @media(max-width:768px){.ft{grid-template-columns:1fr;gap:32px;padding:40px 20px}.ft-bottom{padding:16px 20px;flex-direction:column;text-align:center}}
+/* skeleton */
+.skel{background:var(--card);border:1px solid var(--border)}
+.skel-img{aspect-ratio:1;background:var(--card2);overflow:hidden;position:relative}
+.skel-body{padding:12px}
+.skel-line{height:9px;background:var(--card2);margin-bottom:9px;overflow:hidden;position:relative}
+.skel-line.w70{width:70%}.skel-line.w90{width:90%}.skel-line.w50{width:50%}
+.skel-price-row{display:flex;gap:8px;margin-top:4px}
+.skel-price{height:22px;width:50%;background:var(--card2);overflow:hidden;position:relative}
+.shimmer::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);animation:sMove 1.5s infinite}
+@keyframes sMove{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
-    /* ── MODAL ── */
-    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px)}
-    .modal-overlay.open{display:flex;animation:mfadeIn .2s ease}
-    @keyframes mfadeIn{from{opacity:0}to{opacity:1}}
-    .modal-box{background:var(--dark);border:1px solid var(--border);border-radius:16px;max-width:540px;width:100%;overflow:hidden;position:relative;max-height:90vh;overflow-y:auto;animation:mSlideIn .3s cubic-bezier(.34,1.2,.64,1)}
-    @keyframes mSlideIn{from{opacity:0;transform:scale(.93) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    .modal-img{width:100%;aspect-ratio:1;object-fit:cover}
-    .modal-img-ph{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:80px;background:var(--card)}
-    .modal-close{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.8);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:16px;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-    .modal-close:hover{background:var(--red);border-color:var(--red)}
-    .modal-body{padding:24px}
-    .modal-cat{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-weight:700}
-    .modal-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:2px;margin:8px 0 4px;line-height:1}
-    .modal-price{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--gold)}
-    .modal-desc{color:var(--muted);font-size:14px;margin-top:12px;line-height:1.8}
-    .modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#fff;font-weight:700;font-size:15px;padding:15px;border-radius:10px;text-decoration:none;margin-top:18px;transition:opacity .2s,transform .2s}
-    .modal-wa:hover{opacity:.9;transform:translateY(-2px)}
+/* product card */
+.product-card{background:var(--card);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:border-color .3s,box-shadow .3s,transform .3s;opacity:0;transform:translateY(20px);animation:cardIn .45s ease forwards;display:flex;flex-direction:column}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+.product-card:hover{border-color:rgba(201,168,76,.3);box-shadow:0 12px 40px rgba(0,0,0,.5);transform:translateY(-4px)}
+.product-img-wrap{position:relative;overflow:hidden;aspect-ratio:1}
+.product-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.product-card:hover .product-img{transform:scale(1.06)}
+.product-img-ph{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--card2);color:var(--gold)}
+.product-badges{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:4px}
+.badge{font-size:.55rem;font-weight:700;letter-spacing:.12em;padding:3px 7px;text-transform:uppercase}
+.badge-cat{background:rgba(8,8,8,.85);backdrop-filter:blur(4px);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
+.badge-new{background:var(--gold);color:var(--black)}
+.badge-hot{background:#c0392b;color:#fff}
+.product-quick{position:absolute;inset:0;background:rgba(8,8,8,.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.product-card:hover .product-quick{opacity:1}
+.quick-btn{background:var(--white);color:var(--black);font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border:none;cursor:pointer;transform:translateY(8px);transition:transform .3s}
+.product-card:hover .quick-btn{transform:translateY(0)}
+.product-body{padding:12px;flex:1;display:flex;flex-direction:column}
+.product-cat-lbl{font-size:.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-weight:700;margin-bottom:4px}
+.product-name{font-size:.88rem;font-weight:600;line-height:1.35;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.product-stars{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+.stars-icon{color:var(--star);font-size:.72rem;letter-spacing:1px}
+.stars-count{font-size:.65rem;color:var(--muted)}
+.product-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.product-price{font-family:'Cormorant',serif;font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1}
+.product-mrp{font-size:.75rem;color:var(--muted2);text-decoration:line-through}
+.product-discount{font-size:.68rem;font-weight:700;color:#27ae60}
+.product-footer{display:flex;gap:8px;padding:0 12px 12px;margin-top:auto}
+.product-wa-btn{flex:1;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.2);color:var(--green);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px 8px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s;cursor:pointer}
+.product-wa-btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
+.no-products{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1}
 
-    /* ── WA FLOAT ── */
-    .wa-float{position:fixed;bottom:28px;right:28px;background:var(--green);color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;z-index:999;box-shadow:0 4px 24px rgba(37,211,102,.4);transition:transform .2s;animation:waPop 1s 1.5s cubic-bezier(.34,1.56,.64,1) both}
-    @keyframes waPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
-    .wa-float:hover{transform:scale(1.1) rotate(-8deg)}
-    .wa-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(37,211,102,.35);animation:waPulse 2s ease-out infinite}
-    @keyframes waPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.5);opacity:0}}
+/* ── FEATURE STRIP ── */
+.feat-strip{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.feat-inner{max-width:1300px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.feat-item{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--border);background:var(--card);transition:border-color .3s,transform .3s}
+.feat-item:hover{border-color:var(--border-g);transform:translateY(-3px)}
+.feat-icon{width:44px;height:44px;color:var(--gold);flex-shrink:0}
+.feat-icon svg{width:100%;height:100%}
+.feat-title{font-weight:700;font-size:.88rem;margin-bottom:2px}
+.feat-sub{font-size:.75rem;color:var(--muted);line-height:1.5}
 
-    /* ── SCROLL REVEAL ── */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
-  </style>
+/* ── CONTACT STRIP ── */
+.cstrip{background:var(--dark)}
+.cstrip-inner{max-width:1300px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.ci{display:flex;align-items:center;gap:12px}
+.ci-icon{width:40px;height:40px;background:rgba(201,168,76,.06);border:1px solid var(--border-g);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.95rem;flex-shrink:0;transition:background .3s}
+.ci:hover .ci-icon{background:rgba(201,168,76,.12)}
+.ci-label{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.18em}
+.ci-val{font-weight:600;font-size:.82rem;margin-top:2px}
+.ci-val a{color:var(--white);text-decoration:none;transition:color .2s}
+.ci-val a:hover{color:var(--gold)}
 
+/* ── FOOTER ── */
+footer{background:var(--dark2);border-top:1px solid var(--border)}
+.ft-top{max-width:1300px;margin:0 auto;padding:48px 20px 36px;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px}
+.ft-logo{font-family:'Cormorant',serif;font-size:1.6rem;font-weight:700;letter-spacing:.1em;color:var(--gold);margin-bottom:10px}
+.ft-desc{color:var(--muted);font-size:.8rem;line-height:1.8;max-width:240px;margin-bottom:16px}
+.ft-socials{display:flex;gap:8px}
+.ft-socials a{width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:.82rem;transition:all .2s}
+.ft-socials a:hover{border-color:var(--gold);color:var(--gold)}
+.ft-col h4{font-family:'Cormorant',serif;font-size:1rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:14px;color:var(--gold)}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-col ul a{color:var(--muted);text-decoration:none;font-size:.8rem;cursor:pointer;transition:color .2s}
+.ft-col ul a:hover{color:var(--gold)}
+.ft-bottom{border-top:1px solid var(--border);padding:16px 20px;max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-copy{color:var(--muted);font-size:.72rem}
+.ft-copy span{color:var(--gold)}
+.ft-admin{font-size:.5rem;color:rgba(255,255,255,.06);text-decoration:none;transition:color .2s}
+.ft-admin:hover{color:var(--muted)}
+@media(max-width:900px){.ft-top{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:560px){.ft-top{grid-template-columns:1fr}}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:2000;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(12px)}
+.modal-overlay.open{display:flex;animation:mFade .2s ease}
+@keyframes mFade{from{opacity:0}to{opacity:1}}
+.modal-box{background:var(--dark2);border:1px solid var(--border);max-width:520px;width:100%;position:relative;max-height:92vh;overflow-y:auto;animation:mSlide .3s cubic-bezier(.34,1.2,.64,1)}
+@keyframes mSlide{from{opacity:0;transform:scale(.93) translateY(18px)}to{opacity:1;transform:none}}
+.modal-img{width:100%;aspect-ratio:1;object-fit:cover}
+.modal-img-ph{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--card);color:var(--gold)}
+.modal-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.1);color:var(--white);font-size:.95rem;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;transition:all .2s}
+.modal-close:hover{background:var(--red);border-color:var(--red)}
+.modal-body{padding:22px}
+.modal-cat-lbl{font-size:.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:700}
+.modal-name{font-family:'Cormorant',serif;font-size:2rem;font-weight:600;line-height:1.05;margin:8px 0 4px}
+.modal-stars{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.modal-price{font-family:'Cormorant',serif;font-size:2.5rem;font-weight:700;color:var(--gold)}
+.modal-price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.modal-mrp{font-size:.82rem;color:var(--muted2);text-decoration:line-through}
+.modal-disc{font-size:.78rem;font-weight:700;color:#27ae60}
+.modal-desc{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:16px}
+.modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--green);color:#fff;font-weight:700;font-size:.9rem;padding:14px;text-decoration:none;transition:opacity .2s,transform .2s}
+.modal-wa:hover{opacity:.9;transform:translateY(-2px)}
+
+/* ── WA FLOAT ── */
+.wa-float{position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;z-index:999;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:waPop 1s 2s cubic-bezier(.34,1.56,.64,1) both;transition:transform .2s}
+@keyframes waPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.wa-float:hover{transform:scale(1.1) rotate(-8deg)}
+.wa-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(37,211,102,.3);animation:waRing 2s ease-out infinite}
+.wa-ring2{position:absolute;inset:-13px;border-radius:50%;border:1.5px solid rgba(37,211,102,.12);animation:waRing 2s ease-out infinite .5s}
+@keyframes waRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#home" class="nav-logo">OG <span class="nav-logo-badge">47</span></a>
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#categories">Categories</a></li>
-    <li><a href="#products">Shop</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <a href="https://wa.me/918146805002" target="_blank" class="nav-wa"><i class="fab fa-whatsapp"></i> Order Now</a>
-  </div>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a>
-  <a href="#categories">Categories</a>
-  <a href="#products">Shop</a>
-  <a href="contact.html">Contact</a>
-  <a href="https://wa.me/918146805002" target="_blank" style="color:var(--green)">📱 Order on WhatsApp</a>
+<!-- CURSOR -->
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="ldr-logo">OG Accessories 47</div>
+  <div id="ldr-sub">Zira &bull; Ferozepur &bull; Punjab</div>
+  <div id="ldr-bar-w"><div id="ldr-bar"></div></div>
 </div>
 
-<!-- TICKER -->
-<div class="ticker" style="margin-top:64px">
-  <div class="ticker-inner">
-    <span>🛍️ FREE DELIVERY ON ORDERS ABOVE ₹999</span>
-    <span>⌚ NEW WATCHES COLLECTION IN STOCK</span>
-    <span>👛 PREMIUM WALLETS — BEST PRICES IN ZIRA</span>
-    <span>🕶️ SUNGLASSES FROM ₹299</span>
-    <span>📱 WHATSAPP: +91 81468-05002</span>
-    <span>✨ 100% GENUINE PRODUCTS</span>
-    <span>🛍️ FREE DELIVERY ON ORDERS ABOVE ₹999</span>
-    <span>⌚ NEW WATCHES COLLECTION IN STOCK</span>
-    <span>👛 PREMIUM WALLETS — BEST PRICES IN ZIRA</span>
-    <span>🕶️ SUNGLASSES FROM ₹299</span>
-    <span>📱 WHATSAPP: +91 81468-05002</span>
-    <span>✨ 100% GENUINE PRODUCTS</span>
-  </div>
-</div>
-
-<!-- HERO — Full screen with real fashion background -->
-<section id="home" class="hero">
-  <!-- Real fashion accessories background image from Unsplash -->
-  <img class="hero-bg-img"
-    src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1800&q=80&fit=crop&auto=format"
-    alt="OG Accessories 47 – Premium Fashion"
-    onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80'" />
-  <div class="hero-overlay"></div>
-  <div class="hero-overlay2"></div>
-  <div class="hero-content">
-    <div class="hero-tag">New Collection 2025</div>
-    <h1 class="hero-h1">
-      OG<br>
-      <span class="gold">Accessories</span><br>
-      <span class="outline">47</span>
-    </h1>
-    <p class="hero-sub">Premium fashion accessories for those who define their own standard — straight from Zira, Punjab.</p>
-    <div class="hero-btns">
-      <a href="#products" class="btn-white">Shop Now</a>
-      <a href="contact.html" class="btn-outline-w">Contact Us</a>
+<!-- HEADER -->
+<header id="main-header">
+  <div class="hdr-top">
+    <a href="#home" class="hdr-logo">OG 47<small>Premium Accessories</small></a>
+    <div class="hdr-search">
+      <select class="hdr-search-cat" id="searchCatSelect" aria-label="Search category">
+        <option value="">All</option>
+        <option>Wallets</option><option>Watches</option><option>Side Bags</option>
+        <option>Sunglasses</option><option>Perfumes</option><option>T-Shirts</option>
+        <option>Shirts</option><option>Caps</option><option>Pants</option>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search products, categories..." aria-label="Search" oninput="renderProducts()"/>
+      <button class="hdr-search-btn" onclick="renderProducts()" aria-label="Search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="hdr-right">
+      <a href="contact.html" class="hdr-icon-btn" title="Contact" aria-label="Contact">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+      </a>
+      <a href="https://wa.me/918146805002" target="_blank" rel="noopener" class="hdr-wa">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i> Order Now
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+
+  <!-- CATEGORY NAV BAR -->
+  <nav class="cat-nav" aria-label="Product categories">
+    <div class="cat-nav-inner">
+      <a class="cat-nav-item active" data-cat="all" href="#products-sec" onclick="navFilter('all',this)">All Products</a>
+      <div class="cat-nav-divider"></div>
+      <a class="cat-nav-item" data-cat="Wallets" href="#products-sec" onclick="navFilter('Wallets',this)">Wallets</a>
+      <a class="cat-nav-item" data-cat="Watches" href="#products-sec" onclick="navFilter('Watches',this)">Watches</a>
+      <a class="cat-nav-item" data-cat="Side Bags" href="#products-sec" onclick="navFilter('Side Bags',this)">Side Bags</a>
+      <a class="cat-nav-item" data-cat="Sunglasses" href="#products-sec" onclick="navFilter('Sunglasses',this)">Sunglasses</a>
+      <a class="cat-nav-item" data-cat="Perfumes" href="#products-sec" onclick="navFilter('Perfumes',this)">Perfumes</a>
+      <a class="cat-nav-item" data-cat="T-Shirts" href="#products-sec" onclick="navFilter('T-Shirts',this)">T-Shirts</a>
+      <a class="cat-nav-item" data-cat="Shirts" href="#products-sec" onclick="navFilter('Shirts',this)">Shirts</a>
+      <a class="cat-nav-item" data-cat="Caps" href="#products-sec" onclick="navFilter('Caps',this)">Caps</a>
+      <a class="cat-nav-item" data-cat="Pants" href="#products-sec" onclick="navFilter('Pants',this)">Pants</a>
+      <div class="cat-nav-divider"></div>
+      <a class="cat-nav-item" href="contact.html" style="color:var(--gold)">New Arrivals</a>
+    </div>
+  </nav>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-panel">
+    <div class="mob-header">
+      <div class="mob-logo">OG 47</div>
+      <button class="mob-close" id="mobClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="mob-links">
+      <a href="#home" onclick="closeMob()"><i class="fas fa-home"></i> Home</a>
+      <a href="#categories-sec" onclick="closeMob()"><i class="fas fa-th-large"></i> Categories</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('all',null)"><i class="fas fa-shopping-bag"></i> All Products</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Wallets',null)"><i class="fas fa-wallet"></i> Wallets</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Watches',null)"><i class="fas fa-clock"></i> Watches</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Side Bags',null)"><i class="fas fa-shopping-bag"></i> Side Bags</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Sunglasses',null)"><i class="fas fa-glasses"></i> Sunglasses</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Perfumes',null)"><i class="fas fa-spray-can"></i> Perfumes</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('T-Shirts',null)"><i class="fas fa-tshirt"></i> T-Shirts &amp; Shirts</a>
+      <a href="#products-sec" onclick="closeMob(); navFilter('Caps',null)"><i class="fas fa-hat-cowboy"></i> Caps &amp; Pants</a>
+      <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Contact</a>
+    </div>
+    <div class="mob-footer">
+      <a href="https://wa.me/918146805002" target="_blank" rel="noopener" class="btn-gold" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;text-align:center;padding:13px">
+        <i class="fab fa-whatsapp"></i> Order on WhatsApp
+      </a>
+    </div>
   </div>
-</section>
+</div>
+
+<!-- HERO CAROUSEL -->
+<div class="carousel" id="home" aria-label="Featured collections">
+  <div class="carousel-track" id="carTrack">
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80&auto=format&fit=crop" alt="New Collection 2026"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">New Collection 2026</div>
+        <h1 class="car-h">Premium <span class="gold">Fashion</span><br>Accessories</h1>
+        <p class="car-p">For those who define their own standard — handpicked wallets, watches &amp; more from Zira, Punjab.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold">Shop Now</a>
+          <a href="contact.html" class="btn-outline-w">Visit Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&q=80&auto=format&fit=crop" alt="Watches Collection"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">New Arrivals</div>
+        <h1 class="car-h">Watch <span class="gold">Collection</span><br>2026</h1>
+        <p class="car-p">Premium timepieces at unbeatable prices. New watches collection now in stock.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold" onclick="navFilter('Watches',null)">Shop Watches</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&q=80&auto=format&fit=crop" alt="Sale Up to 30% Off"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">Limited Time</div>
+        <h1 class="car-h">Up to <span class="gold">30% Off</span><br>New Arrivals</h1>
+        <p class="car-p">Elevate your style with our freshly curated seasonal collection. Premium quality, unbeatable prices.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold">Shop the Sale</a>
+          <a href="https://wa.me/918146805002?text=Hi! I want to check sale items" target="_blank" rel="noopener" class="btn-outline-w">WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&q=80&auto=format&fit=crop" alt="Ladies Premium Bags"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">Ladies Collection 2026</div>
+        <h1 class="car-h">Ladies <span class="gold">Premium</span><br>Bags</h1>
+        <p class="car-p">Handpicked side bags &amp; handbags for the modern woman. Style that speaks for itself.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold" onclick="navFilter('Side Bags',null)">Shop Bags</a>
+          <a href="https://wa.me/918146805002?text=Hi! I want to see Ladies Bags" target="_blank" rel="noopener" class="btn-outline-w">WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=1600&q=80&auto=format&fit=crop" alt="Premium Wallets"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">Best Sellers 2026</div>
+        <h1 class="car-h">Premium <span class="gold">Wallet</span><br>Collection</h1>
+        <p class="car-p">Best prices on premium wallets in Zira. Genuine styles built to last — exclusive designs.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold" onclick="navFilter('Wallets',null)">Shop Wallets</a>
+          <a href="https://wa.me/918146805002?text=Hi! I want to see Wallets" target="_blank" rel="noopener" class="btn-outline-w">WhatsApp Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=1600&q=80&auto=format&fit=crop" alt="Sunglasses and Perfumes"/>
+      <div class="carousel-slide-content">
+        <div class="car-tag">New Stock 2026</div>
+        <h1 class="car-h">Sunglasses <span class="gold">&amp;</span><br>Perfumes</h1>
+        <p class="car-p">Complete your look. Premium sunglasses from ₹299 &amp; luxury fragrances — only at OG 47.</p>
+        <div class="car-btns">
+          <a href="#products-sec" class="btn-gold" onclick="navFilter('Sunglasses',null)">Shop Sunglasses</a>
+          <a href="#products-sec" class="btn-outline-w" onclick="navFilter('Perfumes',null)">Shop Perfumes</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button class="car-arrow prev" id="carPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+  <button class="car-arrow next" id="carNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+  <div class="car-dots" id="carDots"></div>
+</div>
+
+<!-- DEAL BANNER -->
+<div class="deal-banner">
+  <div class="deal-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+  </div>
+  <span class="deal-text">Free Delivery</span>
+  <span class="deal-sub">on all orders above &#8377;999 &nbsp;|&nbsp; 100% Genuine Products &nbsp;|&nbsp; Easy Returns</span>
+  <a href="#products-sec" class="deal-cta">Shop Now</a>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
   <div class="stats-inner">
-    <div class="reveal"><div class="stat-num" data-count="500">0</div><div class="stat-label">Happy Customers</div></div>
-    <div class="reveal reveal-d1"><div class="stat-num" data-count="9">0</div><div class="stat-label">Categories</div></div>
-    <div class="reveal reveal-d2"><div class="stat-num" data-count="100">0</div><div class="stat-label">Products</div></div>
-    <div class="reveal reveal-d3"><div class="stat-num" data-count="3">0</div><div class="stat-label">Years in Business</div></div>
+    <div class="reveal"><div class="stat-num" data-count="500" data-suffix="+">0</div><div class="stat-label">Happy Customers</div></div>
+    <div class="reveal reveal-d1"><div class="stat-num" data-count="9" data-suffix="">0</div><div class="stat-label">Categories</div></div>
+    <div class="reveal reveal-d2"><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Products</div></div>
+    <div class="reveal reveal-d3"><div class="stat-num" data-count="3" data-suffix=" Yrs">0</div><div class="stat-label">In Business</div></div>
   </div>
 </div>
 
-<!-- CATEGORIES -->
-<div class="sec" id="categories" style="padding-bottom:20px">
-  <div class="sec-label reveal">Browse by</div>
-  <h2 class="sec-h2 reveal reveal-d1">Shop by <span>Category</span></h2>
-  <div class="cat-grid">
-
-    <!-- ALL -->
-    <a class="cat-card cat-all active" data-cat="all" href="#products" onclick="filterCat('all',this)">
-      <div class="cat-bg-fallback">🛍️</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">✦</div>
-        <div class="cat-name">All Products</div>
-        <div class="cat-count">View all</div>
+<!-- CATEGORY TILES -->
+<div id="categories-sec" style="background:var(--dark);padding:20px 0 32px;border-bottom:1px solid var(--border)">
+  <div class="sec-wrap" style="padding-top:24px;padding-bottom:0">
+    <div class="sec-hdr reveal">
+      <div class="sec-hdr-left">
+        <div class="sec-eyebrow">Browse by</div>
+        <div class="sec-title">Shop by <span>Category</span></div>
+        <div class="sec-divider"></div>
       </div>
-    </a>
-
-    <!-- WALLETS -->
-    <a class="cat-card" data-cat="Wallets" href="#products" onclick="filterCat('Wallets',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1627123424574-724758594913?w=400&q=80&fit=crop" alt="Wallets" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">👛</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">👛</div>
-        <div class="cat-name">Wallets</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- WATCHES -->
-    <a class="cat-card" data-cat="Watches" href="#products" onclick="filterCat('Watches',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80&fit=crop" alt="Watches" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">⌚</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">⌚</div>
-        <div class="cat-name">Watches</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- SIDE BAGS -->
-    <a class="cat-card" data-cat="Side Bags" href="#products" onclick="filterCat('Side Bags',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80&fit=crop" alt="Side Bags" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">👜</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">👜</div>
-        <div class="cat-name">Side Bags</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- SUNGLASSES -->
-    <a class="cat-card" data-cat="Sunglasses" href="#products" onclick="filterCat('Sunglasses',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&q=80&fit=crop" alt="Sunglasses" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">🕶️</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">🕶️</div>
-        <div class="cat-name">Sunglasses</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- PERFUMES -->
-    <a class="cat-card" data-cat="Perfumes" href="#products" onclick="filterCat('Perfumes',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&fit=crop" alt="Perfumes" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">🌸</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">🌸</div>
-        <div class="cat-name">Perfumes</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- T-SHIRTS -->
-    <a class="cat-card" data-cat="T-Shirts" href="#products" onclick="filterCat('T-Shirts',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80&fit=crop" alt="T-Shirts" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">👕</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">👕</div>
-        <div class="cat-name">T-Shirts</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- SHIRTS -->
-    <a class="cat-card" data-cat="Shirts" href="#products" onclick="filterCat('Shirts',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80&fit=crop" alt="Shirts" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">👔</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">👔</div>
-        <div class="cat-name">Shirts</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- CAPS -->
-    <a class="cat-card" data-cat="Caps" href="#products" onclick="filterCat('Caps',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80&fit=crop" alt="Caps" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">🧢</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">🧢</div>
-        <div class="cat-name">Caps</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-    <!-- PANTS -->
-    <a class="cat-card" data-cat="Pants" href="#products" onclick="filterCat('Pants',this)">
-      <img class="cat-bg" src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&q=80&fit=crop" alt="Pants" onerror="this.style.display='none'" />
-      <div class="cat-bg-fallback" style="display:none">👖</div>
-      <div class="cat-overlay"></div>
-      <div class="cat-body">
-        <div class="cat-icon-badge">👖</div>
-        <div class="cat-name">Pants</div>
-        <div class="cat-count">Shop now →</div>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<!-- PRODUCTS -->
-<div class="sec" id="products" style="padding-top:40px">
-  <div class="sec-label reveal">Hand Picked</div>
-  <h2 class="sec-h2 reveal reveal-d1" style="margin-bottom:28px">Our <span>Collection</span></h2>
-  <div class="products-controls reveal reveal-d2">
-    <div class="search-wrap">
-      <i class="fas fa-search"></i>
-      <input class="search-box" type="text" id="searchInput" placeholder="Search products..." oninput="renderProducts()" />
+      <a href="#products-sec" class="sec-see-all" onclick="navFilter('all',null)">See All <i class="fas fa-arrow-right" style="font-size:.6rem"></i></a>
     </div>
-    <select class="sort-select" id="sortSelect" onchange="renderProducts()">
-      <option value="default">Sort: Default</option>
-      <option value="price-asc">Price: Low → High</option>
-      <option value="price-desc">Price: High → Low</option>
-      <option value="name-asc">Name: A → Z</option>
-    </select>
-  </div>
-  <div class="products-grid" id="productsGrid">
-    <div class="loading-text"><div class="spinner"></div><span>Loading products...</span></div>
+    <div class="cat-tiles">
+
+      <a class="cat-tile cat-all-tile active" data-cat="all" href="#products-sec" onclick="filterCat('all',this)">
+        <div class="cat-tile-body" style="position:relative;text-align:center">
+          <div class="cat-tile-icon" style="margin:0 auto 8px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </div>
+          <div class="cat-tile-name">All</div>
+          <div class="cat-tile-sub">All Products</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Wallets" href="#products-sec" onclick="filterCat('Wallets',this)">
+        <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=400&q=80&auto=format&fit=crop" alt="Wallets" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-4 0v2"/><circle cx="16.5" cy="14" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div class="cat-tile-name">Wallets</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Watches" href="#products-sec" onclick="filterCat('Watches',this)">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80&auto=format&fit=crop" alt="Watches" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2M9 3h6M9 21h6"/></svg></div>
+          <div class="cat-tile-name">Watches</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Side Bags" href="#products-sec" onclick="filterCat('Side Bags',this)">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80&auto=format&fit=crop" alt="Side Bags" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+          <div class="cat-tile-name">Side Bags</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Sunglasses" href="#products-sec" onclick="filterCat('Sunglasses',this)">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&q=80&auto=format&fit=crop" alt="Sunglasses" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M3 13H1M21 13h2"/></svg></div>
+          <div class="cat-tile-name">Sunglasses</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Perfumes" href="#products-sec" onclick="filterCat('Perfumes',this)">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&q=80&auto=format&fit=crop" alt="Perfumes" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M9 3h6l1 3H8L9 3z"/><rect x="6" y="6" width="12" height="15" rx="2"/></svg></div>
+          <div class="cat-tile-name">Perfumes</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="T-Shirts" href="#products-sec" onclick="filterCat('T-Shirts',this)">
+        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&q=80&auto=format&fit=crop" alt="T-Shirts" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg></div>
+          <div class="cat-tile-name">T-Shirts</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Shirts" href="#products-sec" onclick="filterCat('Shirts',this)">
+        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&q=80&auto=format&fit=crop" alt="Shirts" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M3 6l4-2 5 3 5-3 4 2v14l-4-2-5 3-5-3-4 2V6z"/><line x1="12" y1="7" x2="12" y2="21"/></svg></div>
+          <div class="cat-tile-name">Shirts</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Caps" href="#products-sec" onclick="filterCat('Caps',this)">
+        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&q=80&auto=format&fit=crop" alt="Caps" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M12 4C7 4 3 8 3 12h18c0-4-4-8-9-8z"/><rect x="3" y="12" width="18" height="4" rx="1"/></svg></div>
+          <div class="cat-tile-name">Caps</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+      <a class="cat-tile" data-cat="Pants" href="#products-sec" onclick="filterCat('Pants',this)">
+        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&q=80&auto=format&fit=crop" alt="Pants" loading="lazy"/>
+        <div class="cat-tile-shimmer"></div>
+        <div class="cat-tile-overlay"></div>
+        <div class="cat-tile-body">
+          <div class="cat-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M6 2h12l1 6-4 14H9L5 8l1-6z"/><line x1="12" y1="2" x2="12" y2="22"/></svg></div>
+          <div class="cat-tile-name">Pants</div>
+          <div class="cat-tile-sub">Shop now</div>
+        </div>
+      </a>
+
+    </div>
   </div>
 </div>
 
-<!-- PROMO -->
-<div class="promo">
-  <div class="promo-inner">
-    <div class="reveal">
-      <div class="promo-tag">Limited Time</div>
-      <h2 class="promo-h2">New Arrivals<br><span class="gold-txt">Up to 30% Off</span></h2>
-      <p class="promo-p">Elevate your style with our freshly curated seasonal collection. Premium quality at unbeatable prices.</p>
-      <a href="#products" class="btn-white">Shop the Sale</a>
+<!-- PRODUCTS SECTION -->
+<div id="products-sec" style="padding:32px 0 48px">
+  <div class="sec-wrap" style="padding-top:0">
+    <div class="sec-hdr reveal">
+      <div class="sec-hdr-left">
+        <div class="sec-eyebrow">Hand Picked</div>
+        <div class="sec-title">Our <span>Collection</span></div>
+        <div class="sec-divider"></div>
+      </div>
+      <span class="filter-count" id="filterCount"></span>
     </div>
-    <div class="promo-features reveal reveal-d2">
-      <div class="pf"><div class="pf-icon">🚚</div><div class="pf-title">Free Delivery</div><div class="pf-sub">Orders above ₹999</div></div>
-      <div class="pf"><div class="pf-icon">✅</div><div class="pf-title">100% Genuine</div><div class="pf-sub">Authenticated products</div></div>
-      <div class="pf"><div class="pf-icon">💬</div><div class="pf-title">WhatsApp Order</div><div class="pf-sub">Instant response</div></div>
-      <div class="pf"><div class="pf-icon">↩️</div><div class="pf-title">Easy Returns</div><div class="pf-sub">Hassle-free policy</div></div>
+    <div class="prod-controls reveal reveal-d1">
+      <div class="search-wrap">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="search-box" type="text" id="searchInput2" placeholder="Search within collection..." aria-label="Search products" oninput="syncSearch(this.value)"/>
+      </div>
+      <select class="sort-select" id="sortSelect" aria-label="Sort" onchange="renderProducts()">
+        <option value="default">Sort: Default</option>
+        <option value="price-asc">Price: Low &rarr; High</option>
+        <option value="price-desc">Price: High &rarr; Low</option>
+        <option value="name-asc">Name: A &rarr; Z</option>
+      </select>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</div>
+
+<!-- FEATURE STRIP -->
+<div class="feat-strip">
+  <div class="feat-inner">
+    <div class="feat-item reveal">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-4 0v2M1 13h22"/></svg></div>
+      <div><div class="feat-title">Free Delivery</div><div class="feat-sub">Orders above &#8377;999 — fast &amp; reliable</div></div>
+    </div>
+    <div class="feat-item reveal reveal-d1">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
+      <div><div class="feat-title">100% Genuine</div><div class="feat-sub">Every product quality-checked &amp; authentic</div></div>
+    </div>
+    <div class="feat-item reveal reveal-d2">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+      <div><div class="feat-title">WhatsApp Ordering</div><div class="feat-sub">Instant response — order in seconds</div></div>
+    </div>
+    <div class="feat-item reveal reveal-d3">
+      <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
+      <div><div class="feat-title">Easy Returns</div><div class="feat-sub">Hassle-free policy — your satisfaction first</div></div>
     </div>
   </div>
 </div>
@@ -534,179 +683,400 @@
 <!-- CONTACT STRIP -->
 <div class="cstrip">
   <div class="cstrip-inner">
-    <div class="ci reveal"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Call Us</div><div class="ci-val"><a href="tel:+918146805002">+91 81468-05002</a></div></div></div>
-    <div class="ci reveal reveal-d1"><div class="ci-icon"><i class="fab fa-whatsapp"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val"><a href="https://wa.me/918146805002" target="_blank">+91 81468-05002</a></div></div></div>
-    <div class="ci reveal reveal-d2"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:bhullarsam162@gmail.com">bhullarsam162@gmail.com</a></div></div></div>
-    <div class="ci reveal reveal-d3"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ci-label">Store</div><div class="ci-val">Old Talwandi Road, Zira, Ferozepur</div></div></div>
+    <div class="ci reveal"><div class="ci-icon"><i class="fas fa-phone" aria-hidden="true"></i></div><div><div class="ci-label">Call Us</div><div class="ci-val"><a href="tel:+918146805002">+91 81468-05002</a></div></div></div>
+    <div class="ci reveal reveal-d1"><div class="ci-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val"><a href="https://wa.me/918146805002" target="_blank" rel="noopener">+91 81468-05002</a></div></div></div>
+    <div class="ci reveal reveal-d2"><div class="ci-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:bhullarsam162@gmail.com">bhullarsam162@gmail.com</a></div></div></div>
+    <div class="ci reveal reveal-d3"><div class="ci-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div><div><div class="ci-label">Store</div><div class="ci-val">Old Talwandi Road, Zira, Ferozepur</div></div></div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft">
+  <div class="ft-top">
     <div class="reveal">
       <div class="ft-logo">OG Accessories 47</div>
-      <p class="ft-desc">Premium fashion accessories for those who define their own standard. Based in Zira, Ferozepur, Punjab.</p>
+      <p class="ft-desc">Premium fashion accessories for those who define their own standard — straight from Zira, Ferozepur, Punjab.</p>
       <div class="ft-socials">
-        <a href="https://instagram.com/og_accessories47" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://wa.me/918146805002" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="ft-col reveal reveal-d1">
       <h4>Shop</h4>
       <ul>
-        <li><a href="#" onclick="filterCat('Wallets',null)">Wallets</a></li>
-        <li><a href="#" onclick="filterCat('Watches',null)">Watches</a></li>
-        <li><a href="#" onclick="filterCat('Side Bags',null)">Side Bags</a></li>
-        <li><a href="#" onclick="filterCat('Perfumes',null)">Perfumes</a></li>
-        <li><a href="#" onclick="filterCat('Sunglasses',null)">Sunglasses</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Wallets',null)">Wallets</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Watches',null)">Watches</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Side Bags',null)">Side Bags</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Perfumes',null)">Perfumes</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Sunglasses',null)">Sunglasses</a></li>
       </ul>
     </div>
     <div class="ft-col reveal reveal-d2">
       <h4>More</h4>
       <ul>
-        <li><a href="#" onclick="filterCat('T-Shirts',null)">T-Shirts</a></li>
-        <li><a href="#" onclick="filterCat('Shirts',null)">Shirts</a></li>
-        <li><a href="#" onclick="filterCat('Pants',null)">Pants</a></li>
-        <li><a href="#" onclick="filterCat('Caps',null)">Caps</a></li>
+        <li><a href="#products-sec" onclick="navFilter('T-Shirts',null)">T-Shirts</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Shirts',null)">Shirts</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Pants',null)">Pants</a></li>
+        <li><a href="#products-sec" onclick="navFilter('Caps',null)">Caps</a></li>
         <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="admin.html">Admin Panel</a></li>
+      </ul>
+    </div>
+    <div class="ft-col reveal reveal-d3">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="tel:+918146805002">+91 81468-05002</a></li>
+        <li><a href="mailto:bhullarsam162@gmail.com">Email Us</a></li>
+        <li><a href="https://wa.me/918146805002" target="_blank" rel="noopener">WhatsApp Order</a></li>
+        <li><a href="contact.html">Store Location</a></li>
       </ul>
     </div>
   </div>
   <div class="ft-bottom">
-    <p>&copy; 2025 <span>OG Accessories 47</span>. All rights reserved.</p>
-    <p>Made with ♥ in <span>Zira, Punjab</span></p>
+    <p class="ft-copy">&copy; 2026 <span>OG Accessories 47</span>. All rights reserved. Made with &hearts; in <span>Zira, Punjab</span></p>
+    <a href="admin.html" class="ft-admin">&#9679;</a>
   </div>
 </footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOut(event)">
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOut(event)" role="dialog" aria-modal="true">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
     <div id="modalContent"></div>
   </div>
 </div>
 
-<!-- WA FLOAT -->
-<a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!" target="_blank" class="wa-float">
-  <div class="wa-ring"></div>
-  <i class="fab fa-whatsapp"></i>
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
+  <div class="wa-ring" aria-hidden="true"></div>
+  <div class="wa-ring2" aria-hidden="true"></div>
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
 </a>
 
 <script>
-const API='https://og-backend-2-pytg.onrender.com';
-let allProducts=[],activeCategory='all';
+gsap.registerPlugin(ScrollTrigger);
+const API = 'https://og-backend-2-pytg.onrender.com';
+let allProducts = [], activeCategory = 'all';
 
-// NAV SCROLL
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+/* ── CURSOR ─────────────────────── */
+const curDot = document.getElementById('cur-dot');
+const curRing = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;curDot.style.cssText=`left:${mx}px;top:${my}px`;curRing.style.cssText=`left:${rx}px;top:${ry}px`;requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.cat-tile,.cat-nav-item,.product-card,.feat-item,.btn-gold,.btn-outline-w,.hdr-wa').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
 });
 
-// HAMBURGER
-const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
-hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open')});
-mm.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{hb.classList.remove('open');mm.classList.remove('open')}));
-document.addEventListener('click',e=>{if(!hb.contains(e.target)&&!mm.contains(e.target)){hb.classList.remove('open');mm.classList.remove('open')}});
+/* ── LOADER ─────────────────────── */
+const ldrBar=document.getElementById('ldr-bar'),loader=document.getElementById('loader');
+let prog=0;
+const pi=setInterval(()=>{prog=Math.min(prog+Math.random()*15,95);ldrBar.style.width=prog+'%'},80);
+gsap.from('#ldr-logo',{opacity:0,y:16,duration:.7,delay:.2,ease:'power2.out'});
+gsap.from('#ldr-sub',{opacity:0,y:8,duration:.5,delay:.5,ease:'power2.out'});
+setTimeout(()=>{
+  clearInterval(pi);ldrBar.style.width='100%';
+  setTimeout(()=>gsap.to(loader,{opacity:0,duration:.5,onComplete:()=>{loader.style.display='none';initHero()}}),300);
+},1600);
 
-// SCROLL REVEAL
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.1});
+/* ── HERO CAROUSEL ──────────────── */
+let carIdx=0;
+const track=document.getElementById('carTrack');
+const slides=track.children;
+const dotsWrap=document.getElementById('carDots');
+function buildDots(){
+  dotsWrap.innerHTML='';
+  Array.from(slides).forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='car-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.onclick=()=>goSlide(i);
+    dotsWrap.appendChild(d);
+  });
+}
+function goSlide(n){
+  carIdx=n;
+  track.style.transform=`translateX(-${n*100}%)`;
+  dotsWrap.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+}
+document.getElementById('carPrev').onclick=()=>goSlide((carIdx-1+slides.length)%slides.length);
+document.getElementById('carNext').onclick=()=>goSlide((carIdx+1)%slides.length);
+buildDots();
+let autoSlide=setInterval(()=>goSlide((carIdx+1)%slides.length),5000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoSlide));
+track.parentElement.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>goSlide((carIdx+1)%slides.length),5000)});
+
+/* ── HERO ENTRANCE ──────────────── */
+function initHero(){
+  gsap.from('.car-tag',{opacity:0,x:-20,duration:.7,delay:.1,ease:'power2.out'});
+  gsap.from('.car-h',{opacity:0,y:30,duration:.9,delay:.2,ease:'power3.out'});
+  gsap.from('.car-p',{opacity:0,y:20,duration:.7,delay:.45,ease:'power2.out'});
+  gsap.from('.car-btns',{opacity:0,y:16,duration:.7,delay:.6,ease:'power2.out'});
+}
+
+/* ── MOBILE DRAWER ──────────────── */
+const hb=document.getElementById('hamburger'),drawer=document.getElementById('mobDrawer');
+hb.addEventListener('click',()=>{hb.classList.toggle('open');drawer.classList.toggle('open');hb.setAttribute('aria-expanded',drawer.classList.contains('open'))});
+document.getElementById('mobClose').addEventListener('click',closeMob);
+drawer.addEventListener('click',e=>{if(e.target===drawer)closeMob()});
+function closeMob(){hb.classList.remove('open');drawer.classList.remove('open');hb.setAttribute('aria-expanded','false')}
+
+/* ── SCROLL REVEAL ──────────────── */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// COUNTER
+/* ── COUNTERS ───────────────────── */
 const cobs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      const el=e.target,target=+el.dataset.count;let cur=0;
-      const step=Math.ceil(target/40);
-      const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur+(target>=100?'+':'');if(cur>=target)clearInterval(t)},30);
-      cobs.unobserve(el);
-    }
+    if(!e.isIntersecting)return;
+    const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'',dur=2000,s=performance.now();
+    (function tick(n){const p=Math.min((n-s)/dur,1),ease=1-Math.pow(1-p,3);el.textContent=Math.round(ease*target)+suffix;if(p<1)requestAnimationFrame(tick)})(s);
+    cobs.unobserve(el);
   });
-},{threshold:0.5});
+},{threshold:.5});
 document.querySelectorAll('.stat-num[data-count]').forEach(el=>cobs.observe(el));
 
-// LOAD
+/* ── 3D TILT ON TILES ───────────── */
+document.querySelectorAll('.cat-tile:not(.cat-all-tile)').forEach(t=>{
+  t.addEventListener('mousemove',e=>{
+    const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    t.style.transform=`perspective(700px) rotateY(${x*8}deg) rotateX(${-y*8}deg) scale(1.02)`;
+    t.style.transition='none';
+  });
+  t.addEventListener('mouseleave',()=>{t.style.transform='';t.style.transition='transform .5s ease,border-color .35s,box-shadow .35s'});
+});
+
+/* ── SKELETON ───────────────────── */
+function showSkeletons(){
+  document.getElementById('productsGrid').innerHTML=Array(8).fill(0).map(()=>`
+    <div class="skel">
+      <div class="skel-img shimmer"></div>
+      <div class="skel-body">
+        <div class="skel-line w50 shimmer"></div>
+        <div class="skel-line w90 shimmer"></div>
+        <div class="skel-line w70 shimmer"></div>
+        <div class="skel-price-row"><div class="skel-price shimmer"></div></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── STAR RATING HELPER ─────────── */
+function starsFor(id){
+  const hash=id.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  const r=(3.5+((hash%30)/30)*1.5).toFixed(1);
+  const full=Math.floor(r),half=r-full>=.5?1:0,empty=5-full-half;
+  return '★'.repeat(full)+(half?'½':'')+'☆'.repeat(empty);
+}
+function reviewCount(id){
+  const h=id.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  return 20+(h%230);
+}
+
+/* ── WHATSAPP LINK ──────────────── */
+function waLink(p){
+  const t=`Hi OG Accessories 47!\nI want to order:\n\n*${p.name}*\nCategory: ${p.category}\nPrice: ₹${Number(p.price).toLocaleString('en-IN')}\n\nPlease confirm availability!`;
+  return `https://wa.me/918146805002?text=${encodeURIComponent(t)}`;
+}
+
+/* ── CATEGORY SVG ───────────────── */
+function catIcon(cat){
+  const icons={
+    'Wallets':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-4 0v2"/><circle cx="16.5" cy="14" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+    'Watches':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><circle cx="12" cy="12" r="7"/><path d="M12 9v3l2 2M9 3h6M9 21h6"/></svg>`,
+    'Side Bags':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`,
+    'Sunglasses':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><circle cx="7" cy="13" r="4"/><circle cx="17" cy="13" r="4"/><path d="M11 13h2M1 13h2M21 13h2"/></svg>`,
+    'Perfumes':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M9 3h6l1 3H8L9 3z"/><rect x="6" y="6" width="12" height="15" rx="2"/></svg>`,
+    'T-Shirts':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>`,
+    'Shirts':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M3 6l4-2 5 3 5-3 4 2v14l-4-2-5 3-5-3-4 2V6z"/><line x1="12" y1="7" x2="12" y2="21"/></svg>`,
+    'Caps':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M12 4C7 4 3 8 3 12h18c0-4-4-8-9-8z"/><rect x="3" y="12" width="18" height="4" rx="1"/></svg>`,
+    'Pants':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="60" height="60"><path d="M6 2h12l1 6-4 14H9L5 8l1-6z"/><line x1="12" y1="2" x2="12" y2="22"/></svg>`,
+  };
+  return `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--gold);opacity:.45">${icons[cat]||icons['Wallets']}</div>`;
+}
+
+/* ── NAV FILTER (top cat nav bar) ── */
+function navFilter(cat,el){
+  document.querySelectorAll('.cat-nav-item').forEach(i=>i.classList.remove('active'));
+  if(el)el.classList.add('active');
+  else document.querySelectorAll(`.cat-nav-item[data-cat="${cat}"]`).forEach(i=>i.classList.add('active'));
+  filterCat(cat,null,true);
+}
+
+/* ── FILTER CAT ─────────────────── */
+function filterCat(cat,el,fromNav=false){
+  activeCategory=cat;
+  document.querySelectorAll('.cat-tile').forEach(c=>c.classList.remove('active'));
+  if(el){el.classList.add('active')}
+  else{document.querySelectorAll(`.cat-tile[data-cat="${cat}"]`).forEach(c=>c.classList.add('active'))}
+  if(!fromNav){
+    document.querySelectorAll('.cat-nav-item').forEach(i=>i.classList.remove('active'));
+    document.querySelectorAll(`.cat-nav-item[data-cat="${cat}"]`).forEach(i=>i.classList.add('active'));
+  }
+  renderProducts();
+  if(!el||fromNav)document.getElementById('products-sec')?.scrollIntoView({behavior:'smooth'});
+}
+
+/* ── SYNC SEARCH (header + section) */
+function syncSearch(val){
+  const h=document.getElementById('searchInput');
+  const s=document.getElementById('searchInput2');
+  if(h)h.value=val;
+  if(s)s.value=val;
+  renderProducts();
+}
+const _hdrSearch=document.getElementById('searchInput');
+if(_hdrSearch)_hdrSearch.addEventListener('input',function(){syncSearch(this.value)});
+const _secSearch=document.getElementById('searchInput2');
+if(_secSearch)_secSearch.addEventListener('input',function(){syncSearch(this.value)});
+
+/* ── LOAD PRODUCTS ──────────────── */
 async function loadProducts(){
+  showSkeletons();
   try{
     const res=await fetch(`${API}/api/products`);
     allProducts=await res.json();
     renderProducts();
   }catch(e){
-    document.getElementById('productsGrid').innerHTML='<div class="no-products">⚠️ Could not load products. Please refresh.</div>';
+    document.getElementById('productsGrid').innerHTML='<div class="no-products"><i class="fas fa-exclamation-circle" style="color:var(--gold);font-size:2rem;display:block;margin-bottom:12px"></i>Could not load products. Check your connection and refresh.</div>';
   }
 }
 
-function filterCat(cat,el){
-  activeCategory=cat;
-  document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('active'));
-  if(el)el.classList.add('active');
-  renderProducts();
-}
-
-function catIcon(cat){
-  const m={'Wallets':'👛','Side Bags':'👜','Watches':'⌚','Perfumes':'🌸','Sunglasses':'🕶️','T-Shirts':'👕','Pants':'👖','Shirts':'👔','Caps':'🧢'};
-  return m[cat]||'🛍️';
-}
-
-function waLink(p){
-  const t=`Hi OG Accessories 47! 👋\nI want to order:\n\n*${p.name}*\nCategory: ${p.category}\nPrice: ₹${Number(p.price).toLocaleString('en-IN')}\n\nPlease confirm availability!`;
-  return `https://wa.me/918146805002?text=${encodeURIComponent(t)}`;
-}
-
+/* ── RENDER PRODUCTS ────────────── */
 function renderProducts(){
-  const search=document.getElementById('searchInput').value.toLowerCase();
+  const v1=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  const v2=(document.getElementById('searchInput2')?.value||'').toLowerCase();
+  const search=v1||v2;
+  const catFilter=document.getElementById('searchCatSelect')?.value||'';
   const sort=document.getElementById('sortSelect').value;
   let list=allProducts.filter(p=>{
     const mc=activeCategory==='all'||p.category===activeCategory;
-    const ms=p.name.toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search);
-    return mc&&ms;
+    const cc=!catFilter||p.category===catFilter;
+    const ms=p.name.toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)||(p.category||'').toLowerCase().includes(search);
+    return mc&&cc&&ms;
   });
-  if(sort==='price-asc')list.sort((a,b)=>a.price-b.price);
+  if(sort==='price-asc') list.sort((a,b)=>a.price-b.price);
   if(sort==='price-desc')list.sort((a,b)=>b.price-a.price);
-  if(sort==='name-asc')list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort==='name-asc')  list.sort((a,b)=>a.name.localeCompare(b.name));
   const grid=document.getElementById('productsGrid');
-  if(!list.length){grid.innerHTML='<div class="no-products">😔 No products found.</div>';return;}
-  grid.innerHTML=list.map((p,i)=>`
-    <div class="product-card" style="animation-delay:${i*0.05}s" onclick="openModal('${p._id}')">
+  const countEl=document.getElementById('filterCount');
+  if(countEl)countEl.textContent=list.length?`${list.length} product${list.length>1?'s':''}`:'' ;
+  if(!list.length){grid.innerHTML='<div class="no-products">No products found. Try a different category or search.</div>';return}
+  const badges={
+    '0':'badge-new','1':'badge-hot','2':'badge-new','3':'','4':'badge-hot','5':'badge-new',
+    '6':'badge-hot','7':'','8':'badge-new','9':'badge-hot'
+  };
+  grid.innerHTML=list.map((p,i)=>{
+    const stars=starsFor(p._id),reviews=reviewCount(p._id);
+    const badgeClass=badges[String(i%10)]||'';
+    const badgeLabel=badgeClass==='badge-new'?'New':badgeClass==='badge-hot'?'Hot':'';
+    const discPct=Math.floor(10+(p._id.charCodeAt(0)%21));
+    const mrp=Math.round(p.price*(1+(discPct/100)));
+    return `
+    <div class="product-card" style="animation-delay:${i*.04}s" onclick="openModal('${p._id}')">
       <div class="product-img-wrap">
         ${p.image?`<img class="product-img" src="${p.image}" alt="${p.name}" loading="lazy"/>`:`<div class="product-img-ph">${catIcon(p.category)}</div>`}
-        <div class="product-cat-badge">${p.category}</div>
-        <div class="product-quick-overlay"><button class="quick-view-btn">Quick View</button></div>
+        <div class="product-badges">
+          <span class="badge badge-cat">${p.category}</span>
+          ${badgeLabel?`<span class="badge ${badgeClass}">${badgeLabel}</span>`:''}
+        </div>
+        <div class="product-quick"><button class="quick-btn">Quick View</button></div>
       </div>
-      <div class="product-info">
-        <div class="product-cat-txt">${p.category}</div>
+      <div class="product-body">
+        <div class="product-cat-lbl">${p.category}</div>
         <div class="product-name">${p.name}</div>
+        <div class="product-stars">
+          <span class="stars-icon">${stars}</span>
+          <span class="stars-count">(${reviews})</span>
+        </div>
+        <div class="product-price-row">
+          <div class="product-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
+          <div class="product-mrp">&#8377;${mrp.toLocaleString('en-IN')}</div>
+          <div class="product-discount">${discPct}% off</div>
+        </div>
       </div>
       <div class="product-footer">
-        <div class="product-price">₹${Number(p.price).toLocaleString('en-IN')}</div>
-        <a class="product-wa-btn" href="${waLink(p)}" target="_blank" onclick="event.stopPropagation()" title="Order on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a class="product-wa-btn" href="${waLink(p)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Order on WhatsApp">
+          <i class="fab fa-whatsapp" aria-hidden="true"></i> Order on WhatsApp
+        </a>
       </div>
-    </div>`).join('');
+    </div>`}).join('');
 }
 
+/* ── MODAL ──────────────────────── */
 function openModal(id){
   const p=allProducts.find(x=>x._id===id);if(!p)return;
+  const stars=starsFor(p._id),reviews=reviewCount(p._id);
+  const discPct=Math.floor(10+(p._id.charCodeAt(0)%21));
+  const mrp=Math.round(p.price*(1+(discPct/100)));
   document.getElementById('modalContent').innerHTML=`
     ${p.image?`<img class="modal-img" src="${p.image}" alt="${p.name}"/>`:`<div class="modal-img-ph">${catIcon(p.category)}</div>`}
     <div class="modal-body">
-      <div class="modal-cat">${p.category}</div>
+      <div class="modal-cat-lbl">${p.category}</div>
       <div class="modal-name">${p.name}</div>
-      <div class="modal-price">₹${Number(p.price).toLocaleString('en-IN')}</div>
+      <div class="modal-stars">
+        <span style="color:var(--star);font-size:.82rem">${stars}</span>
+        <span style="font-size:.72rem;color:var(--muted)">(${reviews} reviews)</span>
+      </div>
+      <div class="modal-price-row">
+        <div class="modal-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
+        <div class="modal-mrp">M.R.P. &#8377;${mrp.toLocaleString('en-IN')}</div>
+        <div class="modal-disc">${discPct}% off</div>
+      </div>
       ${p.description?`<div class="modal-desc">${p.description}</div>`:''}
-      <a class="modal-wa" href="${waLink(p)}" target="_blank"><i class="fab fa-whatsapp"></i> Order on WhatsApp</a>
+      <a class="modal-wa" href="${waLink(p)}" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i> Order on WhatsApp
+      </a>
     </div>`;
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
-function closeModalOut(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow=''}
+function closeModalOut(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
+/* ── LOAD SETTINGS (hero slides + ticker from admin panel) ── */
+async function loadSiteSettings(){
+  try{
+    const res=await fetch(`${API}/api/settings`);
+    if(!res.ok)return;
+    const s=await res.json();
+
+    // ── Rebuild hero slides from admin if saved ──
+    if(s.heroSlides&&Array.isArray(s.heroSlides)&&s.heroSlides.length>0){
+      const track=document.getElementById('carTrack');
+      track.innerHTML=s.heroSlides.map(sl=>`
+        <div class="carousel-slide">
+          <img src="${sl.bg||'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80'}" alt="${sl.tag||'OG Accessories 47'}"/>
+          <div class="carousel-slide-content">
+            <div class="car-tag">${sl.tag||''}</div>
+            <h1 class="car-h">${sl.h1||''} <span class="gold">${sl.h2||''}</span>${sl.h3?`<br><span style="-webkit-text-stroke:1.5px var(--white);color:transparent">${sl.h3}</span>`:''}</h1>
+            <p class="car-p">${sl.sub||''}</p>
+            <div class="car-btns">
+              ${sl.btn1text?`<a href="${sl.btn1link||'#products-sec'}" class="btn-gold">${sl.btn1text}</a>`:''}
+              ${sl.btn2text?`<a href="${sl.btn2link||'contact.html'}" class="btn-outline-w">${sl.btn2text}</a>`:''}
+            </div>
+          </div>
+        </div>`).join('');
+      carIdx=0;
+      buildDots();
+      goSlide(0);
+      clearInterval(autoSlide);
+      autoSlide=setInterval(()=>goSlide((carIdx+1)%track.children.length),5000);
+    }
+
+    // ── Apply ticker if saved ──
+    if(s.ticker&&Array.isArray(s.ticker)&&s.ticker.length>0){
+      const items=[...s.ticker,...s.ticker];
+      const inner=document.querySelector('.ticker-inner');
+      if(inner)inner.innerHTML=items.map(t=>`<span>${t}</span><span class="dot"></span>`).join('');
+    }
+  }catch(e){/* settings optional */}
+}
+
+/* ── INIT ───────────────────────── */
 loadProducts();
+loadSiteSettings();
 </script>
 </body>
 </html>
