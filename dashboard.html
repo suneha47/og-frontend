@@ -920,10 +920,14 @@ async function savePromo(){
 const DEFAULT_CATS=['Wallets','Watches','Side Bags','Sunglasses','Perfumes','T-Shirts','Shirts','Caps','Pants'];
 let catData=[...DEFAULT_CATS];
 
-function loadCategoryData(cats){ catData=[...cats]; rebuildProdCatSelect(); }
-function loadCategories(){ renderCatItems(); }
+function loadCategoryData(cats){
+  catData=Array.isArray(cats)?cats.filter(c=>typeof c==='string'&&c.length>1):[...DEFAULT_CATS];
+  rebuildProdCatSelect();
+}
+function loadCategories(){ if(!Array.isArray(catData)||catData.some(c=>c.length<2)) catData=[...DEFAULT_CATS]; renderCatItems(); }
 
 function renderCatItems(){
+  if(!Array.isArray(catData)) catData=[...DEFAULT_CATS];
   document.getElementById('catItems').innerHTML=catData.map((c,i)=>`
     <div class="ticker-item">
       <input type="text" value="${c}" onchange="catData[${i}]=this.value" placeholder="Category name..."/>
@@ -931,7 +935,7 @@ function renderCatItems(){
     </div>`).join('');
 }
 
-function addCategory(){ catData.push('New Category'); renderCatItems(); }
+function addCategory(){ if(!Array.isArray(catData)) catData=[...DEFAULT_CATS]; catData.push('New Category'); renderCatItems(); }
 function removeCat(i){
   if(catData.length<=1){ showMsg('catMsg','Need at least 1 category.','error'); return; }
   catData.splice(i,1); renderCatItems(); rebuildProdCatSelect();
@@ -944,8 +948,9 @@ function rebuildProdCatSelect(){
 }
 
 async function saveCategories(){
-  document.querySelectorAll('#catItems .ticker-item input').forEach((inp,i)=>{ catData[i]=inp.value.trim(); });
-  catData=catData.filter(c=>c);
+  const inputs=[...document.querySelectorAll('#catItems .ticker-item input')];
+  catData=inputs.map(inp=>inp.value.trim()).filter(c=>c.length>1);
+  if(!catData.length){ showMsg('catMsg','Add at least one category.','error'); return; }
   rebuildProdCatSelect();
   await saveToBackend({categories:catData},'catMsg');
 }
