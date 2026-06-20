@@ -342,16 +342,22 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
       </div>
     </div>
 
-    <!-- ── CATEGORIES (info) ── -->
+    <!-- ── CATEGORIES ── -->
     <div class="panel" id="panel-categories">
       <div class="panel-title"><i class="fas fa-th-large"></i> Categories</div>
       <div class="card">
-        <div class="card-body" style="text-align:center;padding:40px 20px">
-          <i class="fas fa-info-circle" style="font-size:2rem;color:var(--gold);margin-bottom:12px;display:block"></i>
-          <p style="color:var(--muted);font-size:.88rem;line-height:1.8;max-width:400px;margin:0 auto">
-            Current categories: <strong style="color:var(--white)">Wallets, Watches, Side Bags, Sunglasses, Perfumes, T-Shirts, Shirts, Caps, Pants</strong>.<br/><br/>
-            To change categories, contact your developer or update the category list in <code style="color:var(--gold)">index.html</code>.
-          </p>
+        <div class="card-hdr" style="justify-content:space-between">
+          <div class="card-hdr-title"><i class="fas fa-list"></i> Category List</div>
+          <button class="btn btn-gold btn-sm" onclick="addCategory()"><i class="fas fa-plus"></i> Add Category</button>
+        </div>
+        <div class="card-body">
+          <p style="font-size:.78rem;color:var(--muted);margin-bottom:16px">Add, rename or remove categories. Updates the nav bar, filters and product form on the live site instantly — no redeploy needed.</p>
+          <div id="catItems"></div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-gold" onclick="saveCategories()"><i class="fas fa-save"></i> Save Categories</button>
+            <button class="btn btn-outline" onclick="resetCategories()"><i class="fas fa-undo"></i> Reset to Defaults</button>
+          </div>
+          <div class="msg" id="catMsg"></div>
         </div>
       </div>
     </div>
@@ -528,6 +534,7 @@ function showPanel(id){
   // lazy load
   if(id==='hero')renderSlides();
   if(id==='ticker')loadTicker();
+  if(id==='categories')loadCategories();
   if(id==='contact'){loadContact();loadMapEmbed();}
   if(id==='social')loadSocial();
   if(id==='promo')loadPromo();
@@ -567,6 +574,7 @@ async function loadAllSettings(){
     const s=await res.json();
     if(s.heroSlides?.length) heroSlides=s.heroSlides;
     if(s.ticker?.length) loadTickerData(s.ticker);
+    if(s.categories?.length) loadCategoryData(s.categories);
     if(s.contact) loadContactData(s.contact);
     if(s.social) loadSocialData(s.social);
     if(s.promo) loadPromoData(s.promo);
@@ -904,6 +912,42 @@ function loadPromo(){}
 async function savePromo(){
   const d={tag:document.getElementById('promoTag').value,h:document.getElementById('promoH').value,title:document.getElementById('promoTitle').value,desc:document.getElementById('promoDesc').value,btn:document.getElementById('promoBtn').value};
   await saveToBackend({promo:d},'promoMsg');
+}
+
+/* ═══════════════════════════════════════
+   CATEGORIES
+═══════════════════════════════════════ */
+const DEFAULT_CATS=['Wallets','Watches','Side Bags','Sunglasses','Perfumes','T-Shirts','Shirts','Caps','Pants'];
+let catData=[...DEFAULT_CATS];
+
+function loadCategoryData(cats){ catData=[...cats]; rebuildProdCatSelect(); }
+function loadCategories(){ renderCatItems(); }
+
+function renderCatItems(){
+  document.getElementById('catItems').innerHTML=catData.map((c,i)=>`
+    <div class="ticker-item">
+      <input type="text" value="${c}" onchange="catData[${i}]=this.value" placeholder="Category name..."/>
+      <button class="btn btn-danger btn-sm" onclick="removeCat(${i})"><i class="fas fa-times"></i></button>
+    </div>`).join('');
+}
+
+function addCategory(){ catData.push('New Category'); renderCatItems(); }
+function removeCat(i){
+  if(catData.length<=1){ showMsg('catMsg','Need at least 1 category.','error'); return; }
+  catData.splice(i,1); renderCatItems(); rebuildProdCatSelect();
+}
+function resetCategories(){ catData=[...DEFAULT_CATS]; renderCatItems(); rebuildProdCatSelect(); }
+
+function rebuildProdCatSelect(){
+  const sel=document.getElementById('pCategory');
+  if(sel) sel.innerHTML='<option value="">Select category</option>'+catData.map(c=>`<option>${c}</option>`).join('');
+}
+
+async function saveCategories(){
+  document.querySelectorAll('#catItems .ticker-item input').forEach((inp,i)=>{ catData[i]=inp.value.trim(); });
+  catData=catData.filter(c=>c);
+  rebuildProdCatSelect();
+  await saveToBackend({categories:catData},'catMsg');
 }
 
 /* ═══════════════════════════════════════
