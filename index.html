@@ -9,6 +9,8 @@
 <meta property="og:description" content="Premium fashion accessories for those who define their own standard."/>
 <meta property="og:url" content="https://ogaccessories47.netlify.app/"/>
 <meta property="og:type" content="website"/>
+<meta property="og:image" content="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80&auto=format&fit=crop"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌚</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
@@ -306,6 +308,14 @@ footer{background:var(--dark2);border-top:1px solid var(--border)}
 .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── TICKER ── */
+.ticker-bar{background:linear-gradient(90deg,#0c0900,#1a1200 50%,#0c0900);border-bottom:1px solid var(--border-g);overflow:hidden;height:36px;display:flex;align-items:center}
+.ticker-inner{display:flex;align-items:center;white-space:nowrap;animation:tickerScroll 38s linear infinite}
+.ticker-inner span{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:0 22px}
+.ticker-inner .tdot{color:rgba(201,168,76,.3);padding:0;font-size:.45rem}
+.ticker-bar:hover .ticker-inner{animation-play-state:paused}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 </style>
 </head>
 <body>
@@ -396,6 +406,11 @@ footer{background:var(--dark2);border-top:1px solid var(--border)}
       </a>
     </div>
   </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar" id="tickerBar">
+  <div class="ticker-inner" id="tickerInner"><span>Free Delivery on Orders Above ₹999</span><span class="tdot">•</span><span>New Watches Collection In Stock</span><span class="tdot">•</span><span>Premium Wallets — Best Prices in Zira</span><span class="tdot">•</span><span>Sunglasses from ₹299</span><span class="tdot">•</span><span>WhatsApp: +91 81468-05002</span><span class="tdot">•</span><span>100% Genuine Products</span><span class="tdot">•</span><span>Free Delivery on Orders Above ₹999</span><span class="tdot">•</span><span>New Watches Collection In Stock</span><span class="tdot">•</span><span>Premium Wallets — Best Prices in Zira</span><span class="tdot">•</span><span>Sunglasses from ₹299</span><span class="tdot">•</span><span>WhatsApp: +91 81468-05002</span><span class="tdot">•</span><span>100% Genuine Products</span><span class="tdot">•</span></div>
 </div>
 
 <!-- HERO CAROUSEL -->
@@ -490,9 +505,9 @@ footer{background:var(--dark2);border-top:1px solid var(--border)}
   <div class="deal-icon">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
   </div>
-  <span class="deal-text">Free Delivery</span>
-  <span class="deal-sub">on all orders above &#8377;999 &nbsp;|&nbsp; 100% Genuine Products &nbsp;|&nbsp; Easy Returns</span>
-  <a href="#products-sec" class="deal-cta">Shop Now</a>
+  <span class="deal-text" id="dealText">Free Delivery</span>
+  <span class="deal-sub" id="dealSub">on all orders above &#8377;999 &nbsp;|&nbsp; 100% Genuine Products &nbsp;|&nbsp; Easy Returns</span>
+  <a href="#products-sec" class="deal-cta" id="dealCta">Shop Now</a>
 </div>
 
 <!-- STATS -->
@@ -861,6 +876,10 @@ function showSkeletons(){
     </div>`).join('');
 }
 
+/* ── UTILS ──────────────────────── */
+function escHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+function imgErr(img){const c=img.dataset.cat;img.parentElement.innerHTML=`<div class="product-img-ph">${catIcon(c)}</div>`}
+
 /* ── STAR RATING HELPER ─────────── */
 function starsFor(id){
   const hash=id.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
@@ -933,11 +952,17 @@ if(_secSearch)_secSearch.addEventListener('input',function(){syncSearch(this.val
 /* ── LOAD PRODUCTS ──────────────── */
 async function loadProducts(){
   showSkeletons();
+  const slowTimer=setTimeout(()=>{
+    if(!allProducts.length)
+      document.getElementById('productsGrid').innerHTML='<div class="no-products"><i class="fas fa-coffee" style="color:var(--gold);font-size:2rem;display:block;margin-bottom:12px"></i><div style="font-size:.95rem;color:var(--white);margin-bottom:6px">Waking up the server...</div><div style="font-size:.8rem;line-height:1.7">First visit takes ~30 seconds.<br/>Please wait — products will appear shortly.</div></div>';
+  },7000);
   try{
     const res=await fetch(`${API}/api/products`);
+    clearTimeout(slowTimer);
     allProducts=await res.json();
     renderProducts();
   }catch(e){
+    clearTimeout(slowTimer);
     document.getElementById('productsGrid').innerHTML='<div class="no-products"><i class="fas fa-exclamation-circle" style="color:var(--gold);font-size:2rem;display:block;margin-bottom:12px"></i>Could not load products. Check your connection and refresh.</div>';
   }
 }
@@ -970,29 +995,29 @@ function renderProducts(){
     const stars=starsFor(p._id),reviews=reviewCount(p._id);
     const badgeClass=badges[String(i%10)]||'';
     const badgeLabel=badgeClass==='badge-new'?'New':badgeClass==='badge-hot'?'Hot':'';
-    const discPct=Math.floor(10+(p._id.charCodeAt(0)%21));
-    const mrp=Math.round(p.price*(1+(discPct/100)));
+    const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
+    const realMrp=hasMrp?Number(p.mrp):null;
+    const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
     return `
     <div class="product-card" style="animation-delay:${i*.04}s" onclick="openModal('${p._id}')">
       <div class="product-img-wrap">
-        ${p.image?`<img class="product-img" src="${p.image}" alt="${p.name}" loading="lazy"/>`:`<div class="product-img-ph">${catIcon(p.category)}</div>`}
+        ${p.image?`<img class="product-img" src="${escHtml(p.image)}" alt="${escHtml(p.name)}" loading="lazy" data-cat="${escHtml(p.category)}" onerror="imgErr(this)"/>`:`<div class="product-img-ph">${catIcon(p.category)}</div>`}
         <div class="product-badges">
-          <span class="badge badge-cat">${p.category}</span>
+          <span class="badge badge-cat">${escHtml(p.category)}</span>
           ${badgeLabel?`<span class="badge ${badgeClass}">${badgeLabel}</span>`:''}
         </div>
         <div class="product-quick"><button class="quick-btn">Quick View</button></div>
       </div>
       <div class="product-body">
-        <div class="product-cat-lbl">${p.category}</div>
-        <div class="product-name">${p.name}</div>
+        <div class="product-cat-lbl">${escHtml(p.category)}</div>
+        <div class="product-name">${escHtml(p.name)}</div>
         <div class="product-stars">
           <span class="stars-icon">${stars}</span>
           <span class="stars-count">(${reviews})</span>
         </div>
         <div class="product-price-row">
           <div class="product-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-          <div class="product-mrp">&#8377;${mrp.toLocaleString('en-IN')}</div>
-          <div class="product-discount">${discPct}% off</div>
+          ${hasMrp?`<div class="product-mrp">&#8377;${realMrp.toLocaleString('en-IN')}</div><div class="product-discount">${realDisc}% off</div>`:''}
         </div>
       </div>
       <div class="product-footer">
@@ -1007,23 +1032,23 @@ function renderProducts(){
 function openModal(id){
   const p=allProducts.find(x=>x._id===id);if(!p)return;
   const stars=starsFor(p._id),reviews=reviewCount(p._id);
-  const discPct=Math.floor(10+(p._id.charCodeAt(0)%21));
-  const mrp=Math.round(p.price*(1+(discPct/100)));
+  const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
+  const realMrp=hasMrp?Number(p.mrp):null;
+  const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
   document.getElementById('modalContent').innerHTML=`
-    ${p.image?`<img class="modal-img" src="${p.image}" alt="${p.name}"/>`:`<div class="modal-img-ph">${catIcon(p.category)}</div>`}
+    ${p.image?`<img class="modal-img" src="${escHtml(p.image)}" alt="${escHtml(p.name)}" onerror="this.style.display='none'">`:`<div class="modal-img-ph">${catIcon(p.category)}</div>`}
     <div class="modal-body">
-      <div class="modal-cat-lbl">${p.category}</div>
-      <div class="modal-name">${p.name}</div>
+      <div class="modal-cat-lbl">${escHtml(p.category)}</div>
+      <div class="modal-name">${escHtml(p.name)}</div>
       <div class="modal-stars">
         <span style="color:var(--star);font-size:.82rem">${stars}</span>
         <span style="font-size:.72rem;color:var(--muted)">(${reviews} reviews)</span>
       </div>
       <div class="modal-price-row">
         <div class="modal-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-        <div class="modal-mrp">M.R.P. &#8377;${mrp.toLocaleString('en-IN')}</div>
-        <div class="modal-disc">${discPct}% off</div>
+        ${hasMrp?`<div class="modal-mrp">M.R.P. &#8377;${realMrp.toLocaleString('en-IN')}</div><div class="modal-disc">${realDisc}% off</div>`:''}
       </div>
-      ${p.description?`<div class="modal-desc">${p.description}</div>`:''}
+      ${p.description?`<div class="modal-desc">${escHtml(p.description)}</div>`:''}
       <a class="modal-wa" href="${waLink(p)}" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp" aria-hidden="true"></i> Order on WhatsApp
       </a>
@@ -1068,8 +1093,15 @@ async function loadSiteSettings(){
     // ── Apply ticker if saved ──
     if(s.ticker&&Array.isArray(s.ticker)&&s.ticker.length>0){
       const items=[...s.ticker,...s.ticker];
-      const inner=document.querySelector('.ticker-inner');
-      if(inner)inner.innerHTML=items.map(t=>`<span>${t}</span><span class="dot"></span>`).join('');
+      document.getElementById('tickerInner').innerHTML=items.map(t=>`<span>${escHtml(t)}</span><span class="tdot">•</span>`).join('');
+    }
+
+    // ── Apply promo banner if saved ──
+    if(s.promo){
+      const pr=s.promo;
+      if(pr.h) document.getElementById('dealText').textContent=pr.h;
+      if(pr.desc) document.getElementById('dealSub').textContent=pr.desc;
+      if(pr.btn) document.getElementById('dealCta').textContent=pr.btn;
     }
   }catch(e){/* settings optional */}
 }

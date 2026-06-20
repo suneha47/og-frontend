@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Contact & Location — OG Accessories 47 | Zira, Ferozepur</title>
 <meta name="description" content="Visit OG Accessories 47 at Old Talwandi Road, Zira, Ferozepur, Punjab. Call or WhatsApp: +91 81468-05002. Open Mon–Sat 10am–8pm."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌚</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
@@ -315,7 +316,7 @@ async function loadContactSettings(){
       iframes.forEach(f=>{ f.style.width='100%'; f.style.height='380px'; f.style.border='none'; f.style.display='block'; f.style.filter='grayscale(40%) contrast(1.1)'; });
     } else {
       // Default Google Maps embed for Zira, Ferozepur
-      document.getElementById('mapWrap').innerHTML = `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3417.3!2d74.9854!3d30.9743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919e4a5b0000001%3A0x1!2sZira%2C%20Punjab!5e0!3m2!1sen!2sin!4v1" width="100%" height="380" style="border:0;display:block;filter:grayscale(40%) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+      document.getElementById('mapWrap').innerHTML = `<iframe src="https://maps.google.com/maps?q=Zira,+Ferozepur,+Punjab,+India&output=embed&z=14" width="100%" height="380" style="border:0;display:block;filter:grayscale(40%) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
     }
 
   }catch(e){ /* settings optional — defaults shown */ }
@@ -334,7 +335,23 @@ function sendWaMsg(){
   window.open('https://wa.me/918146805002?text='+encodeURIComponent(text),'_blank');
 }
 
-loadContactSettings();
+function highlightTodayHours(){
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const now=new Date(), dayName=days[now.getDay()], h=now.getHours();
+  const isSunday=now.getDay()===0, isOpen=!isSunday&&h>=10&&h<20;
+  document.querySelectorAll('#hoursContainer .hours-row').forEach(row=>{
+    const dayEl=row.querySelector('.hours-day');
+    if(!dayEl||dayEl.textContent.trim()!==dayName)return;
+    row.style.cssText='background:rgba(201,168,76,.05);border-left:2px solid var(--gold);padding:10px 0 10px 10px;display:flex;justify-content:space-between;align-items:center';
+    dayEl.style.color='var(--gold)';
+    const badge=document.createElement('span');
+    badge.style.cssText=`font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;background:${isOpen?'rgba(39,174,96,.15)':'rgba(231,76,60,.12)'};color:${isOpen?'#27ae60':'#e74c3c'};border:1px solid ${isOpen?'rgba(39,174,96,.3)':'rgba(231,76,60,.3)'}`;
+    badge.textContent=isOpen?'Open Now':'Closed Now';
+    row.appendChild(badge);
+  });
+}
+
+loadContactSettings().then(highlightTodayHours);
 </script>
 </body>
 </html>

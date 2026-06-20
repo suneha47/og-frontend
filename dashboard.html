@@ -239,7 +239,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
               </select>
             </div>
           </div>
-          <div class="fg"><label>Price (₹) *</label><input type="number" id="pPrice" placeholder="e.g. 599" min="1"/></div>
+          <div class="fg-row">
+            <div class="fg"><label>Price (₹) *</label><input type="number" id="pPrice" placeholder="e.g. 599" min="1"/></div>
+            <div class="fg"><label>MRP / Original Price (₹) <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional — shows "X% off" on site)</span></label><input type="number" id="pMrp" placeholder="e.g. 799" min="1"/></div>
+          </div>
           <div class="fg"><label>Description</label><textarea id="pDesc" placeholder="Short product description..."></textarea></div>
           <div class="fg">
             <label>Product Image</label>
@@ -278,8 +281,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
         <div class="card-body" style="padding:0">
           <div class="table-wrap">
             <table class="prod-table">
-              <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
-              <tbody id="prodTableBody"><tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px">Loading products...</td></tr></tbody>
+              <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>MRP</th><th>Actions</th></tr></thead>
+              <tbody id="prodTableBody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">Loading products...</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -590,13 +593,14 @@ async function loadProducts(){
 
 function renderProdList(list){
   const tb=document.getElementById('prodTableBody');
-  if(!list.length){ tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px">No products yet. Add one above!</td></tr>'; return; }
+  if(!list.length){ tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">No products yet. Add one above!</td></tr>'; return; }
   tb.innerHTML=list.map(p=>`
     <tr>
       <td><div class="prod-img-thumb">${p.image?`<img src="${p.image}" alt="${p.name}"/>`:'<i class="fas fa-image" style="color:var(--muted)"></i>'}</div></td>
       <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</td>
       <td><span class="prod-cat-badge">${p.category}</span></td>
       <td class="prod-price">₹${Number(p.price).toLocaleString('en-IN')}</td>
+      <td style="color:var(--muted);font-size:.78rem">${p.mrp?'₹'+Number(p.mrp).toLocaleString('en-IN'):'—'}</td>
       <td><div class="prod-actions">
         <button class="btn btn-outline btn-sm" onclick="startEdit('${p._id}')"><i class="fas fa-edit"></i></button>
         <button class="btn btn-danger btn-sm" onclick="askDelete('${p._id}')"><i class="fas fa-trash"></i></button>
@@ -658,7 +662,8 @@ async function submitProduct(){
   const btn=document.querySelector('#prodFormCard .btn-gold');
   btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
   const imageUrl=await uploadImage()||document.getElementById('pImageUrl').value||'';
-  const payload={name,category:cat,price:Number(price),description:document.getElementById('pDesc').value.trim(),image:imageUrl};
+  const mrpVal=document.getElementById('pMrp').value;
+  const payload={name,category:cat,price:Number(price),description:document.getElementById('pDesc').value.trim(),image:imageUrl,mrp:mrpVal?Number(mrpVal):null};
   const id=document.getElementById('editId').value;
   try{
     const url=id?`${API}/api/products/${id}`:`${API}/api/products`;
@@ -678,6 +683,7 @@ function startEdit(id){
   document.getElementById('pName').value=p.name;
   document.getElementById('pCategory').value=p.category;
   document.getElementById('pPrice').value=p.price;
+  document.getElementById('pMrp').value=p.mrp||'';
   document.getElementById('pDesc').value=p.description||'';
   document.getElementById('pImageUrl').value=p.image||'';
   if(p.image){ document.getElementById('imgPreview').src=p.image; document.getElementById('imgPreviewWrap').style.display='inline-block'; }
@@ -693,6 +699,7 @@ function clearProdForm(){
   document.getElementById('pName').value='';
   document.getElementById('pCategory').value='';
   document.getElementById('pPrice').value='';
+  document.getElementById('pMrp').value='';
   document.getElementById('pDesc').value='';
   document.getElementById('pImageUrl').value='';
   document.getElementById('imgFile').value='';
