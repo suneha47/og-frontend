@@ -276,46 +276,45 @@ async function loadContactSettings(){
     if(!res.ok) return;
     const s = await res.json();
 
-    // Contact info
-    if(s.contact){
-      const c = s.contact;
-      if(c.address){
-        document.getElementById('dispAddress').innerHTML = c.address.replace(/,/g,'<br/>');
-      }
-      if(c.phone){
-        const ph = document.getElementById('dispPhone');
-        ph.textContent = c.phone;
-        ph.href = 'tel:' + c.phone.replace(/\s/g,'');
-      }
-      if(c.wa){
-        const wa = document.getElementById('dispWa');
-        wa.textContent = c.wa;
-        wa.href = 'https://wa.me/' + c.wa.replace(/[^0-9]/g,'');
-        document.getElementById('waBtn').href = 'https://wa.me/' + c.wa.replace(/[^0-9]/g,'') + '?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20place%20an%20order.';
-      }
-      if(c.email){
-        const em = document.getElementById('dispEmail');
-        em.textContent = c.email;
-        em.href = 'mailto:' + c.email;
-      }
-      if(c.hours){
-        document.getElementById('hoursContainer').innerHTML = '<div class="hours-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="hours-day" style="color:var(--muted);font-size:.72rem">Business Hours</span><span class="hours-time" style="font-size:.95rem">'+c.hours+'</span></div>';
-      }
+    // Contact info — flat fields (contact_phone, contact_wa, etc.)
+    if(s.contact_address){
+      document.getElementById('dispAddress').innerHTML = s.contact_address.replace(/,\s*/g,'<br/>');
+    }
+    if(s.contact_phone){
+      const ph = document.getElementById('dispPhone');
+      ph.textContent = s.contact_phone;
+      ph.href = 'tel:' + s.contact_phone.replace(/\s/g,'');
+    }
+    if(s.contact_wa){
+      const waNum = s.contact_wa.replace(/[^0-9]/g,'');
+      const wa = document.getElementById('dispWa');
+      wa.textContent = '+' + waNum;
+      wa.href = 'https://wa.me/' + waNum;
+      document.getElementById('waBtn').href = 'https://wa.me/' + waNum + '?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20place%20an%20order.';
+    }
+    if(s.contact_email){
+      const em = document.getElementById('dispEmail');
+      em.textContent = s.contact_email;
+      em.href = 'mailto:' + s.contact_email;
+    }
+    if(s.contact_hours){
+      document.getElementById('hoursContainer').innerHTML = '<div class="hours-row" style="flex-direction:column;align-items:flex-start;gap:4px"><span class="hours-day" style="color:var(--muted);font-size:.72rem">Business Hours</span><span class="hours-time" style="font-size:.95rem">'+s.contact_hours+'</span></div>';
     }
 
-    // Social links
-    if(s.social){
-      if(s.social.insta) document.getElementById('socialInsta').href = s.social.insta;
-      if(s.social.fb) document.getElementById('socialFb').href = s.social.fb;
-    }
+    // Social links — flat fields (social_insta, social_fb)
+    if(s.social_insta) document.getElementById('socialInsta').href = s.social_insta;
+    if(s.social_fb) document.getElementById('socialFb').href = s.social_fb;
 
-    // Map embed
-    if(s.mapEmbed){
-      document.getElementById('mapWrap').innerHTML = s.mapEmbed;
-      const iframes = document.querySelectorAll('#mapWrap iframe');
-      iframes.forEach(f=>{ f.style.width='100%'; f.style.height='380px'; f.style.border='none'; f.style.display='block'; f.style.filter='grayscale(40%) contrast(1.1)'; });
+    // Map embed — stored as map_embed (URL or full iframe code)
+    const mapSrc = s.map_embed || '';
+    if(mapSrc){
+      if(mapSrc.trim().startsWith('<')){
+        document.getElementById('mapWrap').innerHTML = mapSrc;
+        document.querySelectorAll('#mapWrap iframe').forEach(f=>{ f.style.width='100%'; f.style.height='380px'; f.style.border='none'; f.style.display='block'; f.style.filter='grayscale(40%) contrast(1.1)'; });
+      } else {
+        document.getElementById('mapWrap').innerHTML = `<iframe src="${mapSrc}" width="100%" height="380" style="border:0;display:block;filter:grayscale(40%) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+      }
     } else {
-      // Default Google Maps embed for Zira, Ferozepur
       document.getElementById('mapWrap').innerHTML = `<iframe src="https://maps.google.com/maps?q=Zira,+Ferozepur,+Punjab,+India&output=embed&z=14" width="100%" height="380" style="border:0;display:block;filter:grayscale(40%) contrast(1.1)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
     }
 

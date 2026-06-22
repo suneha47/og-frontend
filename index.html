@@ -698,10 +698,10 @@ footer{background:var(--dark2);border-top:1px solid var(--border)}
 <!-- CONTACT STRIP -->
 <div class="cstrip">
   <div class="cstrip-inner">
-    <div class="ci reveal"><div class="ci-icon"><i class="fas fa-phone" aria-hidden="true"></i></div><div><div class="ci-label">Call Us</div><div class="ci-val"><a href="tel:+918146805002">+91 81468-05002</a></div></div></div>
-    <div class="ci reveal reveal-d1"><div class="ci-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val"><a href="https://wa.me/918146805002" target="_blank" rel="noopener">+91 81468-05002</a></div></div></div>
-    <div class="ci reveal reveal-d2"><div class="ci-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:bhullarsam162@gmail.com">bhullarsam162@gmail.com</a></div></div></div>
-    <div class="ci reveal reveal-d3"><div class="ci-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div><div><div class="ci-label">Store</div><div class="ci-val">Old Talwandi Road, Zira, Ferozepur</div></div></div>
+    <div class="ci reveal"><div class="ci-icon"><i class="fas fa-phone" aria-hidden="true"></i></div><div><div class="ci-label">Call Us</div><div class="ci-val"><a href="tel:+918146805002" id="stripPhone">+91 81468-05002</a></div></div></div>
+    <div class="ci reveal reveal-d1"><div class="ci-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div><div><div class="ci-label">WhatsApp</div><div class="ci-val"><a href="https://wa.me/918146805002" target="_blank" rel="noopener" id="stripWa">+91 81468-05002</a></div></div></div>
+    <div class="ci reveal reveal-d2"><div class="ci-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:bhullarsam162@gmail.com" id="stripEmail">bhullarsam162@gmail.com</a></div></div></div>
+    <div class="ci reveal reveal-d3"><div class="ci-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div><div><div class="ci-label">Store</div><div class="ci-val" id="stripAddress">Old Talwandi Road, Zira, Ferozepur</div></div></div>
   </div>
 </div>
 
@@ -712,9 +712,9 @@ footer{background:var(--dark2);border-top:1px solid var(--border)}
       <div class="ft-logo">OG Accessories 47</div>
       <p class="ft-desc">Premium fashion accessories for those who define their own standard — straight from Zira, Ferozepur, Punjab.</p>
       <div class="ft-socials">
-        <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-        <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-        <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram" id="ftSocInsta"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank" rel="noopener" aria-label="Facebook" id="ftSocFb"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp" id="ftSocWa"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="ft-col reveal reveal-d1">
@@ -1128,48 +1128,83 @@ async function loadSiteSettings(){
     if(!res.ok)return;
     const s=await res.json();
 
-    // ── Rebuild hero slides from admin if saved ──
-    if(s.heroSlides&&Array.isArray(s.heroSlides)&&s.heroSlides.length>0){
-      const track=document.getElementById('carTrack');
-      track.innerHTML=s.heroSlides.map(sl=>`
-        <div class="carousel-slide">
-          <img src="${sl.bg||'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80'}" alt="${sl.tag||'OG Accessories 47'}"/>
-          <div class="carousel-slide-content">
-            <div class="car-tag">${sl.tag||''}</div>
-            <h1 class="car-h">${sl.h1||''} <span class="gold">${sl.h2||''}</span>${sl.h3?`<br><span style="-webkit-text-stroke:1.5px var(--white);color:transparent">${sl.h3}</span>`:''}</h1>
-            <p class="car-p">${sl.sub||''}</p>
-            <div class="car-btns">
-              ${sl.btn1text?`<a href="${sl.btn1link||'#products-sec'}" class="btn-gold">${sl.btn1text}</a>`:''}
-              ${sl.btn2text?`<a href="${sl.btn2link||'contact.html'}" class="btn-outline-w">${sl.btn2text}</a>`:''}
-            </div>
-          </div>
-        </div>`).join('');
-      carIdx=0;
-      buildDots();
-      goSlide(0);
-      clearInterval(autoSlide);
-      autoSlide=setInterval(()=>goSlide((carIdx+1)%track.children.length),5000);
+    // ── Hero slides (saved as JSON string) ──
+    if(s.heroSlides){
+      try{
+        const slides=typeof s.heroSlides==='string'?JSON.parse(s.heroSlides):s.heroSlides;
+        if(Array.isArray(slides)&&slides.length){
+          const track=document.getElementById('carTrack');
+          track.innerHTML=slides.map(sl=>`
+            <div class="carousel-slide">
+              <img src="${escHtml(sl.bg||'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&q=80')}" alt="${escHtml(sl.tag||'OG Accessories 47')}"/>
+              <div class="carousel-slide-content">
+                <div class="car-tag">${escHtml(sl.tag||'')}</div>
+                <h1 class="car-h">${escHtml(sl.h1||'')} <span class="gold">${escHtml(sl.h2||'')}</span>${sl.h3?`<br><span style="-webkit-text-stroke:1.5px var(--white);color:transparent">${escHtml(sl.h3)}</span>`:''}</h1>
+                <p class="car-p">${escHtml(sl.sub||'')}</p>
+                <div class="car-btns">
+                  ${sl.btn1text?`<a href="${escHtml(sl.btn1link||'#products-sec')}" class="btn-gold">${escHtml(sl.btn1text)}</a>`:''}
+                  ${sl.btn2text?`<a href="${escHtml(sl.btn2link||'contact.html')}" class="btn-outline-w">${escHtml(sl.btn2text)}</a>`:''}
+                </div>
+              </div>
+            </div>`).join('');
+          carIdx=0; buildDots(); goSlide(0);
+          clearInterval(autoSlide);
+          autoSlide=setInterval(()=>goSlide((carIdx+1)%track.children.length),5000);
+        }
+      }catch(e){}
     }
 
-    // ── Apply ticker if saved ──
-    if(s.ticker&&Array.isArray(s.ticker)&&s.ticker.length>0){
-      const items=[...s.ticker,...s.ticker];
-      document.getElementById('tickerInner').innerHTML=items.map(t=>`<span>${escHtml(t)}</span><span class="tdot">•</span>`).join('');
+    // ── Ticker — stored as ticker_text (JSON string) ──
+    if(s.ticker_text){
+      try{
+        const items=JSON.parse(s.ticker_text);
+        if(Array.isArray(items)&&items.length){
+          const doubled=[...items,...items];
+          document.getElementById('tickerInner').innerHTML=doubled.map(t=>`<span>${escHtml(t)}</span><span class="tdot">•</span>`).join('');
+        }
+      }catch(e){}
     }
 
-    // ── Apply categories if saved ──
-    if(s.categories&&Array.isArray(s.categories)&&s.categories.length>0){
-      buildCatNav(s.categories);
-      buildCatTiles(s.categories);
+    // ── Categories — JSON string of strings or objects ──
+    if(s.categories){
+      try{
+        const raw=typeof s.categories==='string'?JSON.parse(s.categories):s.categories;
+        if(Array.isArray(raw)&&raw.length){
+          const names=raw.map(x=>typeof x==='object'?(x.name||''):String(x)).filter(n=>n.length>1);
+          if(names.length){ buildCatNav(names); buildCatTiles(names); }
+        }
+      }catch(e){}
     }
 
-    // ── Apply promo banner if saved ──
-    if(s.promo){
-      const pr=s.promo;
-      if(pr.h) document.getElementById('dealText').textContent=pr.h;
-      if(pr.desc) document.getElementById('dealSub').textContent=pr.desc;
-      if(pr.btn) document.getElementById('dealCta').textContent=pr.btn;
+    // ── Promo banner — flat fields ──
+    if(s.promo_sub) document.getElementById('dealText').textContent=s.promo_sub;
+    if(s.promo_desc) document.getElementById('dealSub').textContent=s.promo_desc;
+    if(s.promo_btn) document.getElementById('dealCta').textContent=s.promo_btn;
+
+    // ── Social links — update footer icons ──
+    if(s.social_insta){ const el=document.getElementById('ftSocInsta'); if(el) el.href=s.social_insta; }
+    if(s.social_fb){ const el=document.getElementById('ftSocFb'); if(el) el.href=s.social_fb; }
+    if(s.social_wa){ const el=document.getElementById('ftSocWa'); if(el) el.href='https://wa.me/'+s.social_wa.replace(/[^0-9]/g,''); }
+
+    // ── Contact strip — update phone/WhatsApp/email/address ──
+    if(s.contact_phone){
+      const el=document.getElementById('stripPhone');
+      if(el){ el.textContent=s.contact_phone; el.href='tel:'+s.contact_phone.replace(/\s/g,''); }
     }
+    if(s.contact_wa){
+      const waNum=s.contact_wa.replace(/[^0-9]/g,'');
+      const el=document.getElementById('stripWa');
+      if(el){ el.textContent='+'+waNum; el.href='https://wa.me/'+waNum; }
+    }
+    if(s.contact_email){
+      const el=document.getElementById('stripEmail');
+      if(el){ el.textContent=s.contact_email; el.href='mailto:'+s.contact_email; }
+    }
+    if(s.contact_address){
+      const el=document.getElementById('stripAddress');
+      if(el) el.textContent=s.contact_address;
+    }
+
   }catch(e){/* settings optional */}
 }
 

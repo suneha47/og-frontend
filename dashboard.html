@@ -166,6 +166,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
 </head>
 <body>
 
+<!-- SERVER STATUS BANNER -->
+<div id="serverBanner" style="display:none;background:#1a1200;border-bottom:1px solid rgba(201,168,76,.25);padding:8px 20px;font-size:.75rem;color:var(--gold);text-align:center;position:sticky;top:0;z-index:400">
+  <i class="fas fa-circle-notch fa-spin"></i>&nbsp; Server is starting up — this takes 30-60 seconds on first load. Please wait...
+</div>
+
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-logo">OG 47 <small>Admin Dashboard</small></div>
@@ -486,7 +491,7 @@ const DEFAULT_SLIDES = [
 let heroSlides = JSON.parse(JSON.stringify(DEFAULT_SLIDES));
 
 /* ── AUTH ── */
-function getToken(){ return localStorage.getItem('og47_token'); }
+function getToken(){ const t=localStorage.getItem('og47_token'); return (t&&t!=='undefined'&&t!=='null')?t:null; }
 function logout(){ localStorage.removeItem('og47_token'); showLoginOverlay(); }
 
 function showLoginOverlay(){
@@ -510,7 +515,9 @@ async function doLogin(){
     const res=await fetch(`${API}/api/admin/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
     const d=await res.json();
     if(!res.ok) throw new Error(d.message||'Invalid credentials');
-    localStorage.setItem('og47_token',d.token);
+    const token=d.token||d.accessToken||d.jwt||(d.data&&d.data.token)||'';
+    if(!token){ err.textContent='Login OK but no token returned — contact developer.'; err.style.display='block'; btn.disabled=false; btn.textContent='Sign In'; return; }
+    localStorage.setItem('og47_token',token);
     hideLoginOverlay();
     loadProducts();
     loadAllSettings();
@@ -521,7 +528,7 @@ async function doLogin(){
 }
 document.addEventListener('keydown',e=>{ if(e.key==='Enter'&&document.getElementById('loginOverlay').style.display!=='none') doLogin(); });
 
-if(!getToken()) showLoginOverlay();
+if(!getToken()){ localStorage.removeItem('og47_token'); showLoginOverlay(); }
 
 /* ── SIDEBAR ── */
 document.getElementById('mobToggle').onclick=()=>document.getElementById('sidebar').classList.toggle('open');
@@ -535,7 +542,7 @@ function showPanel(id){
   if(id==='hero')renderSlides();
   if(id==='ticker')loadTicker();
   if(id==='categories')loadCategories();
-  if(id==='contact'){loadContact();loadMapEmbed();}
+  if(id==='contact')loadContact();
   if(id==='social')loadSocial();
   if(id==='promo')loadPromo();
 }
@@ -546,22 +553,25 @@ function showMsg(id,text,type='success'){
   if(!el)return;
   el.className='msg '+type;
   el.textContent=text;
-  setTimeout(()=>{ el.className='msg'; el.textContent=''; },4000);
+  setTimeout(()=>{ el.className='msg'; el.textContent=''; },7000);
 }
 
 /* ── SAVE TO BACKEND ── */
 async function saveToBackend(data, msgId){
+  const tok=getToken();
+  if(!tok){ showLoginOverlay(); showMsg(msgId,'Please log in first.','error'); return false; }
   try{
     const res=await fetch(`${API}/api/settings`,{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},
       body:JSON.stringify(data)
     });
-    if(!res.ok) throw new Error('Server error '+res.status);
-    showMsg(msgId,'Saved successfully! Store updated.','success');
+    if(res.status===401){ localStorage.removeItem('og47_token'); showLoginOverlay(); showMsg(msgId,'Session expired — please log in again.','error'); return false; }
+    if(!res.ok){ const er=await res.json().catch(()=>({})); throw new Error(er.message||'Server error '+res.status); }
+    showMsg(msgId,'Saved! Store updated.','success');
     return true;
   }catch(e){
-    showMsg(msgId,'Error saving: '+e.message,'error');
+    showMsg(msgId,'Error: '+e.message,'error');
     return false;
   }
 }
@@ -569,17 +579,54 @@ async function saveToBackend(data, msgId){
 /* ── LOAD ALL SETTINGS ── */
 async function loadAllSettings(){
   try{
-    const res=await fetch(`${API}/api/settings`,{headers:{'Authorization':'Bearer '+getToken()}});
+    const res=await fetch(`${API}/api/settings`);
     if(!res.ok) return;
     const s=await res.json();
-    if(s.heroSlides?.length) heroSlides=s.heroSlides;
-    if(s.ticker?.length) loadTickerData(s.ticker);
-    if(s.categories?.length) loadCategoryData(s.categories);
-    if(s.contact) loadContactData(s.contact);
-    if(s.social) loadSocialData(s.social);
-    if(s.promo) loadPromoData(s.promo);
+
+    // Hero slides (saved as JSON string)
+    if(s.heroSlides){
+      try{ const p=JSON.parse(s.heroSlides); if(Array.isArray(p)&&p.length) heroSlides=p; }catch(e){}
+    }
+
+    // Ticker — backend stores as ticker_text (JSON string)
+    if(s.ticker_text){
+      try{ const a=JSON.parse(s.ticker_text); if(Array.isArray(a)&&a.length) loadTickerData(a); }catch(e){}
+    }
+
+    // Categories — backend stores as JSON string of strings or objects with .name
+    if(s.categories){
+      try{
+        const c=typeof s.categories==='string'?JSON.parse(s.categories):s.categories;
+        if(Array.isArray(c)&&c.length){
+          const names=c.map(x=>typeof x==='object'?(x.name||''):String(x)).filter(n=>n.length>1);
+          if(names.length) loadCategoryData(names);
+        }
+      }catch(e){}
+    }
+
+    // Contact — flat fields
+    if(s.contact_phone) document.getElementById('cPhone').value=s.contact_phone;
+    if(s.contact_wa) document.getElementById('cWa').value=s.contact_wa;
+    if(s.contact_email) document.getElementById('cEmail').value=s.contact_email;
+    if(s.contact_address) document.getElementById('cAddress').value=s.contact_address;
+    if(s.contact_hours) document.getElementById('cHours').value=s.contact_hours;
+    if(s.map_embed) document.getElementById('mapEmbed').value=s.map_embed;
+
+    // Social — flat fields
+    if(s.social_insta) document.getElementById('socInsta').value=s.social_insta;
+    if(s.social_fb) document.getElementById('socFb').value=s.social_fb;
+    if(s.social_wa) document.getElementById('socWa').value=s.social_wa;
+    if(s.social_yt) document.getElementById('socYt').value=s.social_yt;
+
+    // Promo — flat fields
+    if(s.promo_title) document.getElementById('promoTitle').value=s.promo_title;
+    if(s.promo_sub) document.getElementById('promoH').value=s.promo_sub;
+    if(s.promo_tag) document.getElementById('promoTag').value=s.promo_tag;
+    if(s.promo_desc) document.getElementById('promoDesc').value=s.promo_desc;
+    if(s.promo_btn) document.getElementById('promoBtn').value=s.promo_btn;
+
     document.getElementById('ov-slides').textContent=heroSlides.length;
-    if(s.ticker) document.getElementById('ov-tickers').textContent=s.ticker.length;
+    document.getElementById('ov-tickers').textContent=tickerData.length;
   }catch(e){}
 }
 
@@ -595,7 +642,7 @@ async function loadProducts(){
     document.getElementById('navBadge').textContent=allProds.length;
     document.getElementById('ov-total').textContent=allProds.length;
   }catch(e){
-    document.getElementById('prodTableBody').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--red);padding:20px">Could not load products</td></tr>';
+    document.getElementById('prodTableBody').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--red);padding:20px">Could not load products</td></tr>';
   }
 }
 
@@ -677,7 +724,8 @@ async function submitProduct(){
     const url=id?`${API}/api/products/${id}`:`${API}/api/products`;
     const method=id?'PUT':'POST';
     const res=await fetch(url,{method,headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},body:JSON.stringify(payload)});
-    if(!res.ok) throw new Error('Server error');
+    if(res.status===401){ localStorage.removeItem('og47_token'); showLoginOverlay(); showMsg('prodMsg','Session expired — please log in again.','error'); return; }
+    if(!res.ok){ const er=await res.json().catch(()=>({})); throw new Error(er.message||'Server error '+res.status); }
     showMsg('prodMsg',id?'Product updated!':'Product added!','success');
     clearProdForm();
     loadProducts();
@@ -721,9 +769,12 @@ function askDelete(id){ deleteId=id; document.getElementById('confirmOverlay').c
 function closeConfirm(){ document.getElementById('confirmOverlay').classList.remove('open'); deleteId=null; }
 async function confirmDelete(){
   if(!deleteId) return;
+  const id=deleteId;
   closeConfirm();
   try{
-    await fetch(`${API}/api/products/${deleteId}`,{method:'DELETE',headers:{'Authorization':'Bearer '+getToken()}});
+    const res=await fetch(`${API}/api/products/${id}`,{method:'DELETE',headers:{'Authorization':'Bearer '+getToken()}});
+    if(res.status===401){ localStorage.removeItem('og47_token'); showLoginOverlay(); return; }
+    if(!res.ok) throw new Error('Server returned '+res.status);
     loadProducts();
   }catch(e){ alert('Delete failed: '+e.message); }
 }
@@ -813,7 +864,7 @@ function updateSlidePreview(i){
 async function saveAllSlides(){
   const btn=document.querySelector('#panel-hero .btn-gold');
   btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
-  await saveToBackend({heroSlides},'heroMsg');
+  await saveToBackend({heroSlides:JSON.stringify(heroSlides)},'heroMsg');
   btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> Save All Slides to Store';
   document.getElementById('ov-slides').textContent=heroSlides.length;
 }
@@ -850,68 +901,52 @@ function addTickerItem(){ tickerData.push('New announcement'); renderTickerItems
 function removeTickerItem(i){ tickerData.splice(i,1); renderTickerItems(); }
 function resetTicker(){ tickerData=[...DEFAULT_TICKER]; renderTickerItems(); }
 async function saveTicker(){
-  // collect current input values
-  document.querySelectorAll('#tickerItems .ticker-item input').forEach((inp,i)=>{ tickerData[i]=inp.value; });
-  await saveToBackend({ticker:tickerData},'tickerMsg');
+  const inputs=[...document.querySelectorAll('#tickerItems .ticker-item input')];
+  tickerData=inputs.map(inp=>inp.value.trim()).filter(t=>t);
+  await saveToBackend({ticker_text:JSON.stringify(tickerData)},'tickerMsg');
+  document.getElementById('ov-tickers').textContent=tickerData.length;
 }
 
 /* ═══════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════ */
-function loadContactData(d){
-  if(d.phone) document.getElementById('cPhone').value=d.phone;
-  if(d.wa) document.getElementById('cWa').value=d.wa;
-  if(d.email) document.getElementById('cEmail').value=d.email;
-  if(d.address) document.getElementById('cAddress').value=d.address;
-  if(d.hours) document.getElementById('cHours').value=d.hours;
-}
 function loadContact(){}
 async function saveContact(){
-  const d={phone:document.getElementById('cPhone').value,wa:document.getElementById('cWa').value,email:document.getElementById('cEmail').value,address:document.getElementById('cAddress').value,hours:document.getElementById('cHours').value};
-  const mapEmbed=document.getElementById('mapEmbed').value.trim();
-  const payload={contact:d};
-  if(mapEmbed) payload.mapEmbed=mapEmbed;
-  await saveToBackend(payload,'contactMsg');
-}
-
-async function loadMapEmbed(){
-  try{
-    const res=await fetch(`${API}/api/settings`,{headers:{'Authorization':'Bearer '+getToken()}});
-    if(!res.ok)return;
-    const s=await res.json();
-    if(s.mapEmbed) document.getElementById('mapEmbed').value=s.mapEmbed;
-  }catch(e){}
+  await saveToBackend({
+    contact_phone: document.getElementById('cPhone').value.trim(),
+    contact_wa: document.getElementById('cWa').value.trim(),
+    contact_email: document.getElementById('cEmail').value.trim(),
+    contact_address: document.getElementById('cAddress').value.trim(),
+    contact_hours: document.getElementById('cHours').value.trim(),
+    map_embed: document.getElementById('mapEmbed').value.trim()
+  },'contactMsg');
 }
 
 /* ═══════════════════════════════════════
    SOCIAL
 ═══════════════════════════════════════ */
-function loadSocialData(d){
-  if(d.insta) document.getElementById('socInsta').value=d.insta;
-  if(d.fb) document.getElementById('socFb').value=d.fb;
-  if(d.wa) document.getElementById('socWa').value=d.wa;
-  if(d.yt) document.getElementById('socYt').value=d.yt;
-}
 function loadSocial(){}
 async function saveSocial(){
-  const d={insta:document.getElementById('socInsta').value,fb:document.getElementById('socFb').value,wa:document.getElementById('socWa').value,yt:document.getElementById('socYt').value};
-  await saveToBackend({social:d},'socialMsg');
+  await saveToBackend({
+    social_insta: document.getElementById('socInsta').value.trim(),
+    social_fb: document.getElementById('socFb').value.trim(),
+    social_wa: document.getElementById('socWa').value.trim(),
+    social_yt: document.getElementById('socYt').value.trim()
+  },'socialMsg');
 }
 
 /* ═══════════════════════════════════════
    PROMO
 ═══════════════════════════════════════ */
-function loadPromoData(d){
-  if(d.tag) document.getElementById('promoTag').value=d.tag;
-  if(d.h) document.getElementById('promoH').value=d.h;
-  if(d.title) document.getElementById('promoTitle').value=d.title;
-  if(d.desc) document.getElementById('promoDesc').value=d.desc;
-  if(d.btn) document.getElementById('promoBtn').value=d.btn;
-}
 function loadPromo(){}
 async function savePromo(){
-  const d={tag:document.getElementById('promoTag').value,h:document.getElementById('promoH').value,title:document.getElementById('promoTitle').value,desc:document.getElementById('promoDesc').value,btn:document.getElementById('promoBtn').value};
-  await saveToBackend({promo:d},'promoMsg');
+  await saveToBackend({
+    promo_title: document.getElementById('promoTitle').value.trim(),
+    promo_sub: document.getElementById('promoH').value.trim(),
+    promo_tag: document.getElementById('promoTag').value.trim(),
+    promo_desc: document.getElementById('promoDesc').value.trim(),
+    promo_btn: document.getElementById('promoBtn').value.trim()
+  },'promoMsg');
 }
 
 /* ═══════════════════════════════════════
@@ -923,6 +958,7 @@ let catData=[...DEFAULT_CATS];
 function loadCategoryData(cats){
   catData=Array.isArray(cats)?cats.filter(c=>typeof c==='string'&&c.length>1):[...DEFAULT_CATS];
   rebuildProdCatSelect();
+  const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length;
 }
 function loadCategories(){ if(!Array.isArray(catData)||catData.some(c=>c.length<2)) catData=[...DEFAULT_CATS]; renderCatItems(); }
 
@@ -940,7 +976,7 @@ function removeCat(i){
   if(catData.length<=1){ showMsg('catMsg','Need at least 1 category.','error'); return; }
   catData.splice(i,1); renderCatItems(); rebuildProdCatSelect();
 }
-function resetCategories(){ catData=[...DEFAULT_CATS]; renderCatItems(); rebuildProdCatSelect(); }
+function resetCategories(){ catData=[...DEFAULT_CATS]; renderCatItems(); rebuildProdCatSelect(); const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length; }
 
 function rebuildProdCatSelect(){
   const sel=document.getElementById('pCategory');
@@ -952,7 +988,8 @@ async function saveCategories(){
   catData=inputs.map(inp=>inp.value.trim()).filter(c=>c.length>1);
   if(!catData.length){ showMsg('catMsg','Add at least one category.','error'); return; }
   rebuildProdCatSelect();
-  await saveToBackend({categories:catData},'catMsg');
+  const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length;
+  await saveToBackend({categories:JSON.stringify(catData)},'catMsg');
 }
 
 /* ═══════════════════════════════════════
@@ -980,6 +1017,12 @@ async function changePassword(){
 }
 
 /* ── INIT ── */
+// Show wake-up banner if backend takes > 3 seconds to respond
+(function(){
+  const banner = document.getElementById('serverBanner');
+  const timer = setTimeout(()=>{ if(banner) banner.style.display='block'; }, 3000);
+  fetch(`${API}/api/products`).then(()=>{ clearTimeout(timer); if(banner) banner.style.display='none'; }).catch(()=>{ clearTimeout(timer); });
+})();
 loadProducts();
 loadAllSettings();
 </script>
