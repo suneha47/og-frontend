@@ -761,7 +761,7 @@ function clearProdForm(){
   document.getElementById('imgFile').value='';
   document.getElementById('imgPreviewWrap').style.display='none';
   document.getElementById('prodFormTitle').innerHTML='<i class="fas fa-plus"></i> Add New Product';
-  document.getElementById('submitBtnText').textContent='Add Product';
+  const sbt=document.getElementById('submitBtnText'); if(sbt) sbt.textContent='Add Product';
   document.getElementById('cancelEditBtn').style.display='none';
 }
 
