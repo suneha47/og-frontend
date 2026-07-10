@@ -161,6 +161,34 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:600px){.two-col{grid-template-columns:1fr}}
 
+/* ── ORDERS ── */
+.order-table{width:100%;border-collapse:collapse}
+.order-table th{background:var(--card2);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;font-weight:700;white-space:nowrap}
+.order-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:.82rem;vertical-align:middle}
+.order-table tr:last-child td{border-bottom:none}
+.order-table tr:hover td{background:rgba(255,255,255,.02)}
+.order-id{font-weight:700;color:var(--gold);font-size:.8rem}
+.order-customer{font-weight:600;font-size:.82rem}
+.order-phone{font-size:.72rem;color:var(--muted);margin-top:2px}
+.order-items-preview{font-size:.72rem;color:var(--muted);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.order-total{font-weight:700;color:var(--gold)}
+.pay-badge{font-size:.58rem;font-weight:700;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase;border-radius:2px}
+.pay-badge.cod{background:rgba(39,174,96,.12);border:1px solid rgba(39,174,96,.25);color:#27ae60}
+.pay-badge.upi{background:rgba(52,152,219,.12);border:1px solid rgba(52,152,219,.25);color:var(--blue)}
+.pay-badge.razorpay{background:rgba(52,152,219,.12);border:1px solid rgba(52,152,219,.25);color:var(--blue)}
+.status-select{background:var(--card);border:1px solid var(--border);color:var(--white);font-family:inherit;font-size:.72rem;padding:5px 8px;cursor:pointer;outline:none;border-radius:2px}
+.status-select:focus{border-color:var(--gold)}
+.status-select.pending{color:#f39c12}
+.status-select.confirmed{color:var(--blue)}
+.status-select.shipped{color:#8e44ad}
+.status-select.delivered{color:#27ae60}
+.status-select.cancelled{color:var(--red)}
+.order-date{font-size:.7rem;color:var(--muted);white-space:nowrap}
+.orders-filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-btn{background:var(--card2);border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;cursor:pointer;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
+.orders-empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:.85rem}
+
 @media(max-width:860px){.main{padding:16px}}
 </style>
 </head>
@@ -188,6 +216,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-section">Main</div>
     <a class="nav-item active" onclick="showPanel('overview')"><i class="fas fa-chart-line"></i> Overview</a>
+    <a class="nav-item" onclick="showPanel('orders');loadOrders()"><i class="fas fa-shopping-bag"></i> Orders <span class="nav-badge" id="orderNavBadge" style="display:none">0</span></a>
     <a class="nav-item" onclick="showPanel('products')"><i class="fas fa-box"></i> Products <span class="nav-badge" id="navBadge">0</span></a>
 
     <div class="sidebar-section">Website</div>
@@ -210,13 +239,49 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
       <div class="panel-title"><i class="fas fa-chart-line"></i> Overview</div>
       <div class="stat-row" id="overviewStats">
         <div class="stat-card"><div class="stat-card-num" id="ov-total">—</div><div class="stat-card-label">Total Products</div></div>
-        <div class="stat-card"><div class="stat-card-num" id="ov-cats">9</div><div class="stat-card-label">Categories</div></div>
-        <div class="stat-card"><div class="stat-card-num" style="color:var(--green)" id="ov-slides">—</div><div class="stat-card-label">Hero Slides</div></div>
-        <div class="stat-card"><div class="stat-card-num" style="color:var(--blue)" id="ov-tickers">—</div><div class="stat-card-label">Ticker Items</div></div>
+        <div class="stat-card" style="cursor:pointer" onclick="showPanel('orders');loadOrders()"><div class="stat-card-num" style="color:var(--green)" id="ov-orders">—</div><div class="stat-card-label">Total Orders</div></div>
+        <div class="stat-card" style="cursor:pointer" onclick="showPanel('orders');loadOrders()"><div class="stat-card-num" style="color:#f39c12" id="ov-pending">—</div><div class="stat-card-label">Pending Orders</div></div>
+        <div class="stat-card"><div class="stat-card-num" style="color:var(--gold)" id="ov-revenue">—</div><div class="stat-card-label">Total Revenue</div></div>
       </div>
       <div class="card">
         <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-clock"></i> Recent Products</div></div>
         <div class="card-body"><ul class="recent-list" id="recentList"><li style="color:var(--muted);font-size:.82rem">Loading...</li></ul></div>
+      </div>
+    </div>
+
+    <!-- ── ORDERS ── -->
+    <div class="panel" id="panel-orders">
+      <div class="panel-title"><i class="fas fa-shopping-bag"></i> Customer Orders</div>
+      <div class="orders-filter-bar">
+        <button class="filter-btn active" onclick="filterOrders('all',this)">All</button>
+        <button class="filter-btn" onclick="filterOrders('pending',this)">Pending</button>
+        <button class="filter-btn" onclick="filterOrders('confirmed',this)">Confirmed</button>
+        <button class="filter-btn" onclick="filterOrders('shipped',this)">Shipped</button>
+        <button class="filter-btn" onclick="filterOrders('delivered',this)">Delivered</button>
+        <button class="filter-btn" onclick="filterOrders('cancelled',this)">Cancelled</button>
+        <button class="btn btn-outline btn-sm" style="margin-left:auto" onclick="loadOrders()"><i class="fas fa-sync-alt"></i> Refresh</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table class="order-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr><td colspan="7" class="orders-empty">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1025,6 +1090,109 @@ async function changePassword(){
 })();
 loadProducts();
 loadAllSettings();
+
+/* ── ORDERS ─────────────────────────────────────────── */
+let allOrders = [], ordersFilter = 'all';
+
+async function loadOrders(){
+  const tbody = document.getElementById('ordersTableBody');
+  if(tbody) tbody.innerHTML='<tr><td colspan="7" class="orders-empty"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  try{
+    const res = await fetch(`${API}/api/orders`, { headers:{ Authorization:'Bearer '+getToken() } });
+    if(!res.ok) throw new Error();
+    allOrders = await res.json();
+    renderOrders();
+    updateOrderBadge();
+    updateOverviewOrderStats();
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="7" class="orders-empty" style="color:var(--red)">Failed to load orders. Make sure you are logged in as admin.</td></tr>';
+  }
+}
+
+function filterOrders(status, btn){
+  ordersFilter = status;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderOrders();
+}
+
+function renderOrders(){
+  const tbody = document.getElementById('ordersTableBody');
+  if(!tbody) return;
+  const filtered = ordersFilter==='all' ? allOrders : allOrders.filter(o=>o.status===ordersFilter);
+  if(!filtered.length){
+    tbody.innerHTML=`<tr><td colspan="7" class="orders-empty">No ${ordersFilter==='all'?'':ordersFilter} orders yet.</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(o=>{
+    const itemsSummary = o.items.map(i=>`${i.name} ×${i.qty}`).join(', ');
+    const date = new Date(o.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+    const time = new Date(o.createdAt).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    return `<tr>
+      <td><div class="order-id">#${o.orderId||o._id.slice(-6).toUpperCase()}</div></td>
+      <td>
+        <div class="order-customer">${escO(o.customer?.name)}</div>
+        <div class="order-phone"><i class="fas fa-phone" style="font-size:.6rem"></i> ${escO(o.customer?.phone)}</div>
+        <div class="order-phone" style="margin-top:2px"><i class="fas fa-map-marker-alt" style="font-size:.6rem"></i> ${escO(o.customer?.address)}</div>
+      </td>
+      <td><div class="order-items-preview" title="${escO(itemsSummary)}">${escO(itemsSummary)}</div></td>
+      <td><span class="order-total">&#8377;${Number(o.total).toLocaleString('en-IN')}</span></td>
+      <td><span class="pay-badge ${o.payment?.method||'cod'}">${(o.payment?.method||'cod').toUpperCase()}</span></td>
+      <td>
+        <select class="status-select ${o.status}" onchange="updateOrderStatus('${o._id}',this)">
+          <option value="pending"   ${o.status==='pending'   ?'selected':''}>⏳ Pending</option>
+          <option value="confirmed" ${o.status==='confirmed' ?'selected':''}>✅ Confirmed</option>
+          <option value="shipped"   ${o.status==='shipped'   ?'selected':''}>🚚 Shipped</option>
+          <option value="delivered" ${o.status==='delivered' ?'selected':''}>📦 Delivered</option>
+          <option value="cancelled" ${o.status==='cancelled' ?'selected':''}>❌ Cancelled</option>
+        </select>
+      </td>
+      <td><div class="order-date">${date}</div><div class="order-date">${time}</div></td>
+    </tr>`;
+  }).join('');
+}
+
+function escO(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+async function updateOrderStatus(id, sel){
+  const newStatus = sel.value;
+  sel.className = 'status-select '+newStatus;
+  try{
+    const res = await fetch(`${API}/api/orders/${id}/status`,{
+      method:'PUT', headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body: JSON.stringify({status:newStatus})
+    });
+    if(!res.ok) throw new Error();
+    const updated = allOrders.find(o=>o._id===id);
+    if(updated) updated.status = newStatus;
+    updateOrderBadge();
+    updateOverviewOrderStats();
+  }catch(e){
+    alert('Failed to update status. Please try again.');
+    loadOrders();
+  }
+}
+
+function updateOrderBadge(){
+  const pending = allOrders.filter(o=>o.status==='pending').length;
+  const badge = document.getElementById('orderNavBadge');
+  if(badge){ badge.textContent=pending; badge.style.display=pending?'inline-block':'none'; }
+}
+
+function updateOverviewOrderStats(){
+  const total    = allOrders.length;
+  const pending  = allOrders.filter(o=>o.status==='pending').length;
+  const revenue  = allOrders.filter(o=>o.status!=='cancelled').reduce((s,o)=>s+Number(o.total),0);
+  const ovOrders  = document.getElementById('ov-orders');
+  const ovPending = document.getElementById('ov-pending');
+  const ovRevenue = document.getElementById('ov-revenue');
+  if(ovOrders)  ovOrders.textContent  = total;
+  if(ovPending) ovPending.textContent = pending;
+  if(ovRevenue) ovRevenue.textContent = '₹'+revenue.toLocaleString('en-IN');
+}
+
+// Load order stats on overview
+loadOrders();
 </script>
 </body>
 </html>
