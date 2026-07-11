@@ -190,6 +190,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
 .orders-empty{text-align:center;padding:48px 20px;color:var(--muted);font-size:.85rem}
 
 @media(max-width:860px){.main{padding:16px}}
+
+/* ── CAT EDIT CARDS ── */
+.cat-edit-card{display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);padding:14px;margin-bottom:12px}
+.cat-edit-preview{width:80px;height:80px;flex-shrink:0;overflow:hidden;border:1px solid var(--border);background:var(--card2);display:flex;align-items:center;justify-content:center}
+.cat-edit-preview img{width:100%;height:100%;object-fit:cover}
+.cat-edit-body{flex:1;min-width:0}
+@media(max-width:600px){.cat-edit-card{flex-wrap:wrap}.cat-edit-preview{width:100%;height:100px}}
 </style>
 </head>
 <body>
@@ -663,8 +670,8 @@ async function loadAllSettings(){
       try{
         const c=typeof s.categories==='string'?JSON.parse(s.categories):s.categories;
         if(Array.isArray(c)&&c.length){
-          const names=c.map(x=>typeof x==='object'?(x.name||''):String(x)).filter(n=>n.length>1);
-          if(names.length) loadCategoryData(names);
+          const items=c.map(x=>typeof x==='object'?{name:x.name||'',image:x.image||''}:{name:String(x),image:''}).filter(c=>c.name.length>1);
+          if(items.length) loadCategoryData(items);
         }
       }catch(e){}
     }
@@ -761,6 +768,16 @@ function removeImage(){
   document.getElementById('imgFile').value='';
   document.getElementById('pImageUrl').value='';
   document.getElementById('imgPreviewWrap').style.display='none';
+}
+
+async function uploadImageFile(file){
+  if(!file) return null;
+  const fd=new FormData(); fd.append('image',file);
+  try{
+    const res=await fetch(`${API}/api/products/upload`,{method:'POST',headers:{Authorization:'Bearer '+getToken()},body:fd});
+    const d=await res.json();
+    return d.url||d.imageUrl||null;
+  }catch(e){ return null; }
 }
 
 async function uploadImage(){
@@ -868,12 +885,23 @@ function renderSlides(){
         </div>
       </div>
       <div class="slide-editor-body" id="slide-body-${i}">
-        ${sl.bg?`<img src="${sl.bg}" class="slide-preview-mini" alt="Slide background" onerror="this.style.display='none'"/>`:'' }
-        <div class="fg-row">
-          <div class="fg"><label>Tag / Badge Text</label><input type="text" id="sl-tag-${i}" value="${sl.tag||''}" placeholder="e.g. New Collection 2026" oninput="heroSlides[${i}].tag=this.value"/></div>
-          <div class="fg"><label>Background Image URL</label>
-            <input type="url" id="sl-bg-${i}" value="${sl.bg||''}" placeholder="https://images.unsplash.com/..." oninput="heroSlides[${i}].bg=this.value;updateSlidePreview(${i})"/>
-            <small>Use <a href="https://unsplash.com" target="_blank" style="color:var(--gold)">unsplash.com</a> — right-click photo → Copy image address</small>
+        ${sl.bg?`<img src="${sl.bg}" class="slide-preview-mini" id="sl-preview-mini-${i}" alt="Slide background" onerror="this.style.display='none'"/>`:'' }
+        <div class="fg"><label>Tag / Badge Text</label><input type="text" id="sl-tag-${i}" value="${sl.tag||''}" placeholder="e.g. New Collection 2026" oninput="heroSlides[${i}].tag=this.value"/></div>
+        <div class="fg">
+          <label>Background Image</label>
+          <div class="fg-row">
+            <div>
+              <div class="img-upload-area" id="sl-drop-${i}" style="padding:14px;text-align:center">
+                <input type="file" accept="image/*" onchange="uploadSlideImg(event,${i})"/>
+                <i class="fas fa-cloud-upload-alt" style="font-size:1.2rem;color:var(--muted);display:block;margin-bottom:5px"></i>
+                <div style="font-size:.72rem;color:var(--muted)">Drag & drop or click to upload</div>
+              </div>
+            </div>
+            <div class="fg" style="margin-bottom:0">
+              <label>Or paste URL</label>
+              <input type="url" id="sl-bg-${i}" value="${sl.bg||''}" placeholder="https://images.unsplash.com/..." oninput="heroSlides[${i}].bg=this.value;updateSlidePreview(${i})"/>
+              <small>Use <a href="https://unsplash.com" target="_blank" style="color:var(--gold)">unsplash.com</a> — right-click photo → Copy image address</small>
+            </div>
           </div>
         </div>
         <div class="fg-row">
@@ -892,6 +920,7 @@ function renderSlides(){
         </div>
       </div>
     </div>`).join('');
+  setupSlideDropZones();
 }
 
 function toggleSlide(i){
@@ -922,8 +951,50 @@ function moveSlide(i,dir){
 
 function updateSlidePreview(i){
   const url=heroSlides[i].bg;
-  const img=document.querySelector(`#slide-item-${i} .slide-preview-mini`);
-  if(img&&url) img.src=url;
+  let img=document.querySelector(`#slide-item-${i} .slide-preview-mini`);
+  if(url){
+    if(!img){
+      img=document.createElement('img');
+      img.className='slide-preview-mini';
+      img.alt='Slide background';
+      img.onerror=function(){this.style.display='none'};
+      const body=document.getElementById('slide-body-'+i);
+      if(body) body.insertBefore(img,body.firstChild);
+    }
+    img.src=url; img.style.display='';
+  }
+}
+
+async function uploadSlideImg(e,i){
+  const file=e.target.files[0]; if(!file) return;
+  const zone=document.getElementById('sl-drop-'+i);
+  const txt=zone?zone.querySelector('div'):null; if(txt) txt.textContent='Uploading...';
+  const url=await uploadImageFile(file);
+  if(url){
+    heroSlides[i].bg=url;
+    const bgInput=document.getElementById('sl-bg-'+i);
+    if(bgInput) bgInput.value=url;
+    updateSlidePreview(i);
+  }
+  if(txt) txt.textContent='Drag & drop or click to upload';
+}
+
+function setupSlideDropZones(){
+  document.querySelectorAll('[id^="sl-drop-"]').forEach(zone=>{
+    const i=parseInt(zone.id.replace('sl-drop-',''));
+    zone.addEventListener('dragover',e=>{ e.preventDefault(); zone.style.borderColor='var(--gold)'; });
+    zone.addEventListener('dragleave',()=>{ zone.style.borderColor=''; });
+    zone.addEventListener('drop',async e=>{
+      e.preventDefault(); zone.style.borderColor='';
+      const file=e.dataTransfer.files[0];
+      if(file&&file.type.startsWith('image/')){
+        const txt=zone.querySelector('div'); if(txt) txt.textContent='Uploading...';
+        const url=await uploadImageFile(file);
+        if(url){ heroSlides[i].bg=url; const bgInput=document.getElementById('sl-bg-'+i); if(bgInput) bgInput.value=url; updateSlidePreview(i); }
+        if(txt) txt.textContent='Drag & drop or click to upload';
+      }
+    });
+  });
 }
 
 async function saveAllSlides(){
@@ -1017,40 +1088,112 @@ async function savePromo(){
 /* ═══════════════════════════════════════
    CATEGORIES
 ═══════════════════════════════════════ */
-const DEFAULT_CATS=['Wallets','Watches','Side Bags','Sunglasses','Perfumes','T-Shirts','Shirts','Caps','Pants'];
-let catData=[...DEFAULT_CATS];
+const DEFAULT_CATS=[
+  {name:'Wallets',image:'https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&q=95&auto=format&fit=crop'},
+  {name:'Watches',image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=95&auto=format&fit=crop'},
+  {name:'Side Bags',image:'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=95&auto=format&fit=crop'},
+  {name:'Sunglasses',image:'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=95&auto=format&fit=crop'},
+  {name:'Perfumes',image:'https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&q=95&auto=format&fit=crop'},
+  {name:'T-Shirts',image:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=95&auto=format&fit=crop'},
+  {name:'Shirts',image:'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&q=95&auto=format&fit=crop'},
+  {name:'Caps',image:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=95&auto=format&fit=crop'},
+  {name:'Pants',image:'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=95&auto=format&fit=crop'},
+];
+let catData=DEFAULT_CATS.map(c=>({...c}));
 
 function loadCategoryData(cats){
-  catData=Array.isArray(cats)?cats.filter(c=>typeof c==='string'&&c.length>1):[...DEFAULT_CATS];
+  catData=(Array.isArray(cats)?cats:[]).map(c=>typeof c==='string'?{name:c,image:''}:{name:c.name||'',image:c.image||''}).filter(c=>c.name.length>1);
+  if(!catData.length) catData=DEFAULT_CATS.map(c=>({...c}));
   rebuildProdCatSelect();
   const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length;
 }
-function loadCategories(){ if(!Array.isArray(catData)||catData.some(c=>c.length<2)) catData=[...DEFAULT_CATS]; renderCatItems(); }
+function loadCategories(){ if(!Array.isArray(catData)||!catData.length) catData=DEFAULT_CATS.map(c=>({...c})); renderCatItems(); }
 
 function renderCatItems(){
-  if(!Array.isArray(catData)) catData=[...DEFAULT_CATS];
+  if(!Array.isArray(catData)) catData=DEFAULT_CATS.map(c=>({...c}));
   document.getElementById('catItems').innerHTML=catData.map((c,i)=>`
-    <div class="ticker-item">
-      <input type="text" value="${c}" onchange="catData[${i}]=this.value" placeholder="Category name..."/>
-      <button class="btn btn-danger btn-sm" onclick="removeCat(${i})"><i class="fas fa-times"></i></button>
+    <div class="cat-edit-card" id="cat-card-${i}">
+      <div class="cat-edit-preview" id="cat-preview-${i}">
+        ${c.image?`<img src="${escHtml(c.image)}" onerror="this.style.display='none'"/>`:'<i class="fas fa-image" style="color:var(--muted);font-size:1.4rem"></i>'}
+      </div>
+      <div class="cat-edit-body">
+        <div class="fg" style="margin-bottom:10px"><label>Category Name</label><input type="text" value="${escHtml(c.name)}" placeholder="Category name..." onchange="catData[${i}].name=this.value;rebuildProdCatSelect()"/></div>
+        <div class="fg-row">
+          <div>
+            <div class="img-upload-area" id="cat-drop-${i}" style="padding:12px;text-align:center">
+              <input type="file" accept="image/*" onchange="uploadCatImg(event,${i})"/>
+              <i class="fas fa-cloud-upload-alt" style="font-size:1rem;color:var(--muted);display:block;margin-bottom:3px"></i>
+              <div style="font-size:.7rem;color:var(--muted)">Drag & drop or click</div>
+            </div>
+          </div>
+          <div class="fg" style="margin-bottom:0"><label>Or paste URL</label><input type="url" value="${escHtml(c.image||'')}" placeholder="https://..." oninput="catData[${i}].image=this.value;updateCatPreview(${i},this.value)"/></div>
+        </div>
+      </div>
+      <div style="flex-shrink:0;padding-left:4px">
+        <button class="btn btn-danger btn-sm" onclick="removeCat(${i})" title="Remove"><i class="fas fa-times"></i></button>
+      </div>
     </div>`).join('');
+  setupCatDropZones();
 }
 
-function addCategory(){ if(!Array.isArray(catData)) catData=[...DEFAULT_CATS]; catData.push('New Category'); renderCatItems(); }
+function updateCatPreview(i,url){
+  const box=document.getElementById('cat-preview-'+i); if(!box) return;
+  if(url){ let img=box.querySelector('img'); if(!img){ box.innerHTML=''; img=document.createElement('img'); img.onerror=function(){this.style.display='none'}; box.appendChild(img); } img.src=url; img.style.display=''; }
+}
+
+async function uploadCatImg(e,i){
+  const file=e.target.files[0]; if(!file) return;
+  const zone=document.getElementById('cat-drop-'+i);
+  const txt=zone?zone.querySelector('div'):null; if(txt) txt.textContent='Uploading...';
+  const url=await uploadImageFile(file);
+  if(url){
+    catData[i].image=url; updateCatPreview(i,url);
+    const card=document.getElementById('cat-card-'+i);
+    const urlInput=card?card.querySelector('input[type="url"]'):null;
+    if(urlInput) urlInput.value=url;
+  }
+  if(txt) txt.textContent='Drag & drop or click';
+}
+
+function setupCatDropZones(){
+  document.querySelectorAll('[id^="cat-drop-"]').forEach(zone=>{
+    const i=parseInt(zone.id.replace('cat-drop-',''));
+    zone.addEventListener('dragover',e=>{ e.preventDefault(); zone.style.borderColor='var(--gold)'; });
+    zone.addEventListener('dragleave',()=>{ zone.style.borderColor=''; });
+    zone.addEventListener('drop',async e=>{
+      e.preventDefault(); zone.style.borderColor='';
+      const file=e.dataTransfer.files[0];
+      if(file&&file.type.startsWith('image/')){
+        const txt=zone.querySelector('div'); if(txt) txt.textContent='Uploading...';
+        const url=await uploadImageFile(file);
+        if(url){ catData[i].image=url; updateCatPreview(i,url); const card=document.getElementById('cat-card-'+i); const urlInput=card?card.querySelector('input[type="url"]'):null; if(urlInput) urlInput.value=url; }
+        if(txt) txt.textContent='Drag & drop or click';
+      }
+    });
+  });
+}
+
+function addCategory(){ if(!Array.isArray(catData)) catData=DEFAULT_CATS.map(c=>({...c})); catData.push({name:'New Category',image:''}); renderCatItems(); }
 function removeCat(i){
   if(catData.length<=1){ showMsg('catMsg','Need at least 1 category.','error'); return; }
   catData.splice(i,1); renderCatItems(); rebuildProdCatSelect();
 }
-function resetCategories(){ catData=[...DEFAULT_CATS]; renderCatItems(); rebuildProdCatSelect(); const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length; }
+function resetCategories(){ catData=DEFAULT_CATS.map(c=>({...c})); renderCatItems(); rebuildProdCatSelect(); const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length; }
 
 function rebuildProdCatSelect(){
   const sel=document.getElementById('pCategory');
-  if(sel) sel.innerHTML='<option value="">Select category</option>'+catData.map(c=>`<option>${c}</option>`).join('');
+  if(sel) sel.innerHTML='<option value="">Select category</option>'+catData.map(c=>`<option>${escHtml(c.name||c)}</option>`).join('');
 }
 
 async function saveCategories(){
-  const inputs=[...document.querySelectorAll('#catItems .ticker-item input')];
-  catData=inputs.map(inp=>inp.value.trim()).filter(c=>c.length>1);
+  document.querySelectorAll('[id^="cat-card-"]').forEach((card,i)=>{
+    if(!catData[i]) return;
+    const nameInput=card.querySelector('input[type="text"]');
+    const urlInput=card.querySelector('input[type="url"]');
+    if(nameInput) catData[i].name=nameInput.value.trim();
+    if(urlInput) catData[i].image=urlInput.value.trim();
+  });
+  catData=catData.filter(c=>c.name&&c.name.length>1);
   if(!catData.length){ showMsg('catMsg','Add at least one category.','error'); return; }
   rebuildProdCatSelect();
   const el=document.getElementById('ov-cats'); if(el) el.textContent=catData.length;
@@ -1153,6 +1296,7 @@ function renderOrders(){
 }
 
 function escO(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
 async function updateOrderStatus(id, sel){
   const newStatus = sel.value;

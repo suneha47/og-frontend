@@ -1428,10 +1428,10 @@ function catTileIcon(cat){
 function buildCatNav(cats){
   document.querySelector('.cat-nav-inner').innerHTML=
     `<a class="cat-nav-item active" data-cat="all" href="#products-sec" onclick="navFilter('all',this)">All Products</a><div class="cat-nav-divider"></div>`+
-    cats.map(c=>`<a class="cat-nav-item" data-cat="${escHtml(c)}" href="#products-sec" onclick="navFilter('${escHtml(c)}',this)">${escHtml(c)}</a>`).join('')+
+    cats.map(c=>{const n=typeof c==='object'?c.name:c;return`<a class="cat-nav-item" data-cat="${escHtml(n)}" href="#products-sec" onclick="navFilter('${escHtml(n)}',this)">${escHtml(n)}</a>`}).join('')+
     `<div class="cat-nav-divider"></div><a class="cat-nav-item" href="contact.html" style="color:var(--gold)">New Arrivals</a>`;
   const sel=document.getElementById('searchCatSelect');
-  if(sel) sel.innerHTML='<option value="">All</option>'+cats.map(c=>`<option value="${escHtml(c)}">${escHtml(c)}</option>`).join('');
+  if(sel) sel.innerHTML='<option value="">All</option>'+cats.map(c=>{const n=typeof c==='object'?c.name:c;return`<option value="${escHtml(n)}">${escHtml(n)}</option>`}).join('');
 }
 
 function buildCatTiles(cats){
@@ -1442,15 +1442,15 @@ function buildCatTiles(cats){
         <div class="cat-tile-name">All</div><div class="cat-tile-sub">All Products</div>
       </div>
     </a>`+
-    cats.map(c=>`
-    <a class="cat-tile" data-cat="${escHtml(c)}" href="#products-sec" onclick="filterCat('${escHtml(c)}',this)">
-      <img src="${CAT_IMAGES[c]||CAT_DEFAULT_IMG}" alt="${escHtml(c)}" loading="lazy"/>
+    cats.map(c=>{const n=typeof c==='object'?c.name:c;const img=(typeof c==='object'&&c.image)?c.image:(CAT_IMAGES[n]||CAT_DEFAULT_IMG);return`
+    <a class="cat-tile" data-cat="${escHtml(n)}" href="#products-sec" onclick="filterCat('${escHtml(n)}',this)">
+      <img src="${img}" alt="${escHtml(n)}" loading="lazy"/>
       <div class="cat-tile-shimmer"></div><div class="cat-tile-overlay"></div>
       <div class="cat-tile-body">
-        <div class="cat-tile-icon">${catTileIcon(c)}</div>
-        <div class="cat-tile-name">${escHtml(c)}</div><div class="cat-tile-sub">Shop now</div>
+        <div class="cat-tile-icon">${catTileIcon(n)}</div>
+        <div class="cat-tile-name">${escHtml(n)}</div><div class="cat-tile-sub">Shop now</div>
       </div>
-    </a>`).join('');
+    </a>`}).join('');
   document.querySelectorAll('.cat-tile:not(.cat-all-tile)').forEach(t=>{
     t.addEventListener('mousemove',e=>{const r=t.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`perspective(700px) rotateY(${x*6}deg) rotateX(${-y*6}deg) scale(1.02)`;t.style.transition='none';});
     t.addEventListener('mouseleave',()=>{t.style.transform='';t.style.transition='transform .5s ease,border-color .35s,box-shadow .35s';});
@@ -1700,8 +1700,8 @@ async function loadSiteSettings(){
       try{
         const raw=typeof s.categories==='string'?JSON.parse(s.categories):s.categories;
         if(Array.isArray(raw)&&raw.length){
-          const names=raw.map(x=>typeof x==='object'?(x.name||''):String(x)).filter(n=>n.length>1);
-          if(names.length){ buildCatNav(names); buildCatTiles(names); }
+          const items=raw.map(x=>typeof x==='object'?{name:x.name||'',image:x.image||''}:{name:String(x),image:''}).filter(c=>c.name.length>1);
+          if(items.length){ buildCatNav(items); buildCatTiles(items); }
         }
       }catch(e){}
     }
