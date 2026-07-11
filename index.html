@@ -495,8 +495,13 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
 @keyframes mFade{from{opacity:0}to{opacity:1}}
 .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;max-width:520px;width:100%;position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.18);animation:mSlide .3s cubic-bezier(.34,1.2,.64,1)}
 @keyframes mSlide{from{opacity:0;transform:scale(.95) translateY(14px)}to{opacity:1;transform:none}}
+.modal-img-wrap{position:relative}
 .modal-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px 12px 0 0}
 .modal-img-ph{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--card2);border-radius:12px 12px 0 0;color:var(--gold)}
+.modal-gallery-strip{display:flex;gap:6px;padding:8px 12px;background:var(--card2);overflow-x:auto;scrollbar-width:none}
+.modal-gallery-strip::-webkit-scrollbar{display:none}
+.modal-thumb{width:58px;height:58px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent;opacity:.7;transition:all .2s;flex-shrink:0}
+.modal-thumb.active,.modal-thumb:hover{border-color:var(--gold);opacity:1}
 .modal-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.9);border:1px solid var(--border);color:var(--muted);font-size:.95rem;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;transition:all .2s}
 .modal-close:hover{background:var(--red);color:#fff;border-color:var(--red)}
 .modal-body{padding:24px}
@@ -984,11 +989,18 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
         <i class="fas fa-search" aria-hidden="true"></i>
         <input class="search-box" type="text" id="searchInput2" placeholder="Search within collection..." aria-label="Search products" oninput="syncSearch(this.value)"/>
       </div>
+      <select class="sort-select" id="sizeFilter" aria-label="Filter by size" onchange="renderProducts()" style="min-width:100px">
+        <option value="">All Sizes</option>
+      </select>
+      <select class="sort-select" id="colorFilter" aria-label="Filter by color" onchange="renderProducts()" style="min-width:110px">
+        <option value="">All Colors</option>
+      </select>
       <select class="sort-select" id="sortSelect" aria-label="Sort" onchange="renderProducts()">
         <option value="default">Sort: Default</option>
         <option value="price-asc">Price: Low &rarr; High</option>
         <option value="price-desc">Price: High &rarr; Low</option>
         <option value="name-asc">Name: A &rarr; Z</option>
+        <option value="rating-desc">Top Rated</option>
       </select>
     </div>
     <div class="products-grid" id="productsGrid"></div>
@@ -1456,15 +1468,29 @@ function escHtml(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/<
 function imgErr(img){const c=img.dataset.cat;img.parentElement.innerHTML=`<div class="product-img-ph">${catIcon(c)}</div>`}
 
 /* ── STAR RATING HELPER ─────────── */
-function starsFor(id){
-  const hash=id.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-  const r=(3.5+((hash%30)/30)*1.5).toFixed(1);
-  const full=Math.floor(r),half=r-full>=.5?1:0,empty=5-full-half;
+function buildStars(rating){
+  const r=Math.round((Number(rating)||0)*2)/2;
+  const full=Math.floor(r),half=r-full>=0.5?1:0,empty=5-full-half;
   return '★'.repeat(full)+(half?'½':'')+'☆'.repeat(empty);
 }
-function reviewCount(id){
-  const h=id.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-  return 20+(h%230);
+
+/* ── POPULATE SIZE / COLOR FILTERS ─ */
+function populateFilters(){
+  const sizes=new Set(), colors=new Set();
+  allProducts.forEach(p=>{
+    (p.sizes||[]).forEach(s=>sizes.add(s));
+    (p.colors||[]).forEach(c=>colors.add(c));
+  });
+  const szSel=document.getElementById('sizeFilter');
+  const clSel=document.getElementById('colorFilter');
+  if(szSel){
+    const cur=szSel.value;
+    szSel.innerHTML='<option value="">All Sizes</option>'+[...sizes].map(s=>'<option value="'+escHtml(s)+'"'+(s===cur?' selected':'')+'>'+escHtml(s)+'</option>').join('');
+  }
+  if(clSel){
+    const cur=clSel.value;
+    clSel.innerHTML='<option value="">All Colors</option>'+[...colors].map(c=>'<option value="'+escHtml(c)+'"'+(c===cur?' selected':'')+'>'+escHtml(c)+'</option>').join('');
+  }
 }
 
 /* ── WHATSAPP LINK ──────────────── */
@@ -1608,6 +1634,7 @@ async function loadProducts(){
     const res=await fetch(`${API}/api/products`);
     clearTimeout(slowTimer);
     allProducts=await res.json();
+    populateFilters();
     renderProducts();
   }catch(e){
     clearTimeout(slowTimer);
@@ -1644,16 +1671,21 @@ function renderProducts(){
   const v2=(document.getElementById('searchInput2')?.value||'').toLowerCase();
   const search=v1||v2;
   const catFilter=document.getElementById('searchCatSelect')?.value||'';
+  const szFilter=document.getElementById('sizeFilter')?.value||'';
+  const clFilter=document.getElementById('colorFilter')?.value||'';
   const sort=document.getElementById('sortSelect').value;
   let list=allProducts.filter(p=>{
     const mc=activeCategory==='all'||p.category===activeCategory;
     const cc=!catFilter||p.category===catFilter;
     const ms=p.name.toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)||(p.category||'').toLowerCase().includes(search);
-    return mc&&cc&&ms;
+    const szOk=!szFilter||(p.sizes||[]).includes(szFilter);
+    const clOk=!clFilter||(p.colors||[]).includes(clFilter);
+    return mc&&cc&&ms&&szOk&&clOk;
   });
-  if(sort==='price-asc') list.sort((a,b)=>a.price-b.price);
-  if(sort==='price-desc')list.sort((a,b)=>b.price-a.price);
-  if(sort==='name-asc')  list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort==='price-asc')   list.sort((a,b)=>a.price-b.price);
+  if(sort==='price-desc')  list.sort((a,b)=>b.price-a.price);
+  if(sort==='name-asc')    list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort==='rating-desc') list.sort((a,b)=>(b.avgRating||0)-(a.avgRating||0));
   const totalPages=Math.max(1,Math.ceil(list.length/PER_PAGE));
   if(currentPage>totalPages)currentPage=1;
   const grid=document.getElementById('productsGrid');
@@ -1664,7 +1696,8 @@ function renderProducts(){
   list=list.slice(start,start+PER_PAGE);
   const badges={'0':'badge-new','1':'badge-hot','2':'badge-new','3':'','4':'badge-hot','5':'badge-new','6':'badge-hot','7':'','8':'badge-new','9':'badge-hot'};
   grid.innerHTML=list.map((p,i)=>{
-    const stars=starsFor(p._id),reviews=reviewCount(p._id);
+    const stars=buildStars(p.avgRating),reviews=p.reviewCount||0;
+    const starTip=p.avgRating?Number(p.avgRating).toFixed(1)+' / 5':'No ratings yet';
     const badgeClass=badges[String(i%10)]||'';
     const badgeLabel=badgeClass==='badge-new'?'New':badgeClass==='badge-hot'?'Hot':'';
     const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
@@ -1686,9 +1719,9 @@ function renderProducts(){
       <div class="product-body">
         <div class="product-cat-lbl">${escHtml(p.category)}</div>
         <div class="product-name">${escHtml(p.name)}</div>
-        <div class="product-stars">
-          <span class="stars-icon">${stars}</span>
-          <span class="stars-count">(${reviews})</span>
+        <div class="product-stars" title="${starTip}">
+          <span class="stars-icon">${reviews?stars:'☆☆☆☆☆'}</span>
+          <span class="stars-count">${reviews?'('+reviews+')':'No reviews yet'}</span>
         </div>
         <div class="product-price-row">
           <div class="product-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
@@ -1714,7 +1747,7 @@ let _modalSelSize = '', _modalSelColor = '';
 function openModal(id){
   const p=allProducts.find(x=>x._id===id);if(!p)return;
   _modalProductId=id; _modalSelSize=''; _modalSelColor='';
-  const stars=starsFor(p._id),revCnt=reviewCount(p._id);
+  const stars=buildStars(p.avgRating),revCnt=p.reviewCount||0;
   const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
   const realMrp=hasMrp?Number(p.mrp):null;
   const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
@@ -1742,8 +1775,18 @@ function openModal(id){
       '<div class="related-card-body"><div class="related-card-name">'+escHtml(r.name)+'</div><div class="related-card-price">&#8377;'+Number(r.price).toLocaleString('en-IN')+'</div></div></div>').join('')+
   '</div></div>':'';
 
+  // Build gallery: combine main image + extra images, dedupe
+  const allImgs=[p.image,...(p.images||[])].filter((v,i,a)=>v&&a.indexOf(v)===i);
+  const galleryHtml=allImgs.length>1?
+    '<div class="modal-gallery-strip" id="modalGalleryStrip">'+
+      allImgs.map((src,i)=>'<img class="modal-thumb'+(i===0?' active':'')+'" src="'+escHtml(src)+'" alt="view '+(i+1)+'" onclick="switchModalImg(\''+escHtml(src)+'\',this)" loading="lazy">').join('')+
+    '</div>':'';
+
   document.getElementById('modalContent').innerHTML=
-    (p.image?'<img class="modal-img" src="'+escHtml(p.image)+'" alt="'+escHtml(p.name)+'" onerror="this.style.display=\'none\'">':`<div class="modal-img-ph">${catIcon(p.category)}</div>`)+
+    '<div class="modal-img-wrap">'+
+      (p.image?'<img class="modal-img" id="modalMainImg" src="'+escHtml(p.image)+'" alt="'+escHtml(p.name)+'" onerror="this.style.display=\'none\'">':`<div class="modal-img-ph">${catIcon(p.category)}</div>`)+
+      galleryHtml+
+    '</div>'+
     '<div class="modal-body">'+
       '<div class="modal-cat-lbl">'+escHtml(p.category)+'</div>'+
       '<div class="modal-name">'+escHtml(p.name)+'</div>'+
@@ -1783,6 +1826,12 @@ function selectColor(c,el){
   _modalSelColor=_modalSelColor===c?'':c;
   document.querySelectorAll('#modalColors .var-chip').forEach(b=>b.classList.remove('sel'));
   if(_modalSelColor) el.classList.add('sel');
+}
+function switchModalImg(src,thumb){
+  const main=document.getElementById('modalMainImg');
+  if(main)main.src=src;
+  document.querySelectorAll('.modal-thumb').forEach(t=>t.classList.remove('active'));
+  if(thumb)thumb.classList.add('active');
 }
 function addToCartFromModal(id){
   const p=allProducts.find(x=>x._id===id);if(!p||p.stock===0)return;
