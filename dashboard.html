@@ -229,7 +229,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
     <div class="sidebar-section">Website</div>
     <a class="nav-item" onclick="showPanel('hero')"><i class="fas fa-images"></i> Hero Slides</a>
     <a class="nav-item" onclick="showPanel('ticker')"><i class="fas fa-bullhorn"></i> Ticker Text</a>
-    <a class="nav-item" onclick="showPanel('categories')"><i class="fas fa-th-large"></i> Categories</a>
+    <a class="nav-item" onclick="showPanel('categories')"><i class="fas fa-th-large"></i> Shop by Category</a>
     <a class="nav-item" onclick="showPanel('contact')"><i class="fas fa-address-book"></i> Contact Info</a>
     <a class="nav-item" onclick="showPanel('social')"><i class="fas fa-share-alt"></i> Social Links</a>
     <a class="nav-item" onclick="showPanel('promo')"><i class="fas fa-tag"></i> Promo Banner</a>
@@ -421,17 +421,35 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
 
     <!-- ── CATEGORIES ── -->
     <div class="panel" id="panel-categories">
-      <div class="panel-title"><i class="fas fa-th-large"></i> Categories</div>
+      <div class="panel-title"><i class="fas fa-th-large"></i> Shop by Category</div>
+
+      <div class="card">
+        <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-info-circle"></i> How It Works</div></div>
+        <div class="card-body">
+          <p style="font-size:.82rem;color:var(--muted);line-height:1.9">
+            This controls the <strong style="color:var(--white)">"Shop by Category"</strong> tiles on your store homepage.<br>
+            For each category: change the <strong style="color:var(--white)">name</strong> and <strong style="color:var(--white)">photo</strong> — either <strong style="color:var(--gold)">drag &amp; drop</strong> an image or <strong style="color:var(--gold)">paste a URL</strong>.<br>
+            Click <strong style="color:var(--gold)">Save All Categories</strong> to go live instantly.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-eye"></i> Tile Preview <span style="font-size:.65rem;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none">(auto-updates as you edit)</span></div></div>
+        <div class="card-body" style="padding:14px">
+          <div id="catPreviewGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px"></div>
+        </div>
+      </div>
+
       <div class="card">
         <div class="card-hdr" style="justify-content:space-between">
-          <div class="card-hdr-title"><i class="fas fa-list"></i> Category List</div>
+          <div class="card-hdr-title"><i class="fas fa-images"></i> Edit Images &amp; Names</div>
           <button class="btn btn-gold btn-sm" onclick="addCategory()"><i class="fas fa-plus"></i> Add Category</button>
         </div>
         <div class="card-body">
-          <p style="font-size:.78rem;color:var(--muted);margin-bottom:16px">Add, rename or remove categories. Updates the nav bar, filters and product form on the live site instantly — no redeploy needed.</p>
           <div id="catItems"></div>
           <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn btn-gold" onclick="saveCategories()"><i class="fas fa-save"></i> Save Categories</button>
+            <button class="btn btn-gold" onclick="saveCategories()"><i class="fas fa-save"></i> Save All Categories</button>
             <button class="btn btn-outline" onclick="resetCategories()"><i class="fas fa-undo"></i> Reset to Defaults</button>
           </div>
           <div class="msg" id="catMsg"></div>
@@ -1111,34 +1129,57 @@ function loadCategories(){ if(!Array.isArray(catData)||!catData.length) catData=
 
 function renderCatItems(){
   if(!Array.isArray(catData)) catData=DEFAULT_CATS.map(c=>({...c}));
-  document.getElementById('catItems').innerHTML=catData.map((c,i)=>`
-    <div class="cat-edit-card" id="cat-card-${i}">
-      <div class="cat-edit-preview" id="cat-preview-${i}">
-        ${c.image?`<img src="${escHtml(c.image)}" onerror="this.style.display='none'"/>`:'<i class="fas fa-image" style="color:var(--muted);font-size:1.4rem"></i>'}
-      </div>
-      <div class="cat-edit-body">
-        <div class="fg" style="margin-bottom:10px"><label>Category Name</label><input type="text" value="${escHtml(c.name)}" placeholder="Category name..." onchange="catData[${i}].name=this.value;rebuildProdCatSelect()"/></div>
-        <div class="fg-row">
-          <div>
-            <div class="img-upload-area" id="cat-drop-${i}" style="padding:12px;text-align:center">
-              <input type="file" accept="image/*" onchange="uploadCatImg(event,${i})"/>
-              <i class="fas fa-cloud-upload-alt" style="font-size:1rem;color:var(--muted);display:block;margin-bottom:3px"></i>
-              <div style="font-size:.7rem;color:var(--muted)">Drag & drop or click</div>
-            </div>
-          </div>
-          <div class="fg" style="margin-bottom:0"><label>Or paste URL</label><input type="url" value="${escHtml(c.image||'')}" placeholder="https://..." oninput="catData[${i}].image=this.value;updateCatPreview(${i},this.value)"/></div>
-        </div>
-      </div>
-      <div style="flex-shrink:0;padding-left:4px">
-        <button class="btn btn-danger btn-sm" onclick="removeCat(${i})" title="Remove"><i class="fas fa-times"></i></button>
-      </div>
-    </div>`).join('');
+  document.getElementById('catItems').innerHTML=catData.map((c,i)=>{
+    const img=c.image||'';
+    const thumb=img
+      ? '<img src="'+escHtml(img)+'" style="width:100%;height:100%;object-fit:cover">'
+      : '<i class="fas fa-image" style="color:var(--muted);font-size:1.4rem"></i>';
+    return '<div class="cat-edit-card" id="cat-card-'+i+'">'
+      +'<div class="cat-edit-preview" id="cat-preview-'+i+'">'+thumb+'</div>'
+      +'<div class="cat-edit-body">'
+        +'<div class="fg" style="margin-bottom:10px"><label>Category Name</label>'
+        +'<input type="text" value="'+escHtml(c.name)+'" placeholder="e.g. Wallets" onchange="catData['+i+'].name=this.value;rebuildProdCatSelect();renderCatPreview()"/></div>'
+        +'<div class="fg-row">'
+          +'<div><label style="font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px">Upload Photo</label>'
+          +'<div class="img-upload-area" id="cat-drop-'+i+'" style="padding:10px 12px;text-align:center">'
+          +'<input type="file" accept="image/*" onchange="uploadCatImg(event,'+i+')">'
+          +'<i class="fas fa-cloud-upload-alt" style="font-size:.95rem;color:var(--muted);display:block;margin-bottom:2px"></i>'
+          +'<div style="font-size:.67rem;color:var(--muted)">Drag &amp; drop or click</div>'
+          +'</div></div>'
+          +'<div class="fg" style="margin-bottom:0"><label>Or paste Image URL</label>'
+          +'<input type="url" value="'+escHtml(img)+'" placeholder="https://..." oninput="catData['+i+'].image=this.value;updateCatPreview('+i+',this.value)"/></div>'
+        +'</div>'
+      +'</div>'
+      +'<div style="flex-shrink:0">'
+        +'<button class="btn btn-danger btn-sm" onclick="removeCat('+i+')" title="Delete"><i class="fas fa-trash"></i></button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
   setupCatDropZones();
+  renderCatPreview();
+}
+
+function renderCatPreview(){
+  const grid=document.getElementById('catPreviewGrid'); if(!grid) return;
+  if(!Array.isArray(catData)){grid.innerHTML=''; return;}
+  grid.innerHTML=catData.map(c=>{
+    const img=c.image||'';
+    const bg=img?'background:url('+img+') center/cover no-repeat':'background:var(--card2)';
+    return '<div style="'+bg+';height:70px;border:1px solid var(--border);position:relative;overflow:hidden">'
+      +'<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,.1))"></div>'
+      +'<div style="position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:.62rem;font-weight:700;color:#fff;letter-spacing:.05em;padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escHtml(c.name)+'</div>'
+      +'</div>';
+  }).join('');
 }
 
 function updateCatPreview(i,url){
   const box=document.getElementById('cat-preview-'+i); if(!box) return;
-  if(url){ let img=box.querySelector('img'); if(!img){ box.innerHTML=''; img=document.createElement('img'); img.onerror=function(){this.style.display='none'}; box.appendChild(img); } img.src=url; img.style.display=''; }
+  if(url){
+    let img=box.querySelector('img');
+    if(!img){ box.innerHTML=''; img=document.createElement('img'); img.style.cssText='width:100%;height:100%;object-fit:cover'; box.appendChild(img); }
+    img.src=url; img.style.display='';
+  }
+  renderCatPreview();
 }
 
 async function uploadCatImg(e,i){
@@ -1151,6 +1192,7 @@ async function uploadCatImg(e,i){
     const card=document.getElementById('cat-card-'+i);
     const urlInput=card?card.querySelector('input[type="url"]'):null;
     if(urlInput) urlInput.value=url;
+    renderCatPreview();
   }
   if(txt) txt.textContent='Drag & drop or click';
 }
