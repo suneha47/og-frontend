@@ -191,6 +191,39 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
 
 @media(max-width:860px){.main{padding:16px}}
 
+/* ── CUSTOMERS TABLE ── */
+.cust-table{width:100%;border-collapse:collapse}
+.cust-table th{background:var(--card2);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;font-weight:700}
+.cust-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.82rem;vertical-align:middle}
+.cust-table tr:last-child td{border-bottom:none}
+.cust-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* ── CHART ── */
+.chart-wrap{display:flex;align-items:flex-end;gap:6px;height:120px;padding:0 4px}
+.chart-bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
+.chart-bar{width:100%;background:var(--goldg);border-radius:3px 3px 0 0;transition:opacity .2s;min-height:2px}
+.chart-bar:hover{opacity:.8}
+.chart-label{font-size:.58rem;color:var(--muted);white-space:nowrap;text-align:center;letter-spacing:.02em}
+.chart-val{font-size:.62rem;color:var(--gold);font-weight:700}
+
+/* ── COUPON TABLE ── */
+.coupon-table{width:100%;border-collapse:collapse}
+.coupon-table th{background:var(--card2);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;font-weight:700}
+.coupon-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.82rem;vertical-align:middle}
+.coupon-table tr:last-child td{border-bottom:none}
+.coupon-table tr:hover td{background:rgba(255,255,255,.02)}
+.coupon-code-badge{font-family:monospace;font-size:.78rem;font-weight:700;color:var(--gold);background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);padding:3px 8px;letter-spacing:.08em}
+.coupon-active{color:#27ae60;font-size:.65rem;font-weight:700;text-transform:uppercase}
+.coupon-inactive{color:var(--muted);font-size:.65rem;font-weight:700;text-transform:uppercase}
+
+/* ── REVIEWS TABLE ── */
+.review-table{width:100%;border-collapse:collapse}
+.review-table th{background:var(--card2);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;font-weight:700}
+.review-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.82rem;vertical-align:middle}
+.review-table tr:last-child td{border-bottom:none}
+.review-table tr:hover td{background:rgba(255,255,255,.02)}
+.rev-stars{color:#d97706;font-size:.88rem}
+
 /* ── CAT EDIT CARDS ── */
 .cat-edit-card{display:flex;align-items:flex-start;gap:14px;background:var(--card);border:1px solid var(--border);padding:14px;margin-bottom:12px}
 .cat-edit-preview{width:80px;height:80px;flex-shrink:0;overflow:hidden;border:1px solid var(--border);background:var(--card2);display:flex;align-items:center;justify-content:center}
@@ -225,6 +258,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
     <a class="nav-item active" onclick="showPanel('overview')"><i class="fas fa-chart-line"></i> Overview</a>
     <a class="nav-item" onclick="showPanel('orders');loadOrders()"><i class="fas fa-shopping-bag"></i> Orders <span class="nav-badge" id="orderNavBadge" style="display:none">0</span></a>
     <a class="nav-item" onclick="showPanel('products')"><i class="fas fa-box"></i> Products <span class="nav-badge" id="navBadge">0</span></a>
+    <a class="nav-item" onclick="showPanel('customers');loadCustomers()"><i class="fas fa-users"></i> Customers</a>
+    <a class="nav-item" onclick="showPanel('coupons');loadCoupons()"><i class="fas fa-ticket-alt"></i> Coupons</a>
+    <a class="nav-item" onclick="showPanel('reviews');loadAllReviews()"><i class="fas fa-star"></i> Reviews</a>
 
     <div class="sidebar-section">Website</div>
     <a class="nav-item" onclick="showPanel('hero')"><i class="fas fa-images"></i> Hero Slides</a>
@@ -249,6 +285,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
         <div class="stat-card" style="cursor:pointer" onclick="showPanel('orders');loadOrders()"><div class="stat-card-num" style="color:var(--green)" id="ov-orders">—</div><div class="stat-card-label">Total Orders</div></div>
         <div class="stat-card" style="cursor:pointer" onclick="showPanel('orders');loadOrders()"><div class="stat-card-num" style="color:#f39c12" id="ov-pending">—</div><div class="stat-card-label">Pending Orders</div></div>
         <div class="stat-card"><div class="stat-card-num" style="color:var(--gold)" id="ov-revenue">—</div><div class="stat-card-label">Total Revenue</div></div>
+        <div class="stat-card" style="cursor:pointer" onclick="showPanel('customers');loadCustomers()"><div class="stat-card-num" style="color:var(--blue)" id="ov-customers">—</div><div class="stat-card-label">Customers</div></div>
+      </div>
+      <!-- 7-day revenue chart -->
+      <div class="card" id="revenueChartCard">
+        <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-chart-bar"></i> Revenue — Last 7 Days</div></div>
+        <div class="card-body"><div id="revenueChart" class="chart-wrap"><div style="color:var(--muted);font-size:.8rem;align-self:center;width:100%;text-align:center">Loading chart...</div></div></div>
       </div>
       <div class="card">
         <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-clock"></i> Recent Products</div></div>
@@ -266,6 +308,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
         <button class="filter-btn" onclick="filterOrders('shipped',this)">Shipped</button>
         <button class="filter-btn" onclick="filterOrders('delivered',this)">Delivered</button>
         <button class="filter-btn" onclick="filterOrders('cancelled',this)">Cancelled</button>
+        <button class="btn btn-outline btn-sm" onclick="exportOrdersCSV()"><i class="fas fa-file-csv"></i> Export CSV</button>
         <button class="btn btn-outline btn-sm" style="margin-left:auto" onclick="loadOrders()"><i class="fas fa-sync-alt"></i> Refresh</button>
       </div>
       <div class="card">
@@ -321,6 +364,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
             <div class="fg"><label>MRP / Original Price (₹) <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(optional — shows "X% off" on site)</span></label><input type="number" id="pMrp" placeholder="e.g. 799" min="1"/></div>
           </div>
           <div class="fg"><label>Description</label><textarea id="pDesc" placeholder="Short product description..."></textarea></div>
+          <div class="fg-row">
+            <div class="fg"><label>Stock Quantity <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(-1 = unlimited)</span></label><input type="number" id="pStock" placeholder="-1" value="-1" min="-1"/></div>
+            <div></div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>Sizes <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(comma separated)</span></label><input type="text" id="pSizes" placeholder="S, M, L, XL, XXL"/></div>
+            <div class="fg"><label>Colors <span style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0">(comma separated)</span></label><input type="text" id="pColors" placeholder="Red, Blue, Black"/></div>
+          </div>
           <div class="fg">
             <label>Product Image</label>
             <div class="fg-row">
@@ -516,6 +567,90 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
       </div>
     </div>
 
+    <!-- ── CUSTOMERS ── -->
+    <div class="panel" id="panel-customers">
+      <div class="panel-title"><i class="fas fa-users"></i> Customers</div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-hdr-title"><i class="fas fa-user-friends"></i> Registered Customers</div>
+          <button class="btn btn-outline btn-sm" onclick="loadCustomers()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table class="cust-table">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th></tr></thead>
+              <tbody id="customersTableBody"><tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px">Loading customers...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COUPONS ── -->
+    <div class="panel" id="panel-coupons">
+      <div class="panel-title"><i class="fas fa-ticket-alt"></i> Coupon Management</div>
+      <!-- Add Coupon Form -->
+      <div class="card">
+        <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-plus"></i> Create New Coupon</div></div>
+        <div class="card-body">
+          <div class="fg-row">
+            <div class="fg"><label>Coupon Code *</label><input type="text" id="cpCode" placeholder="e.g. SAVE20" style="text-transform:uppercase"/></div>
+            <div class="fg">
+              <label>Type *</label>
+              <select id="cpType">
+                <option value="percent">Percentage (%)</option>
+                <option value="flat">Flat Amount (₹)</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>Value *</label><input type="number" id="cpValue" placeholder="20 (for 20% or ₹20)" min="1"/></div>
+            <div class="fg"><label>Min Order Amount (₹)</label><input type="number" id="cpMinOrder" placeholder="0" min="0" value="0"/></div>
+          </div>
+          <div class="fg-row">
+            <div class="fg"><label>Max Uses (-1 = unlimited)</label><input type="number" id="cpMaxUses" placeholder="-1" value="-1" min="-1"/></div>
+            <div class="fg"><label>Expiry Date (optional)</label><input type="date" id="cpExpiry"/></div>
+          </div>
+          <button class="btn btn-gold" onclick="createCoupon()"><i class="fas fa-save"></i> Create Coupon</button>
+          <div class="msg" id="couponMsg"></div>
+        </div>
+      </div>
+      <!-- Coupon List -->
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-hdr-title"><i class="fas fa-list"></i> All Coupons</div>
+          <button class="btn btn-outline btn-sm" onclick="loadCoupons()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table class="coupon-table">
+              <thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Min Order</th><th>Uses</th><th>Expires</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="couponsTableBody"><tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px">Loading coupons...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── REVIEWS ── -->
+    <div class="panel" id="panel-reviews">
+      <div class="panel-title"><i class="fas fa-star"></i> Product Reviews</div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-hdr-title"><i class="fas fa-comments"></i> All Customer Reviews</div>
+          <button class="btn btn-outline btn-sm" onclick="loadAllReviews()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table class="review-table">
+              <thead><tr><th>Product</th><th>Customer</th><th>Rating</th><th>Review</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="reviewsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">Loading reviews...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ── PASSWORD ── -->
     <div class="panel" id="panel-password">
       <div class="panel-title"><i class="fas fa-lock"></i> Change Password</div>
@@ -635,6 +770,10 @@ function showPanel(id){
   if(id==='contact')loadContact();
   if(id==='social')loadSocial();
   if(id==='promo')loadPromo();
+  if(id==='customers')loadCustomers();
+  if(id==='coupons')loadCoupons();
+  if(id==='reviews')loadAllReviews();
+  if(id==='overview')loadAdminStats();
 }
 
 /* ── MSG ── */
@@ -715,9 +854,30 @@ async function loadAllSettings(){
     if(s.promo_desc) document.getElementById('promoDesc').value=s.promo_desc;
     if(s.promo_btn) document.getElementById('promoBtn').value=s.promo_btn;
 
-    document.getElementById('ov-slides').textContent=heroSlides.length;
-    document.getElementById('ov-tickers').textContent=tickerData.length;
   }catch(e){}
+}
+
+/* ── LOAD ADMIN STATS (7-day chart) ── */
+async function loadAdminStats(){
+  try{
+    const res=await fetch(`${API}/api/admin/stats`,{headers:{Authorization:'Bearer '+getToken()}});
+    if(!res.ok) return;
+    const d=await res.json();
+    if(d.totalCustomers!==undefined){ const el=document.getElementById('ov-customers'); if(el) el.textContent=d.totalCustomers; }
+    if(d.days&&d.days.length) renderRevenueChart(d.days);
+  }catch(e){}
+}
+function renderRevenueChart(days){
+  const wrap=document.getElementById('revenueChart'); if(!wrap) return;
+  const max=Math.max(...days.map(d=>d.revenue),1);
+  wrap.innerHTML=days.map(d=>{
+    const h=Math.max(4,Math.round((d.revenue/max)*110));
+    return '<div class="chart-bar-col">'+
+      '<div class="chart-val">'+(d.revenue>0?'₹'+d.revenue.toLocaleString('en-IN'):'')+'</div>'+
+      '<div class="chart-bar" style="height:'+h+'px" title="'+d.date+': ₹'+d.revenue.toLocaleString('en-IN')+' ('+d.orders+' orders)"></div>'+
+      '<div class="chart-label">'+d.date+'</div>'+
+    '</div>';
+  }).join('');
 }
 
 /* ═══════════════════════════════════════
@@ -818,7 +978,18 @@ async function submitProduct(){
   btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
   const imageUrl=await uploadImage()||document.getElementById('pImageUrl').value||'';
   const mrpVal=document.getElementById('pMrp').value;
-  const payload={name,category:cat,price:Number(price),description:document.getElementById('pDesc').value.trim(),image:imageUrl,mrp:mrpVal?Number(mrpVal):null};
+  const stockVal=document.getElementById('pStock').value;
+  const sizesRaw=(document.getElementById('pSizes').value||'').trim();
+  const colorsRaw=(document.getElementById('pColors').value||'').trim();
+  const payload={
+    name,category:cat,price:Number(price),
+    description:document.getElementById('pDesc').value.trim(),
+    image:imageUrl,
+    mrp:mrpVal?Number(mrpVal):null,
+    stock:stockVal!==''?Number(stockVal):-1,
+    sizes:sizesRaw?sizesRaw.split(',').map(s=>s.trim()).filter(Boolean):[],
+    colors:colorsRaw?colorsRaw.split(',').map(s=>s.trim()).filter(Boolean):[],
+  };
   const id=document.getElementById('editId').value;
   try{
     const url=id?`${API}/api/products/${id}`:`${API}/api/products`;
@@ -841,6 +1012,9 @@ function startEdit(id){
   document.getElementById('pPrice').value=p.price;
   document.getElementById('pMrp').value=p.mrp||'';
   document.getElementById('pDesc').value=p.description||'';
+  document.getElementById('pStock').value=p.stock!=null?p.stock:-1;
+  document.getElementById('pSizes').value=Array.isArray(p.sizes)?p.sizes.join(', '):'';
+  document.getElementById('pColors').value=Array.isArray(p.colors)?p.colors.join(', '):'';
   document.getElementById('pImageUrl').value=p.image||'';
   if(p.image){ document.getElementById('imgPreview').src=p.image; document.getElementById('imgPreviewWrap').style.display='inline-block'; }
   document.getElementById('prodFormTitle').innerHTML='<i class="fas fa-edit"></i> Edit Product';
@@ -857,6 +1031,9 @@ function clearProdForm(){
   document.getElementById('pPrice').value='';
   document.getElementById('pMrp').value='';
   document.getElementById('pDesc').value='';
+  document.getElementById('pStock').value='-1';
+  document.getElementById('pSizes').value='';
+  document.getElementById('pColors').value='';
   document.getElementById('pImageUrl').value='';
   document.getElementById('imgFile').value='';
   document.getElementById('imgPreviewWrap').style.display='none';
@@ -1379,6 +1556,178 @@ function updateOverviewOrderStats(){
 
 // Load order stats on overview
 loadOrders();
+loadAdminStats();
+
+/* ═══════════════════════════════════════
+   EXPORT ORDERS CSV
+═══════════════════════════════════════ */
+function exportOrdersCSV(){
+  if(!allOrders.length){ alert('No orders to export.'); return; }
+  const rows=[['Order ID','Date','Customer','Phone','Address','Items','Total','Payment','Status']];
+  allOrders.forEach(o=>{
+    const items=o.items.map(i=>i.name+'x'+i.qty).join(' | ');
+    const date=new Date(o.createdAt).toLocaleDateString('en-IN');
+    rows.push([
+      o.orderId||o._id.slice(-6).toUpperCase(),
+      date,
+      o.customer?.name||'',
+      o.customer?.phone||'',
+      o.customer?.address||'',
+      items,
+      o.total,
+      o.payment?.method||'cod',
+      o.status
+    ]);
+  });
+  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='og47-orders-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ═══════════════════════════════════════
+   CUSTOMERS
+═══════════════════════════════════════ */
+async function loadCustomers(){
+  const tbody=document.getElementById('customersTableBody');
+  if(tbody) tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  try{
+    const res=await fetch(`${API}/api/admin/customers`,{headers:{Authorization:'Bearer '+getToken()}});
+    if(!res.ok) throw new Error('Could not load customers');
+    const customers=await res.json();
+    const el=document.getElementById('ov-customers'); if(el) el.textContent=customers.length;
+    if(!customers.length){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px">No registered customers yet.</td></tr>'; return; }
+    tbody.innerHTML=customers.map((c,i)=>{
+      const joined=new Date(c.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+      return '<tr>'+
+        '<td style="color:var(--muted)">'+(i+1)+'</td>'+
+        '<td style="font-weight:600">'+escO(c.name)+'</td>'+
+        '<td>'+escO(c.email)+'</td>'+
+        '<td>'+escO(c.phone||'—')+'</td>'+
+        '<td class="order-date">'+joined+'</td>'+
+      '</tr>';
+    }).join('');
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--red);padding:30px">Failed to load customers.</td></tr>';
+  }
+}
+
+/* ═══════════════════════════════════════
+   COUPONS
+═══════════════════════════════════════ */
+async function loadCoupons(){
+  const tbody=document.getElementById('couponsTableBody');
+  if(tbody) tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  try{
+    const res=await fetch(`${API}/api/coupons`,{headers:{Authorization:'Bearer '+getToken()}});
+    if(!res.ok) throw new Error();
+    const coupons=await res.json();
+    if(!coupons.length){ tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px">No coupons yet. Create one above.</td></tr>'; return; }
+    tbody.innerHTML=coupons.map(c=>{
+      const exp=c.expiresAt?new Date(c.expiresAt).toLocaleDateString('en-IN'):'No expiry';
+      const uses=c.maxUses===-1?c.usedCount+'/∞':c.usedCount+'/'+c.maxUses;
+      return '<tr>'+
+        '<td><span class="coupon-code-badge">'+escO(c.code)+'</span></td>'+
+        '<td>'+escO(c.type==='percent'?'Percentage':'Flat')+'</td>'+
+        '<td>'+(c.type==='percent'?c.value+'%':'₹'+c.value)+'</td>'+
+        '<td>₹'+c.minOrder+'</td>'+
+        '<td>'+uses+'</td>'+
+        '<td>'+exp+'</td>'+
+        '<td><span class="'+(c.active?'coupon-active':'coupon-inactive')+'">'+(c.active?'Active':'Inactive')+'</span></td>'+
+        '<td><div class="prod-actions">'+
+          '<button class="btn btn-outline btn-sm" onclick="toggleCoupon(\''+c._id+'\','+(!c.active)+')" title="'+(c.active?'Deactivate':'Activate')+'">'+
+            '<i class="fas fa-'+(c.active?'pause':'play')+'"></i>'+
+          '</button>'+
+          '<button class="btn btn-danger btn-sm" onclick="deleteCoupon(\''+c._id+'\')" title="Delete"><i class="fas fa-trash"></i></button>'+
+        '</div></td>'+
+      '</tr>';
+    }).join('');
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--red);padding:30px">Failed to load coupons.</td></tr>';
+  }
+}
+
+async function createCoupon(){
+  const code=(document.getElementById('cpCode').value||'').trim().toUpperCase();
+  const type=document.getElementById('cpType').value;
+  const value=document.getElementById('cpValue').value;
+  const minOrder=document.getElementById('cpMinOrder').value||0;
+  const maxUses=document.getElementById('cpMaxUses').value||-1;
+  const expiry=document.getElementById('cpExpiry').value||null;
+  if(!code||!value){ showMsg('couponMsg','Code and value are required.','error'); return; }
+  try{
+    const res=await fetch(`${API}/api/coupons`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body:JSON.stringify({code,type,value:Number(value),minOrder:Number(minOrder),maxUses:Number(maxUses),expiresAt:expiry})
+    });
+    const d=await res.json();
+    if(!res.ok){ showMsg('couponMsg',d.message||'Error creating coupon.','error'); return; }
+    showMsg('couponMsg','Coupon created: '+d.code,'success');
+    document.getElementById('cpCode').value='';
+    document.getElementById('cpValue').value='';
+    document.getElementById('cpMinOrder').value='0';
+    document.getElementById('cpMaxUses').value='-1';
+    document.getElementById('cpExpiry').value='';
+    loadCoupons();
+  }catch(e){ showMsg('couponMsg','Network error.','error'); }
+}
+
+async function toggleCoupon(id, active){
+  try{
+    await fetch(`${API}/api/coupons/${id}`,{
+      method:'PUT',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body:JSON.stringify({active})
+    });
+    loadCoupons();
+  }catch(e){ alert('Failed to update coupon.'); }
+}
+
+async function deleteCoupon(id){
+  if(!confirm('Delete this coupon?')) return;
+  try{
+    await fetch(`${API}/api/coupons/${id}`,{method:'DELETE',headers:{Authorization:'Bearer '+getToken()}});
+    loadCoupons();
+  }catch(e){ alert('Failed to delete coupon.'); }
+}
+
+/* ═══════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════ */
+async function loadAllReviews(){
+  const tbody=document.getElementById('reviewsTableBody');
+  if(tbody) tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  try{
+    const res=await fetch(`${API}/api/reviews/all`,{headers:{Authorization:'Bearer '+getToken()}});
+    if(!res.ok) throw new Error();
+    const reviews=await res.json();
+    if(!reviews.length){ tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">No reviews yet.</td></tr>'; return; }
+    tbody.innerHTML=reviews.map(r=>{
+      const stars='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      const date=new Date(r.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+      return '<tr>'+
+        '<td style="font-size:.78rem;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+escO(r.productId?.name||'Unknown')+'</td>'+
+        '<td style="font-weight:600">'+escO(r.name)+'</td>'+
+        '<td><span class="rev-stars">'+stars+'</span></td>'+
+        '<td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.78rem;color:var(--muted)">'+escO(r.comment)+'</td>'+
+        '<td class="order-date">'+date+'</td>'+
+        '<td><button class="btn btn-danger btn-sm" onclick="deleteReview(\''+r._id+'\')" title="Delete"><i class="fas fa-trash"></i></button></td>'+
+      '</tr>';
+    }).join('');
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--red);padding:30px">Failed to load reviews.</td></tr>';
+  }
+}
+
+async function deleteReview(id){
+  if(!confirm('Delete this review?')) return;
+  try{
+    await fetch(`${API}/api/reviews/${id}`,{method:'DELETE',headers:{Authorization:'Bearer '+getToken()}});
+    loadAllReviews();
+  }catch(e){ alert('Failed to delete review.'); }
+}
 </script>
 </body>
 </html>

@@ -511,6 +511,73 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
 .modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:#fff;font-weight:700;font-size:.9rem;padding:14px;border-radius:6px;text-decoration:none;transition:opacity .2s,transform .2s}
 .modal-wa:hover{opacity:.9;transform:translateY(-2px)}
 
+/* ── WISHLIST ── */
+.wish-btn{position:absolute;top:8px;right:8px;width:30px;height:30px;background:rgba(255,255,255,.92);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.78rem;color:var(--muted2);transition:color .2s,background .2s;z-index:2;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.wish-btn:hover,.wish-btn.active{color:#e11d48;background:#fff}
+.wish-btn.active i{font-weight:900}
+.badge-oos{background:#1c1917;color:#fff}
+
+/* ── COUPON ── */
+.coupon-row{display:flex;gap:8px;margin-bottom:14px}
+.coupon-input{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.85rem;padding:10px 14px;border-radius:6px;outline:none;transition:border-color .2s;text-transform:uppercase;letter-spacing:.06em}
+.coupon-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,146,30,.1)}
+.coupon-input::placeholder{text-transform:none;letter-spacing:0}
+.coupon-apply-btn{background:var(--goldg);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;transition:filter .2s}
+.coupon-apply-btn:hover{filter:brightness(1.1)}
+.coupon-msg{font-size:.75rem;margin-bottom:10px;padding:8px 12px;border-radius:6px;display:none}
+.coupon-msg.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d;display:block}
+.coupon-msg.err{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;display:block}
+
+/* ── VARIANTS ── */
+.modal-variants{margin:12px 0}
+.variants-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.variants-row{display:flex;flex-wrap:wrap;gap:6px}
+.var-chip{font-size:.72rem;font-weight:600;padding:5px 12px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;background:var(--bg);color:var(--white);transition:border-color .2s,background .2s}
+.var-chip:hover{border-color:var(--gold)}
+.var-chip.sel{border-color:var(--gold);background:rgba(184,146,30,.08);color:var(--gold)}
+.var-chip.color-chip{width:28px;height:28px;padding:0;border-radius:50%;border:2px solid var(--border)}
+.var-chip.color-chip.sel{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.modal-atc-btn{width:100%;background:var(--goldg);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:14px;border:none;border-radius:6px;cursor:pointer;margin-top:12px;transition:filter .2s,transform .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.modal-atc-btn:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+.modal-atc-btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* ── REVIEWS ── */
+.reviews-section{border-top:1px solid var(--border);margin-top:16px;padding-top:16px}
+.reviews-title{font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:12px}
+.review-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.review-card{background:var(--bg2);border-radius:8px;padding:11px 13px;border:1px solid var(--border)}
+.review-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.review-name{font-size:.78rem;font-weight:700;color:var(--white)}
+.review-stars{color:var(--star);font-size:.72rem}
+.review-date{font-size:.65rem;color:var(--muted2);margin-left:auto}
+.review-comment{font-size:.8rem;color:var(--muted);line-height:1.55}
+.review-form{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px}
+.review-form-title{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.star-select{display:flex;gap:4px;margin-bottom:10px}
+.star-select i{font-size:1.2rem;color:var(--border);cursor:pointer;transition:color .15s}
+.star-select i.active{color:var(--star)}
+.review-textarea{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:.82rem;padding:9px 12px;border-radius:6px;outline:none;resize:vertical;min-height:64px;transition:border-color .2s}
+.review-textarea:focus{border-color:var(--gold)}
+.review-submit-btn{margin-top:8px;background:var(--goldg);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;transition:filter .2s}
+.review-submit-btn:hover{filter:brightness(1.1)}
+.review-submit-btn:disabled{opacity:.45;cursor:not-allowed}
+.no-reviews{font-size:.8rem;color:var(--muted2);text-align:center;padding:10px 0}
+
+/* ── RELATED PRODUCTS ── */
+.related-section{border-top:1px solid var(--border);margin-top:16px;padding-top:16px}
+.related-title{font-family:'Cormorant',serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:10px}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.related-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.related-card:hover{border-color:var(--gold)}
+.related-card img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.related-card-body{padding:7px 8px}
+.related-card-name{font-size:.75rem;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.related-card-price{font-size:.78rem;font-weight:700;color:var(--gold)}
+
+/* ── CANCEL ORDER ── */
+.cancel-order-btn{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:none;border:1px solid rgba(220,38,38,.3);color:#dc2626;padding:5px 12px;border-radius:4px;cursor:pointer;transition:background .2s,color .2s}
+.cancel-order-btn:hover{background:#fef2f2;border-color:#dc2626}
+
 /* ── WA FLOAT ── */
 .wa-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;z-index:999;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:waPop 1s 2s cubic-bezier(.34,1.56,.64,1) both;transition:transform .2s}
 @keyframes waPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
@@ -992,6 +1059,8 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
         <li><a href="#products-sec" onclick="navFilter('Pants',null)">Pants</a></li>
         <li><a href="#products-sec" onclick="navFilter('Caps',null)">Caps</a></li>
         <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="policy.html">Privacy Policy</a></li>
+        <li><a href="returns.html">Returns Policy</a></li>
       </ul>
     </div>
     <div class="ft-col reveal reveal-d3">
@@ -1001,6 +1070,7 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
         <li><a href="mailto:bhullarsam162@gmail.com">Email Us</a></li>
         <li><a href="https://wa.me/918146805002" target="_blank" rel="noopener">WhatsApp Order</a></li>
         <li><a href="contact.html">Store Location</a></li>
+        <li><a href="policy.html">Terms &amp; Conditions</a></li>
       </ul>
     </div>
   </div>
@@ -1166,6 +1236,15 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
         </div>
       </div>
       <div class="checkout-body">
+        <!-- COUPON -->
+        <div style="margin-bottom:4px">
+          <label class="co-label" for="couponInput">Have a coupon?</label>
+          <div class="coupon-row">
+            <input class="coupon-input" id="couponInput" type="text" placeholder="Enter coupon code" maxlength="30"/>
+            <button class="coupon-apply-btn" onclick="applyCoupon()">Apply</button>
+          </div>
+          <div class="coupon-msg" id="couponMsg"></div>
+        </div>
         <div class="co-summary">
           <div class="co-summary-ttl">Order Summary</div>
           <div id="coSummaryItems"></div>
@@ -1591,14 +1670,17 @@ function renderProducts(){
     const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
     const realMrp=hasMrp?Number(p.mrp):null;
     const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
+    const oos=p.stock===0;
+    const wished=isWished(p._id);
     return `
     <div class="product-card" style="animation-delay:${i*.04}s" onclick="openModal('${p._id}')">
       <div class="product-img-wrap">
-        ${p.image?`<img class="product-img" src="${escHtml(p.image)}" alt="${escHtml(p.name)}" loading="lazy" data-cat="${escHtml(p.category)}" onerror="imgErr(this)"/>`:`<div class="product-img-ph">${catIcon(p.category)}</div>`}
+        ${p.image?'<img class="product-img" src="'+escHtml(p.image)+'" alt="'+escHtml(p.name)+'" loading="lazy" data-cat="'+escHtml(p.category)+'" onerror="imgErr(this)"/>':`<div class="product-img-ph">${catIcon(p.category)}</div>`}
         <div class="product-badges">
           <span class="badge badge-cat">${escHtml(p.category)}</span>
-          ${badgeLabel?`<span class="badge ${badgeClass}">${badgeLabel}</span>`:''}
+          ${oos?'<span class="badge badge-oos">Out of Stock</span>':(badgeLabel?'<span class="badge '+badgeClass+'">'+badgeLabel+'</span>':'')}
         </div>
+        <button class="wish-btn${wished?' active':''}" onclick="toggleWish('${p._id}');event.stopPropagation()" title="${wished?'Remove from wishlist':'Add to wishlist'}"><i class="${wished?'fas':'far'} fa-heart"></i></button>
         <div class="product-quick"><button class="quick-btn">Quick View</button></div>
       </div>
       <div class="product-body">
@@ -1610,12 +1692,12 @@ function renderProducts(){
         </div>
         <div class="product-price-row">
           <div class="product-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-          ${hasMrp?`<div class="product-mrp">&#8377;${realMrp.toLocaleString('en-IN')}</div><div class="product-discount">${realDisc}% off</div>`:''}
+          ${hasMrp?'<div class="product-mrp">&#8377;'+realMrp.toLocaleString('en-IN')+'</div><div class="product-discount">'+realDisc+'% off</div>':''}
         </div>
       </div>
       <div class="product-footer">
-        <button class="product-atc-btn" id="atc-${p._id}" onclick="addToCart('${p._id}');event.stopPropagation()" aria-label="Add to cart">
-          <i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart
+        <button class="product-atc-btn"${oos?' disabled':''} id="atc-${p._id}" onclick="addToCart('${p._id}');event.stopPropagation()" aria-label="Add to cart">
+          ${oos?'<i class="fas fa-ban"></i> Out of Stock':'<i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart'}
         </button>
         <a class="product-wa-btn" href="${waLink(p)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Order on WhatsApp" style="flex:0 0 auto;padding:9px 10px" title="Order via WhatsApp">
           <i class="fab fa-whatsapp" aria-hidden="true"></i>
@@ -1626,34 +1708,138 @@ function renderProducts(){
 }
 
 /* ── MODAL ── */
+let _modalProductId = null;
+let _modalSelSize = '', _modalSelColor = '';
+
 function openModal(id){
   const p=allProducts.find(x=>x._id===id);if(!p)return;
-  const stars=starsFor(p._id),reviews=reviewCount(p._id);
+  _modalProductId=id; _modalSelSize=''; _modalSelColor='';
+  const stars=starsFor(p._id),revCnt=reviewCount(p._id);
   const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
   const realMrp=hasMrp?Number(p.mrp):null;
   const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
-  document.getElementById('modalContent').innerHTML=`
-    ${p.image?`<img class="modal-img" src="${escHtml(p.image)}" alt="${escHtml(p.name)}" onerror="this.style.display='none'">`:`<div class="modal-img-ph">${catIcon(p.category)}</div>`}
-    <div class="modal-body">
-      <div class="modal-cat-lbl">${escHtml(p.category)}</div>
-      <div class="modal-name">${escHtml(p.name)}</div>
-      <div class="modal-stars">
-        <span style="color:var(--star);font-size:.82rem">${stars}</span>
-        <span style="font-size:.72rem;color:var(--muted2)">(${reviews} reviews)</span>
-      </div>
-      <div class="modal-price-row">
-        <div class="modal-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-        ${hasMrp?`<div class="modal-mrp">M.R.P. &#8377;${realMrp.toLocaleString('en-IN')}</div><div class="modal-disc">${realDisc}% off</div>`:''}
-      </div>
-      ${p.description?`<div class="modal-desc">${escHtml(p.description)}</div>`:''}
-      <a class="modal-wa" href="${waLink(p)}" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp" aria-hidden="true"></i> Order on WhatsApp
-      </a>
-    </div>`;
+  const oos=p.stock===0;
+  const sizes=Array.isArray(p.sizes)&&p.sizes.length?p.sizes:[];
+  const colors=Array.isArray(p.colors)&&p.colors.length?p.colors:[];
+
+  let sizesHtml='', colorsHtml='';
+  if(sizes.length){
+    sizesHtml='<div class="modal-variants"><div class="variants-label">Select Size</div><div class="variants-row" id="modalSizes">'+
+      sizes.map(s=>'<button class="var-chip" onclick="selectSize(\''+escHtml(s)+'\',this)">'+escHtml(s)+'</button>').join('')+
+    '</div></div>';
+  }
+  if(colors.length){
+    colorsHtml='<div class="modal-variants"><div class="variants-label">Select Color</div><div class="variants-row" id="modalColors">'+
+      colors.map(c=>'<button class="var-chip color-chip" onclick="selectColor(\''+escHtml(c)+'\',this)" style="background:'+escHtml(c)+'" title="'+escHtml(c)+'"></button>').join('')+
+    '</div></div>';
+  }
+
+  // Related products (same category, not this product)
+  const related=allProducts.filter(x=>x.category===p.category&&x._id!==id).slice(0,3);
+  const relatedHtml=related.length?'<div class="related-section"><div class="related-title">You May Also Like</div><div class="related-grid">'+
+    related.map(r=>'<div class="related-card" onclick="closeModal();setTimeout(()=>openModal(\''+r._id+'\'),50)">'+
+      (r.image?'<img src="'+escHtml(r.image)+'" alt="'+escHtml(r.name)+'" loading="lazy"/>':`<div style="aspect-ratio:1;background:var(--card2);display:flex;align-items:center;justify-content:center;color:var(--gold)">${catIcon(r.category)}</div>`)+
+      '<div class="related-card-body"><div class="related-card-name">'+escHtml(r.name)+'</div><div class="related-card-price">&#8377;'+Number(r.price).toLocaleString('en-IN')+'</div></div></div>').join('')+
+  '</div></div>':'';
+
+  document.getElementById('modalContent').innerHTML=
+    (p.image?'<img class="modal-img" src="'+escHtml(p.image)+'" alt="'+escHtml(p.name)+'" onerror="this.style.display=\'none\'">':`<div class="modal-img-ph">${catIcon(p.category)}</div>`)+
+    '<div class="modal-body">'+
+      '<div class="modal-cat-lbl">'+escHtml(p.category)+'</div>'+
+      '<div class="modal-name">'+escHtml(p.name)+'</div>'+
+      '<div class="modal-stars">'+
+        '<span style="color:var(--star);font-size:.82rem">'+stars+'</span>'+
+        '<span style="font-size:.72rem;color:var(--muted2)">('+revCnt+' reviews)</span>'+
+      '</div>'+
+      '<div class="modal-price-row">'+
+        '<div class="modal-price">&#8377;'+Number(p.price).toLocaleString('en-IN')+'</div>'+
+        (hasMrp?'<div class="modal-mrp">M.R.P. &#8377;'+realMrp.toLocaleString('en-IN')+'</div><div class="modal-disc">'+realDisc+'% off</div>':'')+
+      '</div>'+
+      (p.description?'<div class="modal-desc">'+escHtml(p.description)+'</div>':'')+
+      sizesHtml+colorsHtml+
+      '<button class="modal-atc-btn"'+(oos?' disabled':'')+' id="modalAtcBtn" onclick="addToCartFromModal(\''+id+'\')" >'+
+        (oos?'<i class="fas fa-ban"></i> Out of Stock':'<i class="fas fa-shopping-bag"></i> Add to Cart')+
+      '</button>'+
+      '<a class="modal-wa" href="'+waLink(p)+'" target="_blank" rel="noopener" style="margin-top:8px">'+
+        '<i class="fab fa-whatsapp" aria-hidden="true"></i> Order on WhatsApp'+
+      '</a>'+
+      '<div class="reviews-section" id="modalReviewsSection"><div class="reviews-title">Reviews</div><div class="review-list" id="modalReviewList"><div class="no-reviews">Loading reviews...</div></div>'+
+        (currentUser?'<div class="review-form" id="modalReviewForm"><div class="review-form-title">Write a Review</div><div class="star-select" id="starSelect"><i class="far fa-star" data-v="1" onclick="setStarRating(1)"></i><i class="far fa-star" data-v="2" onclick="setStarRating(2)"></i><i class="far fa-star" data-v="3" onclick="setStarRating(3)"></i><i class="far fa-star" data-v="4" onclick="setStarRating(4)"></i><i class="far fa-star" data-v="5" onclick="setStarRating(5)"></i></div><textarea class="review-textarea" id="reviewText" placeholder="Share your experience with this product..."></textarea><button class="review-submit-btn" onclick="submitReview(\''+id+'\')">Submit Review</button></div>':'<p style="font-size:.78rem;color:var(--muted);margin-top:10px">Please <a href="#" onclick="closeModal();openAuthModal(\'login\');" style="color:var(--gold);font-weight:700">login</a> to write a review.</p>')+
+      '</div>'+
+      relatedHtml+
+    '</div>';
+
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
+  fetchProductReviews(id);
 }
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow=''}
+
+function selectSize(s,el){
+  _modalSelSize=_modalSelSize===s?'':s;
+  document.querySelectorAll('#modalSizes .var-chip').forEach(b=>b.classList.remove('sel'));
+  if(_modalSelSize) el.classList.add('sel');
+}
+function selectColor(c,el){
+  _modalSelColor=_modalSelColor===c?'':c;
+  document.querySelectorAll('#modalColors .var-chip').forEach(b=>b.classList.remove('sel'));
+  if(_modalSelColor) el.classList.add('sel');
+}
+function addToCartFromModal(id){
+  const p=allProducts.find(x=>x._id===id);if(!p||p.stock===0)return;
+  const existing=cart.find(x=>x._id===id&&x.size===_modalSelSize&&x.color===_modalSelColor);
+  if(existing){existing.qty++;}
+  else{cart.push({_id:p._id,name:p.name,price:Number(p.price),category:p.category||'',image:p.image||null,qty:1,size:_modalSelSize||'',color:_modalSelColor||''});}
+  saveCart();renderCartItems();
+  const btn=document.getElementById('modalAtcBtn');
+  if(btn){btn.innerHTML='<i class="fas fa-check"></i> Added to Cart!';setTimeout(()=>{btn.innerHTML='<i class="fas fa-shopping-bag"></i> Add to Cart';},1500);}
+}
+
+let _starRating=0;
+function setStarRating(n){
+  _starRating=n;
+  document.querySelectorAll('#starSelect i').forEach((el,i)=>{
+    el.className=i<n?'fas fa-star active':'far fa-star';
+  });
+}
+async function fetchProductReviews(productId){
+  const listEl=document.getElementById('modalReviewList');
+  if(!listEl)return;
+  try{
+    const res=await fetch(API+'/api/products/'+productId+'/reviews');
+    if(!res.ok){listEl.innerHTML='<div class="no-reviews">No reviews yet. Be the first!</div>';return;}
+    const reviews=await res.json();
+    if(!reviews.length){listEl.innerHTML='<div class="no-reviews">No reviews yet. Be the first to review this product!</div>';return;}
+    listEl.innerHTML=reviews.map(r=>{
+      const d=new Date(r.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+      const s='★'.repeat(r.rating)+'☆'.repeat(5-r.rating);
+      return '<div class="review-card"><div class="review-top"><div class="review-name">'+escHtml(r.name)+'</div><div class="review-stars">'+s+'</div><div class="review-date">'+d+'</div></div><div class="review-comment">'+escHtml(r.comment)+'</div></div>';
+    }).join('');
+  }catch(e){listEl.innerHTML='<div class="no-reviews">Could not load reviews.</div>';}
+}
+async function submitReview(productId){
+  if(!currentUser){openAuthModal('login');return;}
+  if(!_starRating){alert('Please select a star rating.');return;}
+  const comment=document.getElementById('reviewText')?.value.trim()||'';
+  if(!comment){alert('Please write your review.');return;}
+  const btn=document.querySelector('.review-submit-btn');
+  if(btn){btn.disabled=true;btn.textContent='Submitting...';}
+  try{
+    const res=await fetch(API+'/api/products/'+productId+'/reviews',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+currentUser.token},
+      body:JSON.stringify({rating:_starRating,comment})
+    });
+    const data=await res.json();
+    if(!res.ok){alert(data.message||'Could not submit review.');return;}
+    const form=document.getElementById('modalReviewForm');
+    if(form)form.innerHTML='<div style="color:#15803d;font-size:.82rem;font-weight:600;padding:8px 0">&#10003; Thank you! Your review has been submitted.</div>';
+    fetchProductReviews(productId);
+    _starRating=0;
+  }catch(e){alert('Network error. Please try again.');}
+  finally{if(btn){btn.disabled=false;btn.textContent='Submit Review';}}
+}
+
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';_modalProductId=null;}
 function closeModalOut(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
@@ -1957,6 +2143,7 @@ function renderMyOrders(orders){
     const payIcon = o.payment?.method==='cod'?'fa-money-bill-wave':o.payment?.method==='upi'?'fa-mobile-alt':'fa-credit-card';
     const payLabel = o.payment?.method==='cod'?'Cash on Delivery':o.payment?.method==='upi'?'UPI Payment':'Card / Razorpay';
 
+    const canCancel=!isCancelled&&(o.status==='pending'||o.status==='confirmed');
     return `<div class="order-card">
       <div class="order-card-head">
         <div>
@@ -1969,7 +2156,10 @@ function renderMyOrders(orders){
       <div class="order-items-list">${itemsHtml}</div>
       <div class="order-card-foot">
         <div class="order-pay-info"><i class="fas ${payIcon}"></i> ${payLabel}</div>
-        <div class="order-grand-total">Total: &#8377;${Number(o.total).toLocaleString('en-IN')}</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          ${canCancel?`<button class="cancel-order-btn" onclick="cancelOrder('${o._id}',this)"><i class="fas fa-times-circle"></i> Cancel</button>`:''}
+          <div class="order-grand-total">Total: &#8377;${Number(o.total).toLocaleString('en-IN')}</div>
+        </div>
       </div>
     </div>`;
   }).join('');
@@ -2097,19 +2287,40 @@ function showCoStep(n){
   document.getElementById('coStep'+n)?.classList.add('active');
 }
 
+let _appliedCoupon = null; // { code, discount, newTotal }
+
 function renderCoSummary(){
   const el = document.getElementById('coSummaryItems');
   if(!el) return;
-  const total = cartTotal();
+  const subtotal = cartTotal();
+  const discount = _appliedCoupon ? _appliedCoupon.discount : 0;
+  const total = Math.max(0, subtotal - discount);
   el.innerHTML = cart.map(x=>`
     <div class="co-sum-row">
-      <span>${escHtml(x.name)} &times; ${x.qty}</span>
+      <span>${escHtml(x.name)}${x.size?' ('+escHtml(x.size)+')':''}${x.color?' · '+escHtml(x.color):''} &times; ${x.qty}</span>
       <span>&#8377;${(x.price*x.qty).toLocaleString('en-IN')}</span>
-    </div>`).join('')+`
+    </div>`).join('')+
+    (discount>0?`<div class="co-sum-row" style="color:#15803d"><span><i class="fas fa-tag"></i> Coupon (${escHtml(_appliedCoupon.code)})</span><span style="color:#15803d">- &#8377;${discount.toLocaleString('en-IN')}</span></div>`:'')+`
     <div class="co-sum-row">
       <span>Total Amount</span>
       <span>&#8377;${total.toLocaleString('en-IN')}</span>
     </div>`;
+}
+
+async function applyCoupon(){
+  const code = (document.getElementById('couponInput')?.value||'').trim();
+  const msgEl = document.getElementById('couponMsg');
+  if(!code){msgEl.textContent='Please enter a coupon code.';msgEl.className='coupon-msg err';return;}
+  const subtotal = cartTotal();
+  try{
+    const res = await fetch(API+'/api/coupons/validate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,total:subtotal})});
+    const data = await res.json();
+    if(!res.ok){_appliedCoupon=null;msgEl.textContent=data.message||'Invalid coupon.';msgEl.className='coupon-msg err';renderCoSummary();return;}
+    _appliedCoupon={code:data.code,discount:data.discount,newTotal:data.newTotal};
+    msgEl.textContent=data.message+' You save ₹'+data.discount+'!';
+    msgEl.className='coupon-msg ok';
+    renderCoSummary();
+  }catch(e){msgEl.textContent='Could not validate coupon. Check your connection.';msgEl.className='coupon-msg err';}
 }
 
 function coValidate(){
@@ -2185,10 +2396,16 @@ async function placeOrder(paymentInfo){
     document.getElementById('coPin').value.trim()
   ].filter(Boolean).join(', ');
 
+  const subtotal = cartTotal();
+  const discount = _appliedCoupon ? _appliedCoupon.discount : 0;
+  const finalTotal = Math.max(0, subtotal - discount);
+
   const orderData = {
     customer:{ name, phone, email, address },
-    items: cart.map(x=>({ product:x._id, name:x.name, price:x.price, qty:x.qty })),
-    total: cartTotal(),
+    items: cart.map(x=>({ product:x._id, name:x.name, price:x.price, qty:x.qty, size:x.size||'', color:x.color||'' })),
+    total: finalTotal,
+    couponCode: _appliedCoupon?.code || '',
+    couponDiscount: discount,
     payment: paymentInfo,
     userId: currentUser?._id || null
   };
@@ -2197,7 +2414,7 @@ async function placeOrder(paymentInfo){
     const headers = {'Content-Type':'application/json'};
     if(currentUser?.token) headers['Authorization'] = 'Bearer '+currentUser.token;
     await fetch(API+'/api/orders',{ method:'POST', headers, body: JSON.stringify(orderData) });
-  }catch(e){ /* backend may not have orders endpoint yet */ }
+  }catch(e){}
 
   // save delivery address to profile for next time
   await saveProfileToBackend();
@@ -2209,8 +2426,40 @@ async function placeOrder(paymentInfo){
   }
 
   cart=[]; saveCart(); renderCartItems();
+  _appliedCoupon=null;
+  const couponInput=document.getElementById('couponInput');
+  if(couponInput) couponInput.value='';
+  const couponMsg=document.getElementById('couponMsg');
+  if(couponMsg){couponMsg.className='coupon-msg';couponMsg.textContent='';}
   document.querySelectorAll('.co-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('coStepSuccess').classList.add('active');
+}
+
+/* ── CANCEL ORDER ── */
+async function cancelOrder(orderId, btn){
+  if(!confirm('Are you sure you want to cancel this order?')) return;
+  btn.disabled=true; btn.textContent='Cancelling...';
+  try{
+    const res=await fetch(API+'/api/orders/'+orderId+'/cancel',{
+      method:'PUT',
+      headers:{Authorization:'Bearer '+currentUser.token}
+    });
+    const data=await res.json();
+    if(!res.ok){alert(data.message||'Could not cancel order.');btn.disabled=false;btn.innerHTML='<i class="fas fa-times-circle"></i> Cancel';return;}
+    fetchMyOrders();
+  }catch(e){alert('Network error. Please try again.');btn.disabled=false;btn.innerHTML='<i class="fas fa-times-circle"></i> Cancel';}
+}
+
+/* ── WISHLIST ── */
+function getWishlist(){ return JSON.parse(localStorage.getItem('og_wish')||'[]'); }
+function saveWishlist(list){ localStorage.setItem('og_wish',JSON.stringify(list)); }
+function isWished(id){ return getWishlist().includes(id); }
+function toggleWish(id){
+  let list=getWishlist();
+  if(list.includes(id)) list=list.filter(x=>x!==id);
+  else list.push(id);
+  saveWishlist(list);
+  renderProducts();
 }
 
 function handlePayment(){
@@ -2231,9 +2480,10 @@ function handlePayment(){
       return;
     }
     btn.disabled=true;
+    const finalAmt = Math.max(0, cartTotal() - (_appliedCoupon?_appliedCoupon.discount:0));
     const options={
       key: RAZORPAY_KEY,
-      amount: cartTotal()*100,
+      amount: finalAmt*100,
       currency:'INR',
       name:'OG Accessories 47',
       description:'Order Payment',
