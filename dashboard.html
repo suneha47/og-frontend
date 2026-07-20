@@ -323,11 +323,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
                   <th>Total</th>
                   <th>Payment</th>
                   <th>Status</th>
+                  <th>Tracking</th>
                   <th>Date</th>
                 </tr>
               </thead>
               <tbody id="ordersTableBody">
-                <tr><td colspan="7" class="orders-empty">Loading orders...</td></tr>
+                <tr><td colspan="8" class="orders-empty">Loading orders...</td></tr>
               </tbody>
             </table>
           </div>
@@ -1458,7 +1459,7 @@ let allOrders = [], ordersFilter = 'all';
 
 async function loadOrders(){
   const tbody = document.getElementById('ordersTableBody');
-  if(tbody) tbody.innerHTML='<tr><td colspan="7" class="orders-empty"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  if(tbody) tbody.innerHTML='<tr><td colspan="8" class="orders-empty"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
   try{
     const res = await fetch(`${API}/api/orders`, { headers:{ Authorization:'Bearer '+getToken() } });
     if(!res.ok) throw new Error();
@@ -1467,7 +1468,7 @@ async function loadOrders(){
     updateOrderBadge();
     updateOverviewOrderStats();
   }catch(e){
-    if(tbody) tbody.innerHTML='<tr><td colspan="7" class="orders-empty" style="color:var(--red)">Failed to load orders. Make sure you are logged in as admin.</td></tr>';
+    if(tbody) tbody.innerHTML='<tr><td colspan="8" class="orders-empty" style="color:var(--red)">Failed to load orders. Make sure you are logged in as admin.</td></tr>';
   }
 }
 
@@ -1483,7 +1484,7 @@ function renderOrders(){
   if(!tbody) return;
   const filtered = ordersFilter==='all' ? allOrders : allOrders.filter(o=>o.status===ordersFilter);
   if(!filtered.length){
-    tbody.innerHTML=`<tr><td colspan="7" class="orders-empty">No ${ordersFilter==='all'?'':ordersFilter} orders yet.</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="8" class="orders-empty">No ${ordersFilter==='all'?'':ordersFilter} orders yet.</td></tr>`;
     return;
   }
   tbody.innerHTML = filtered.map(o=>{
@@ -1509,6 +1510,23 @@ function renderOrders(){
           <option value="cancelled" ${o.status==='cancelled' ?'selected':''}>❌ Cancelled</option>
         </select>
       </td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:5px;min-width:180px">
+          <select class="tracking-courier-sel" id="courier-${o._id}" style="font-size:.72rem;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);width:100%">
+            <option value="">— Select Courier —</option>
+            <option value="Delhivery"   ${(o.tracking?.courierName==='Delhivery'  ?'selected':'')}>Delhivery</option>
+            <option value="India Post"  ${(o.tracking?.courierName==='India Post' ?'selected':'')}>India Post</option>
+            <option value="DTDC"        ${(o.tracking?.courierName==='DTDC'       ?'selected':'')}>DTDC</option>
+            <option value="BlueDart"    ${(o.tracking?.courierName==='BlueDart'   ?'selected':'')}>BlueDart</option>
+            <option value="Ecom Express"${(o.tracking?.courierName==='Ecom Express'?'selected':'')}>Ecom Express</option>
+            <option value="XpressBees" ${(o.tracking?.courierName==='XpressBees' ?'selected':'')}>XpressBees</option>
+            <option value="Shadowfax"  ${(o.tracking?.courierName==='Shadowfax'  ?'selected':'')}>Shadowfax</option>
+            <option value="Ekart"      ${(o.tracking?.courierName==='Ekart'       ?'selected':'')}>Ekart</option>
+          </select>
+          <input type="text" id="trackno-${o._id}" value="${escO(o.tracking?.trackingNumber||'')}" placeholder="Tracking number" style="font-size:.72rem;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);width:100%;box-sizing:border-box"/>
+          <button onclick="saveTracking('${o._id}')" style="font-size:.68rem;padding:4px 8px;border-radius:6px;background:var(--gold);color:#000;border:none;cursor:pointer;font-weight:700">Save</button>
+        </div>
+      </td>
       <td><div class="order-date">${date}</div><div class="order-date">${time}</div></td>
     </tr>`;
   }).join('');
@@ -1533,6 +1551,25 @@ async function updateOrderStatus(id, sel){
   }catch(e){
     alert('Failed to update status. Please try again.');
     loadOrders();
+  }
+}
+
+async function saveTracking(id){
+  const courierName = document.getElementById('courier-'+id)?.value || '';
+  const trackingNumber = document.getElementById('trackno-'+id)?.value.trim() || '';
+  if(!trackingNumber){ alert('Please enter a tracking number.'); return; }
+  if(!courierName){ alert('Please select a courier.'); return; }
+  try{
+    const res = await fetch(`${API}/api/admin/orders/${id}/tracking`,{
+      method:'PATCH', headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body: JSON.stringify({courierName, trackingNumber})
+    });
+    if(!res.ok) throw new Error();
+    const order = allOrders.find(o=>o._id===id);
+    if(order) order.tracking = {courierName, trackingNumber};
+    alert(`Tracking saved!\nCourier: ${courierName}\nTracking #: ${trackingNumber}`);
+  }catch(e){
+    alert('Failed to save tracking. Please try again.');
   }
 }
 
