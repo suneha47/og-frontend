@@ -1129,7 +1129,53 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
         <button class="auth-submit" id="loginSubmitBtn" onclick="doLogin()">
           <i class="fas fa-sign-in-alt"></i> &nbsp;Login to My Account
         </button>
+        <div style="text-align:center;margin-top:10px">
+          <button onclick="switchAuthTab('forgot')" style="background:none;border:none;color:var(--muted);font-size:.78rem;cursor:pointer;text-decoration:underline">Forgot Password?</button>
+        </div>
         <div class="auth-switch">Don't have an account? <button onclick="switchAuthTab('signup')">Create one free</button></div>
+      </div>
+
+      <!-- FORGOT PASSWORD PANEL -->
+      <div class="auth-panel" id="authPanelForgot">
+        <div style="text-align:center;margin-bottom:16px">
+          <div style="font-size:2rem">🔐</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--text);margin-top:6px">Forgot your password?</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Enter your email and we'll send you a reset link.</div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="forgotEmail">Email Address <span class="req">*</span></label>
+          <input class="auth-input" id="forgotEmail" type="email" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+        <button class="auth-submit" id="forgotSubmitBtn" onclick="doForgotPassword()">
+          <i class="fas fa-paper-plane"></i> &nbsp;Send Reset Link
+        </button>
+        <div class="auth-switch">Remember your password? <button onclick="switchAuthTab('login')">Back to Login</button></div>
+      </div>
+
+      <!-- RESET PASSWORD PANEL -->
+      <div class="auth-panel" id="authPanelReset">
+        <div style="text-align:center;margin-bottom:16px">
+          <div style="font-size:2rem">🔑</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--text);margin-top:6px">Set New Password</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Choose a new password for your account.</div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="resetPassword">New Password <span class="req">*</span></label>
+          <div class="auth-pw-wrap">
+            <input class="auth-input" id="resetPassword" type="password" placeholder="Min. 6 characters" autocomplete="new-password"/>
+            <button class="auth-pw-toggle" type="button" onclick="togglePw('resetPassword',this)" tabindex="-1"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="auth-field">
+          <label class="auth-label" for="resetPasswordConfirm">Confirm Password <span class="req">*</span></label>
+          <div class="auth-pw-wrap">
+            <input class="auth-input" id="resetPasswordConfirm" type="password" placeholder="Re-enter password" autocomplete="new-password"/>
+            <button class="auth-pw-toggle" type="button" onclick="togglePw('resetPasswordConfirm',this)" tabindex="-1"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+        <button class="auth-submit" id="resetSubmitBtn" onclick="doResetPassword()">
+          <i class="fas fa-lock"></i> &nbsp;Reset My Password
+        </button>
       </div>
 
       <!-- SIGNUP PANEL -->
@@ -2020,6 +2066,10 @@ function switchAuthTab(tab){
   document.getElementById('authTabSignup').classList.toggle('active', tab==='signup');
   document.getElementById('authPanelLogin').classList.toggle('active', tab==='login');
   document.getElementById('authPanelSignup').classList.toggle('active', tab==='signup');
+  document.getElementById('authPanelForgot').classList.toggle('active', tab==='forgot');
+  document.getElementById('authPanelReset').classList.toggle('active', tab==='reset');
+  // Hide the tab bar on forgot/reset screens
+  document.querySelector('.auth-tabs').style.display = (tab==='forgot'||tab==='reset') ? 'none' : '';
   document.getElementById('authErr').classList.remove('show');
 }
 
@@ -2227,6 +2277,75 @@ function renderMyOrders(orders){
   }).join('');
 }
 function openEditProfile(){ closeUserMenu(); openAuthModal('login'); }
+
+let _resetToken = '';
+
+async function doForgotPassword(){
+  const email = document.getElementById('forgotEmail').value.trim();
+  if(!email){ showAuthErr('Please enter your email address.'); return; }
+  const btn = document.getElementById('forgotSubmitBtn');
+  btn.disabled=true; btn.textContent='Sending…';
+  try{
+    const res = await fetch(API+'/api/users/forgot-password',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email})
+    });
+    const data = await res.json();
+    document.getElementById('authErr').classList.remove('show');
+    document.getElementById('authPanelForgot').innerHTML=`
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:2.5rem">📧</div>
+        <div style="font-weight:700;font-size:1rem;color:var(--text);margin-top:10px">Check your email!</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.6">If <strong>${email}</strong> is registered, a password reset link has been sent. Check your inbox (and spam folder).</div>
+        <button onclick="switchAuthTab('login')" style="margin-top:18px;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 20px;color:var(--text);cursor:pointer;font-size:.8rem">Back to Login</button>
+      </div>`;
+  }catch(e){
+    showAuthErr('Network error. Please try again.');
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+async function doResetPassword(){
+  const password = document.getElementById('resetPassword').value;
+  const confirm  = document.getElementById('resetPasswordConfirm').value;
+  if(!password||!confirm){ showAuthErr('Please fill in both fields.'); return; }
+  if(password.length<6){ showAuthErr('Password must be at least 6 characters.'); return; }
+  if(password!==confirm){ showAuthErr('Passwords do not match.'); return; }
+  const btn = document.getElementById('resetSubmitBtn');
+  btn.disabled=true; btn.textContent='Resetting…';
+  try{
+    const res = await fetch(API+'/api/users/reset-password',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({token:_resetToken, password})
+    });
+    const data = await res.json();
+    if(!res.ok){ showAuthErr(data.message||'Reset failed.'); return; }
+    // Clear token from URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+    document.getElementById('authPanelReset').innerHTML=`
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:2.5rem">✅</div>
+        <div style="font-weight:700;font-size:1rem;color:var(--text);margin-top:10px">Password Reset!</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:8px">Your password has been updated. You can now log in.</div>
+        <button onclick="switchAuthTab('login')" style="margin-top:18px;background:var(--gold);border:none;border-radius:8px;padding:10px 24px;color:#fff;cursor:pointer;font-size:.85rem;font-weight:700">Login Now</button>
+      </div>`;
+  }catch(e){
+    showAuthErr('Network error. Please try again.');
+  }finally{
+    btn.disabled=false;
+  }
+}
+
+// Check for ?reset=TOKEN in URL on page load
+window.addEventListener('DOMContentLoaded', ()=>{
+  const params = new URLSearchParams(window.location.search);
+  const resetTok = params.get('reset');
+  if(resetTok){
+    _resetToken = resetTok;
+    openAuthModal('reset');
+  }
+});
 
 /* ── CART ─────────────────────────────────────────────── */
 const UPI_ID = 'bhullarsam162@okicici'; // ← change to your actual UPI ID
