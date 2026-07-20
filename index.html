@@ -1260,8 +1260,8 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
           </div>
         </div>
         <div class="co-field">
-          <label class="co-label" for="coEmail">Email Address</label>
-          <input class="co-input" id="coEmail" type="email" placeholder="your@email.com (optional)" autocomplete="email"/>
+          <label class="co-label" for="coEmail">Email Address <span style="color:#ef4444">*</span></label>
+          <input class="co-input" id="coEmail" type="email" placeholder="your@email.com" autocomplete="email" required/>
         </div>
         <div class="co-field">
           <label class="co-label" for="coAddress">Delivery Address <span class="req">*</span></label>
@@ -2507,7 +2507,7 @@ async function applyCoupon(){
 
 function coValidate(){
   let ok=true;
-  [['coName','Name is required'],['coPhone','Phone number is required'],['coAddress','Delivery address is required']].forEach(([id,msg])=>{
+  [['coName','Name is required'],['coPhone','Phone number is required'],['coEmail','Email address is required'],['coAddress','Delivery address is required']].forEach(([id,msg])=>{
     const el=document.getElementById(id), err=document.getElementById(id+'Err');
     if(!el.value.trim()){ el.style.borderColor='var(--red)'; if(err){err.textContent=msg;err.style.display='block';} ok=false; }
     else{ el.style.borderColor=''; if(err) err.style.display='none'; }
