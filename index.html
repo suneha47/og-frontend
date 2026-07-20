@@ -1262,16 +1262,8 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
           <div id="coSummaryItems"></div>
         </div>
         <div class="pay-options">
-          <label class="pay-option sel" data-method="cod">
-            <input type="radio" name="payMethod" value="cod" checked/>
-            <div class="pay-icon cod"><i class="fas fa-money-bill-wave"></i></div>
-            <div>
-              <div class="pay-name">Cash on Delivery</div>
-              <div class="pay-desc">Pay in cash when your order arrives</div>
-            </div>
-          </label>
-          <label class="pay-option" data-method="upi">
-            <input type="radio" name="payMethod" value="upi"/>
+          <label class="pay-option sel" data-method="upi">
+            <input type="radio" name="payMethod" value="upi" checked/>
             <div class="pay-icon upi"><i class="fas fa-mobile-alt"></i></div>
             <div style="flex:1">
               <div class="pay-name">UPI / Scan &amp; Pay</div>
@@ -2512,20 +2504,16 @@ function toggleWish(id){
 }
 
 function handlePayment(){
-  const method = document.querySelector('.pay-option.sel')?.dataset.method || 'cod';
+  const method = document.querySelector('.pay-option.sel')?.dataset.method || 'upi';
   const btn = document.getElementById('coPayBtn');
 
-  if(method==='cod'){
-    btn.disabled=true; btn.textContent='Placing order…';
-    placeOrder({method:'cod',status:'pending'}).finally(()=>{btn.disabled=false;});
-
-  }else if(method==='upi'){
+  if(method==='upi'){
     btn.disabled=true; btn.textContent='Confirming…';
     placeOrder({method:'upi',status:'pending'}).finally(()=>{btn.disabled=false;});
 
   }else if(method==='razorpay'){
     if(RAZORPAY_KEY==='YOUR_RAZORPAY_KEY_ID'){
-      alert('Online payment is not configured yet.\nPlease select Cash on Delivery or UPI to place your order.');
+      alert('Online payment is not configured yet.\nPlease select UPI to place your order.');
       return;
     }
     btn.disabled=true;
