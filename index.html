@@ -1307,54 +1307,22 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
           <div class="co-summary-ttl">Order Summary</div>
           <div id="coSummaryItems"></div>
         </div>
-        <div class="pay-options">
-          <label class="pay-option sel" data-method="upi">
-            <input type="radio" name="payMethod" value="upi" checked/>
-            <div class="pay-icon upi"><i class="fas fa-mobile-alt"></i></div>
-            <div style="flex:1">
-              <div class="pay-name">UPI / Scan &amp; Pay</div>
-              <div class="pay-desc">GPay, Paytm, PhonePe, BHIM &amp; any UPI app</div>
-              <div class="upi-app-logos">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/512px-Google_Pay_Logo.svg.png" alt="Google Pay" title="Google Pay"/>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/512px-Paytm_Logo_%28standalone%29.svg.png" alt="Paytm" title="Paytm"/>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/512px-PhonePe_Logo.svg.png" alt="PhonePe" title="PhonePe"/>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/512px-UPI-Logo-vector.svg.png" alt="BHIM UPI" title="BHIM UPI"/>
-              </div>
-            </div>
-          </label>
-          <label class="pay-option" data-method="razorpay">
-            <input type="radio" name="payMethod" value="razorpay"/>
-            <div class="pay-icon rzp"><i class="fas fa-credit-card"></i></div>
-            <div>
-              <div class="pay-name">Card / Net Banking / Wallets</div>
-              <div class="pay-desc">Secure online payment via Razorpay</div>
-            </div>
-          </label>
-        </div>
-        <div class="upi-info-box" id="upiInfoBox">
-          <div style="display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap">
-            <div>
-              <img id="upiQrImg" src="" alt="UPI QR Code" style="width:140px;height:140px;border-radius:8px;border:1px solid #c7d2fe;display:block"/>
-              <div style="font-size:.62rem;color:#4338ca;text-align:center;margin-top:5px">Scan with any UPI app</div>
-            </div>
-            <div style="text-align:left;min-width:160px">
-              <div style="font-size:.62rem;font-weight:700;color:#4338ca;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">Or enter UPI ID manually</div>
-              <div class="upi-id-val" id="upiIdDisplay">ogaccessories47@ybl</div>
-              <button class="upi-copy-btn" onclick="copyUpi()"><i class="fas fa-copy"></i> Copy UPI ID</button>
-              <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-                <span class="upi-app-chip">GPay</span>
-                <span class="upi-app-chip">Paytm</span>
-                <span class="upi-app-chip">PhonePe</span>
-                <span class="upi-app-chip">BHIM</span>
-              </div>
-            </div>
+        <div style="background:#f9f7f4;border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;margin-bottom:4px">
+          <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Accepted Payment Methods</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/512px-Google_Pay_Logo.svg.png" alt="Google Pay" style="height:22px;object-fit:contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/512px-PhonePe_Logo.svg.png" alt="PhonePe" style="height:22px;object-fit:contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/512px-Paytm_Logo_%28standalone%29.svg.png" alt="Paytm" style="height:22px;object-fit:contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/512px-UPI-Logo-vector.svg.png" alt="UPI" style="height:20px;object-fit:contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/512px-Visa_Inc._logo.svg.png" alt="Visa" style="height:18px;object-fit:contain"/>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/512px-Mastercard-logo.svg.png" alt="Mastercard" style="height:22px;object-fit:contain"/>
           </div>
-          <div class="upi-note" style="margin-top:12px">After paying, click "Confirm Order" below. We'll verify &amp; ship your order.</div>
+          <div style="font-size:.72rem;color:var(--muted)"><i class="fas fa-lock" style="color:var(--gold);margin-right:4px"></i>Secured by Razorpay — 256-bit SSL encrypted</div>
         </div>
       </div>
       <div class="checkout-foot">
         <button class="co-back-btn" onclick="coBack()"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="co-pay-btn" id="coPayBtn" onclick="handlePayment()"><i class="fas fa-lock"></i> &nbsp;Confirm Order</button>
+        <button class="co-pay-btn" id="coPayBtn" onclick="handlePayment()"><i class="fas fa-lock"></i> &nbsp;Pay Securely</button>
       </div>
     </div>
 
@@ -2232,8 +2200,8 @@ function renderMyOrders(orders){
         <div class="order-item-price">&#8377;${(item.price*item.qty).toLocaleString('en-IN')}</div>
       </div>`).join('');
 
-    const payIcon = o.payment?.method==='cod'?'fa-money-bill-wave':o.payment?.method==='upi'?'fa-mobile-alt':'fa-credit-card';
-    const payLabel = o.payment?.method==='cod'?'Cash on Delivery':o.payment?.method==='upi'?'UPI Payment':'Card / Razorpay';
+    const payIcon = o.payment?.method==='upi'?'fa-mobile-alt':'fa-credit-card';
+    const payLabel = o.payment?.method==='upi'?'UPI Payment':'Paid via Razorpay';
 
     const canCancel=!isCancelled&&(o.status==='pending'||o.status==='confirmed');
 
@@ -2350,7 +2318,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 /* ── CART ─────────────────────────────────────────────── */
 const UPI_ID = 'bhullarsam162@okicici'; // ← change to your actual UPI ID
-const RAZORPAY_KEY = 'YOUR_RAZORPAY_KEY_ID'; // ← paste your Razorpay Key ID here
+const RAZORPAY_KEY = 'rzp_live_TG1vlIdlgkv6Kq';
 
 let cart = JSON.parse(localStorage.getItem('og_cart') || '[]');
 
@@ -2527,44 +2495,10 @@ function coNext(){
 
 function coBack(){ showCoStep(1); }
 
-function copyUpi(){
-  const id = document.getElementById('upiIdDisplay').textContent;
-  navigator.clipboard?.writeText(id).then(()=>{
-    const btn=document.querySelector('.upi-copy-btn');
-    if(btn){btn.textContent='Copied!'; setTimeout(()=>{ btn.innerHTML='<i class="fas fa-copy"></i> Copy UPI ID'; },2000);}
-  });
-}
-
-/* payment method UI */
-function updateUpiQr(){
-  const total = cartTotal();
-  const upiLink = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent('OG Accessories 47')}&am=${total}&cu=INR`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(upiLink)}&size=140x140&margin=6`;
-  const img = document.getElementById('upiQrImg');
-  if(img) img.src = qrUrl;
-  const idEl = document.getElementById('upiIdDisplay');
-  if(idEl) idEl.textContent = UPI_ID;
-}
-
 document.addEventListener('DOMContentLoaded', ()=>{
   renderHeaderUser();
-  // Enter key support for auth forms
   document.getElementById('loginPassword')?.addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
   document.getElementById('signupPassword')?.addEventListener('keydown', e=>{ if(e.key==='Enter') doSignup(); });
-
-  document.querySelectorAll('.pay-option').forEach(opt=>{
-    opt.addEventListener('click', ()=>{
-      document.querySelectorAll('.pay-option').forEach(o=>o.classList.remove('sel'));
-      opt.classList.add('sel');
-      opt.querySelector('input[type=radio]').checked=true;
-      const method = opt.dataset.method;
-      const upiBox = document.getElementById('upiInfoBox');
-      if(upiBox){
-        upiBox.classList.toggle('show', method==='upi');
-        if(method==='upi') updateUpiQr();
-      }
-    });
-  });
   updateCartBadge();
 });
 
@@ -2644,37 +2578,56 @@ function toggleWish(id){
   renderProducts();
 }
 
-function handlePayment(){
-  const method = document.querySelector('.pay-option.sel')?.dataset.method || 'upi';
+async function handlePayment(){
   const btn = document.getElementById('coPayBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;Preparing…';
 
-  if(method==='upi'){
-    btn.disabled=true; btn.textContent='Confirming…';
-    placeOrder({method:'upi',status:'pending'}).finally(()=>{btn.disabled=false;});
+  const finalAmt = Math.max(1, cartTotal() - (_appliedCoupon ? _appliedCoupon.discount : 0));
 
-  }else if(method==='razorpay'){
-    if(RAZORPAY_KEY==='YOUR_RAZORPAY_KEY_ID'){
-      alert('Online payment is not configured yet.\nPlease select UPI to place your order.');
-      return;
-    }
-    btn.disabled=true;
-    const finalAmt = Math.max(0, cartTotal() - (_appliedCoupon?_appliedCoupon.discount:0));
-    const options={
+  try {
+    const res = await fetch(API + '/api/orders/razorpay/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: finalAmt })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Failed to initiate payment.');
+
+    const options = {
       key: RAZORPAY_KEY,
-      amount: finalAmt*100,
-      currency:'INR',
-      name:'OG Accessories 47',
-      description:'Order Payment',
-      handler: resp=>{ placeOrder({method:'razorpay', paymentId:resp.razorpay_payment_id, status:'paid'}); },
-      prefill:{
+      amount: data.amount,
+      currency: 'INR',
+      order_id: data.razorpay_order_id,
+      name: 'OG Accessories 47',
+      description: 'Order Payment',
+      handler: function(resp) {
+        placeOrder({
+          method: 'razorpay',
+          paymentId: resp.razorpay_payment_id,
+          razorpayOrderId: resp.razorpay_order_id,
+          signature: resp.razorpay_signature,
+          status: 'paid'
+        });
+      },
+      prefill: {
         name: document.getElementById('coName').value,
         contact: document.getElementById('coPhone').value,
         email: document.getElementById('coEmail').value
       },
-      theme:{ color:'#b8921e' },
-      modal:{ ondismiss:()=>{ btn.disabled=false; btn.innerHTML='<i class="fas fa-lock"></i> &nbsp;Confirm Order'; } }
+      theme: { color: '#b8921e' },
+      modal: {
+        ondismiss: () => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-lock"></i> &nbsp;Pay Securely';
+        }
+      }
     };
     new Razorpay(options).open();
+  } catch(e) {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-lock"></i> &nbsp;Pay Securely';
+    alert(e.message || 'Payment failed. Please try again.');
   }
 }
 </script>
