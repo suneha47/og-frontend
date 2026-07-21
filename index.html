@@ -1274,8 +1274,21 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
             <input class="co-input" id="coCity" type="text" placeholder="Zira" autocomplete="address-level2"/>
           </div>
           <div class="co-field">
-            <label class="co-label" for="coPin">PIN Code</label>
-            <input class="co-input" id="coPin" type="text" placeholder="142030" maxlength="6" autocomplete="postal-code"/>
+            <label class="co-label" for="coPin">PIN / ZIP Code</label>
+            <input class="co-input" id="coPin" type="text" placeholder="142030" maxlength="10" autocomplete="postal-code"/>
+          </div>
+        </div>
+        <div class="co-field" style="margin-top:4px">
+          <label class="co-label">Delivery Location <span class="req">*</span></label>
+          <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--white)">
+              <input type="radio" name="shippingZone" value="india" checked onchange="setShippingZone('india')"/>
+              <span>India &nbsp;<span style="color:var(--muted);font-weight:400">(&#8377;320 shipping)</span></span>
+            </label>
+            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--white)">
+              <input type="radio" name="shippingZone" value="international" onchange="setShippingZone('international')"/>
+              <span>International &nbsp;<span style="color:var(--muted);font-weight:400">(&#8377;5,000 shipping)</span></span>
+            </label>
           </div>
         </div>
       </div>
@@ -2317,8 +2330,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
 });
 
 /* ── CART ─────────────────────────────────────────────── */
-const UPI_ID = 'bhullarsam162@okicici'; // ← change to your actual UPI ID
+const UPI_ID = 'bhullarsam162@okicici';
 const RAZORPAY_KEY = 'rzp_live_TG1vlIdlgkv6Kq';
+const SHIPPING = { india: 320, international: 5000 };
+let _shippingZone = 'india';
+function setShippingZone(zone){ _shippingZone = zone; }
 
 let cart = JSON.parse(localStorage.getItem('og_cart') || '[]');
 
@@ -2444,16 +2460,18 @@ function renderCoSummary(){
   if(!el) return;
   const subtotal = cartTotal();
   const discount = _appliedCoupon ? _appliedCoupon.discount : 0;
-  const total = Math.max(0, subtotal - discount);
+  const shipping = SHIPPING[_shippingZone] || 0;
+  const total = Math.max(0, subtotal + shipping - discount);
   el.innerHTML = cart.map(x=>`
     <div class="co-sum-row">
       <span>${escHtml(x.name)}${x.size?' ('+escHtml(x.size)+')':''}${x.color?' · '+escHtml(x.color):''} &times; ${x.qty}</span>
       <span>&#8377;${(x.price*x.qty).toLocaleString('en-IN')}</span>
     </div>`).join('')+
+    `<div class="co-sum-row"><span>Shipping (${_shippingZone==='international'?'International':'India'})</span><span>&#8377;${shipping.toLocaleString('en-IN')}</span></div>`+
     (discount>0?`<div class="co-sum-row" style="color:#15803d"><span><i class="fas fa-tag"></i> Coupon (${escHtml(_appliedCoupon.code)})</span><span style="color:#15803d">- &#8377;${discount.toLocaleString('en-IN')}</span></div>`:'')+`
-    <div class="co-sum-row">
-      <span>Total Amount</span>
-      <span>&#8377;${total.toLocaleString('en-IN')}</span>
+    <div class="co-sum-row" style="font-weight:700;font-size:.95rem;border-top:1px solid var(--border);padding-top:8px;margin-top:4px">
+      <span>Total Payable</span>
+      <span style="color:var(--gold)">&#8377;${total.toLocaleString('en-IN')}</span>
     </div>`;
 }
 
@@ -2514,7 +2532,8 @@ async function placeOrder(paymentInfo){
 
   const subtotal = cartTotal();
   const discount = _appliedCoupon ? _appliedCoupon.discount : 0;
-  const finalTotal = Math.max(0, subtotal - discount);
+  const shipping = SHIPPING[_shippingZone] || 0;
+  const finalTotal = Math.max(0, subtotal + shipping - discount);
 
   const orderData = {
     customer:{ name, phone, email, address },
@@ -2522,6 +2541,7 @@ async function placeOrder(paymentInfo){
     total: finalTotal,
     couponCode: _appliedCoupon?.code || '',
     couponDiscount: discount,
+    shipping: { zone: _shippingZone, charge: shipping },
     payment: paymentInfo,
     userId: currentUser?._id || null
   };
@@ -2529,8 +2549,20 @@ async function placeOrder(paymentInfo){
   try{
     const headers = {'Content-Type':'application/json'};
     if(currentUser?.token) headers['Authorization'] = 'Bearer '+currentUser.token;
-    await fetch(API+'/api/orders',{ method:'POST', headers, body: JSON.stringify(orderData) });
-  }catch(e){}
+    const res = await fetch(API+'/api/orders',{ method:'POST', headers, body: JSON.stringify(orderData) });
+    if(!res.ok){
+      const d = await res.json().catch(()=>({}));
+      const payBtn = document.getElementById('coPayBtn');
+      if(payBtn){ payBtn.disabled=false; payBtn.innerHTML='<i class="fas fa-lock"></i> &nbsp;Pay Securely'; }
+      alert((d.message||'Order could not be placed.')+'\n\nYour payment was received. Please contact us on WhatsApp: +91 81468 05002');
+      return;
+    }
+  }catch(e){
+    const payBtn = document.getElementById('coPayBtn');
+    if(payBtn){ payBtn.disabled=false; payBtn.innerHTML='<i class="fas fa-lock"></i> &nbsp;Pay Securely'; }
+    alert('Network error. Your payment was received.\nPlease contact us on WhatsApp: +91 81468 05002');
+    return;
+  }
 
   // save delivery address to profile for next time
   await saveProfileToBackend();
@@ -2543,10 +2575,12 @@ async function placeOrder(paymentInfo){
 
   cart=[]; saveCart(); renderCartItems();
   _appliedCoupon=null;
+  _shippingZone='india';
   const couponInput=document.getElementById('couponInput');
   if(couponInput) couponInput.value='';
   const couponMsg=document.getElementById('couponMsg');
   if(couponMsg){couponMsg.className='coupon-msg';couponMsg.textContent='';}
+  document.getElementById('checkoutOverlay').classList.add('open');
   document.querySelectorAll('.co-step').forEach(s=>s.classList.remove('active'));
   document.getElementById('coStepSuccess').classList.add('active');
 }
@@ -2583,7 +2617,8 @@ async function handlePayment(){
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;Preparing…';
 
-  const finalAmt = Math.max(1, cartTotal() - (_appliedCoupon ? _appliedCoupon.discount : 0));
+  const shipping = SHIPPING[_shippingZone] || 0;
+  const finalAmt = Math.max(1, cartTotal() + shipping - (_appliedCoupon ? _appliedCoupon.discount : 0));
 
   try {
     const res = await fetch(API + '/api/orders/razorpay/create-order', {
@@ -2602,6 +2637,8 @@ async function handlePayment(){
       name: 'OG Accessories 47',
       description: 'Order Payment',
       handler: function(resp) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp;Confirming Order…';
         placeOrder({
           method: 'razorpay',
           paymentId: resp.razorpay_payment_id,
