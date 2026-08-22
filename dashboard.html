@@ -1488,6 +1488,8 @@ loadAllSettings();
 
 /* ── ORDERS ─────────────────────────────────────────── */
 let allOrders = [], ordersFilter = 'all';
+let _lastOrderCount = 0;
+let _lastOrderId    = null;
 
 async function loadOrders(){
   const tbody = document.getElementById('ordersTableBody');
@@ -1640,8 +1642,6 @@ function updateOverviewOrderStats(){
 loadOrders();
 
 /* ── AUTO-REFRESH ORDERS every 30 seconds ── */
-let _lastOrderCount = 0;
-let _lastOrderId    = null;
 setInterval(async () => {
   try {
     const res = await fetch(`${API}/api/orders`, { headers: { Authorization: 'Bearer ' + getToken() } });
