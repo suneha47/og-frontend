@@ -1494,6 +1494,7 @@ async function loadOrders(){
     const res = await fetch(`${API}/api/orders`, { headers:{ Authorization:'Bearer '+getToken() } });
     if(!res.ok) throw new Error();
     allOrders = await res.json();
+    if(!_lastOrderId){ _lastOrderCount = allOrders.length; _lastOrderId = allOrders[0]?._id || 'init'; }
     if(!window._deliveryPartners?.length){
       fetch(`${API}/api/delivery`,{headers:{Authorization:'Bearer '+getToken()}}).then(r=>r.json()).then(d=>{window._deliveryPartners=d;}).catch(()=>{});
     }
@@ -1635,6 +1636,43 @@ function updateOverviewOrderStats(){
 
 // Load order stats on overview
 loadOrders();
+
+/* ── AUTO-REFRESH ORDERS every 30 seconds ── */
+let _lastOrderCount = 0;
+let _lastOrderId    = null;
+setInterval(async () => {
+  try {
+    const res = await fetch(`${API}/api/orders`, { headers: { Authorization: 'Bearer ' + getToken() } });
+    if (!res.ok) return;
+    const fresh = await res.json();
+    const newCount = fresh.length;
+    const newTopId = fresh[0]?._id;
+    if (_lastOrderId && newTopId !== _lastOrderId) {
+      const added = newCount - _lastOrderCount;
+      // Flash the page title
+      document.title = `🔔 ${added > 0 ? added + ' New Order' + (added > 1 ? 's' : '') + '!' : 'New Order!'} — OG Admin`;
+      setTimeout(() => { document.title = 'OG Accessories 47 — Admin'; }, 5000);
+      // Play beep sound
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [0, 0.18, 0.36].forEach(t => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.connect(g); g.connect(ctx.destination);
+          o.frequency.value = 880; g.gain.setValueAtTime(0.3, ctx.currentTime + t);
+          g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.15);
+          o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15);
+        });
+      } catch (_) {}
+    }
+    _lastOrderCount = newCount;
+    _lastOrderId    = newTopId;
+    allOrders = fresh;
+    window._deliveryPartners = window._deliveryPartners || [];
+    renderOrders();
+    updateOrderBadge();
+    updateOverviewOrderStats();
+  } catch (_) {}
+}, 30000);
 loadAdminStats();
 
 /* ═══════════════════════════════════════
