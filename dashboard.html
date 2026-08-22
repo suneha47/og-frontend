@@ -777,6 +777,8 @@ async function doLogin(){
     hideLoginOverlay();
     loadProducts();
     loadAllSettings();
+    loadOrders();
+    loadAdminStats();
   }catch(e){
     err.textContent=e.message;
     err.style.display='block';
