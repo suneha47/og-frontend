@@ -18,6 +18,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=INR&intent=capture" onload="initPayPalButtons()"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -1278,19 +1279,6 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
             <input class="co-input" id="coPin" type="text" placeholder="142030" maxlength="10" autocomplete="postal-code"/>
           </div>
         </div>
-        <div class="co-field" style="margin-top:4px">
-          <label class="co-label">Delivery Location <span class="req">*</span></label>
-          <div style="display:flex;gap:14px;margin-top:8px;flex-wrap:wrap">
-            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--white)">
-              <input type="radio" name="shippingZone" value="india" checked onchange="setShippingZone('india')"/>
-              <span>India &nbsp;<span style="color:var(--muted);font-weight:400">(&#8377;320 shipping)</span></span>
-            </label>
-            <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--white)">
-              <input type="radio" name="shippingZone" value="international" onchange="setShippingZone('international')"/>
-              <span>International &nbsp;<span style="color:var(--muted);font-weight:400">(&#8377;5,000 shipping)</span></span>
-            </label>
-          </div>
-        </div>
       </div>
       <div class="checkout-foot">
         <button class="co-next-btn" onclick="coNext()">Continue to Payment &nbsp;<i class="fas fa-arrow-right"></i></button>
@@ -1336,6 +1324,15 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
       <div class="checkout-foot">
         <button class="co-back-btn" onclick="coBack()"><i class="fas fa-arrow-left"></i> Back</button>
         <button class="co-pay-btn" id="coPayBtn" onclick="handlePayment()"><i class="fas fa-lock"></i> &nbsp;Pay Securely</button>
+      </div>
+      <div style="padding:0 16px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+          <span style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">or pay internationally</span>
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+        </div>
+        <div id="paypal-button-container"></div>
+        <div style="text-align:center;font-size:.65rem;color:var(--muted);margin-top:6px"><i class="fas fa-globe" style="margin-right:3px"></i>PayPal — accepted in 200+ countries</div>
       </div>
     </div>
 
@@ -2213,8 +2210,8 @@ function renderMyOrders(orders){
         <div class="order-item-price">&#8377;${(item.price*item.qty).toLocaleString('en-IN')}</div>
       </div>`).join('');
 
-    const payIcon = o.payment?.method==='upi'?'fa-mobile-alt':'fa-credit-card';
-    const payLabel = o.payment?.method==='upi'?'UPI Payment':'Paid via Razorpay';
+    const payIcon = o.payment?.method==='upi'?'fa-mobile-alt':o.payment?.method==='paypal'?'fa-paypal':'fa-credit-card';
+    const payLabel = o.payment?.method==='upi'?'UPI Payment':o.payment?.method==='paypal'?'Paid via PayPal':'Paid via Razorpay';
 
     const canCancel=!isCancelled&&(o.status==='pending'||o.status==='confirmed');
 
@@ -2332,7 +2329,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 /* ── CART ─────────────────────────────────────────────── */
 const UPI_ID = 'bhullarsam162@okicici';
 const RAZORPAY_KEY = 'rzp_live_TG1vlIdlgkv6Kq';
-const SHIPPING = { india: 320, international: 5000 };
+const SHIPPING = { india: 0, international: 0 };
 let _shippingZone = 'india';
 function setShippingZone(zone){ _shippingZone = zone; }
 
@@ -2467,7 +2464,7 @@ function renderCoSummary(){
       <span>${escHtml(x.name)}${x.size?' ('+escHtml(x.size)+')':''}${x.color?' · '+escHtml(x.color):''} &times; ${x.qty}</span>
       <span>&#8377;${(x.price*x.qty).toLocaleString('en-IN')}</span>
     </div>`).join('')+
-    `<div class="co-sum-row"><span>Shipping (${_shippingZone==='international'?'International':'India'})</span><span>&#8377;${shipping.toLocaleString('en-IN')}</span></div>`+
+    ``+
     (discount>0?`<div class="co-sum-row" style="color:#15803d"><span><i class="fas fa-tag"></i> Coupon (${escHtml(_appliedCoupon.code)})</span><span style="color:#15803d">- &#8377;${discount.toLocaleString('en-IN')}</span></div>`:'')+`
     <div class="co-sum-row" style="font-weight:700;font-size:.95rem;border-top:1px solid var(--border);padding-top:8px;margin-top:4px">
       <span>Total Payable</span>
@@ -2610,6 +2607,40 @@ function toggleWish(id){
   else list.push(id);
   saveWishlist(list);
   renderProducts();
+}
+
+let _paypalRendered = false;
+function initPayPalButtons(){
+  if(_paypalRendered || typeof paypal === 'undefined') return;
+  _paypalRendered = true;
+  paypal.Buttons({
+    style:{ layout:'horizontal', color:'gold', shape:'rect', label:'paypal', height:40, tagline:false },
+    createOrder: async () => {
+      const shipping = SHIPPING[_shippingZone] || 0;
+      const finalAmt = Math.max(1, cartTotal() + shipping - (_appliedCoupon ? _appliedCoupon.discount : 0));
+      const res = await fetch(API + '/api/paypal/create-order', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ amount: finalAmt })
+      });
+      const data = await res.json();
+      if(!res.ok) throw new Error(data.message || 'PayPal order creation failed.');
+      return data.id;
+    },
+    onApprove: async (data) => {
+      try {
+        const res = await fetch(API + '/api/paypal/capture-order', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ orderID: data.orderID })
+        });
+        const capture = await res.json();
+        if(!res.ok) throw new Error(capture.message || 'PayPal capture failed.');
+        placeOrder({ method:'paypal', paymentId: capture.captureId, status:'paid' });
+      } catch(e) {
+        alert(e.message || 'PayPal payment failed. Please try again.');
+      }
+    },
+    onError: () => { alert('PayPal payment failed. Please try again or use Razorpay.'); }
+  }).render('#paypal-button-container');
 }
 
 async function handlePayment(){
