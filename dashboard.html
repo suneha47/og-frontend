@@ -261,6 +261,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
     <a class="nav-item" onclick="showPanel('customers');loadCustomers()"><i class="fas fa-users"></i> Customers</a>
     <a class="nav-item" onclick="showPanel('coupons');loadCoupons()"><i class="fas fa-ticket-alt"></i> Coupons</a>
     <a class="nav-item" onclick="showPanel('reviews');loadAllReviews()"><i class="fas fa-star"></i> Reviews</a>
+    <a class="nav-item" onclick="showPanel('delivery');loadDeliveryPartners()"><i class="fas fa-motorcycle"></i> Delivery Partners</a>
 
     <div class="sidebar-section">Website</div>
     <a class="nav-item" onclick="showPanel('hero')"><i class="fas fa-images"></i> Hero Slides</a>
@@ -324,6 +325,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
                   <th>Payment</th>
                   <th>Status</th>
                   <th>Tracking</th>
+                  <th>Delivery</th>
                   <th>Date</th>
                 </tr>
               </thead>
@@ -646,6 +648,34 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--black);color:v
             <table class="review-table">
               <thead><tr><th>Product</th><th>Customer</th><th>Rating</th><th>Review</th><th>Date</th><th>Action</th></tr></thead>
               <tbody id="reviewsTableBody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">Loading reviews...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DELIVERY PARTNERS ── -->
+    <div class="panel" id="panel-delivery">
+      <div class="panel-title"><i class="fas fa-motorcycle"></i> Delivery Partners</div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-hdr"><div class="card-hdr-title"><i class="fas fa-plus-circle"></i> Add New Delivery Guy</div></div>
+        <div class="card-body" style="padding:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+          <div class="fg" style="flex:1;min-width:160px"><label>Name</label><input type="text" id="dpName" placeholder="e.g. Ravi Kumar"/></div>
+          <div class="fg" style="flex:1;min-width:160px"><label>WhatsApp Number (with country code)</label><input type="text" id="dpPhone" placeholder="e.g. 918146805002"/></div>
+          <button class="btn btn-gold" onclick="addDeliveryPartner()" style="margin-bottom:1px"><i class="fas fa-plus"></i> Add</button>
+        </div>
+        <div id="dpAddMsg" style="margin:0 20px 16px"></div>
+      </div>
+      <div class="card">
+        <div class="card-hdr">
+          <div class="card-hdr-title"><i class="fas fa-list"></i> All Delivery Partners</div>
+          <button class="btn btn-outline btn-sm" onclick="loadDeliveryPartners()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table class="prod-table">
+              <thead><tr><th>Name</th><th>Phone</th><th>Added</th><th>Action</th></tr></thead>
+              <tbody id="dpTableBody"><tr><td colspan="4" style="text-align:center;color:var(--muted);padding:30px">Loading...</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -1459,16 +1489,19 @@ let allOrders = [], ordersFilter = 'all';
 
 async function loadOrders(){
   const tbody = document.getElementById('ordersTableBody');
-  if(tbody) tbody.innerHTML='<tr><td colspan="8" class="orders-empty"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  if(tbody) tbody.innerHTML='<tr><td colspan="9" class="orders-empty"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
   try{
     const res = await fetch(`${API}/api/orders`, { headers:{ Authorization:'Bearer '+getToken() } });
     if(!res.ok) throw new Error();
     allOrders = await res.json();
+    if(!window._deliveryPartners?.length){
+      fetch(`${API}/api/delivery`,{headers:{Authorization:'Bearer '+getToken()}}).then(r=>r.json()).then(d=>{window._deliveryPartners=d;}).catch(()=>{});
+    }
     renderOrders();
     updateOrderBadge();
     updateOverviewOrderStats();
   }catch(e){
-    if(tbody) tbody.innerHTML='<tr><td colspan="8" class="orders-empty" style="color:var(--red)">Failed to load orders. Make sure you are logged in as admin.</td></tr>';
+    if(tbody) tbody.innerHTML='<tr><td colspan="9" class="orders-empty" style="color:var(--red)">Failed to load orders. Make sure you are logged in as admin.</td></tr>';
   }
 }
 
@@ -1484,7 +1517,7 @@ function renderOrders(){
   if(!tbody) return;
   const filtered = ordersFilter==='all' ? allOrders : allOrders.filter(o=>o.status===ordersFilter);
   if(!filtered.length){
-    tbody.innerHTML=`<tr><td colspan="8" class="orders-empty">No ${ordersFilter==='all'?'':ordersFilter} orders yet.</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="9" class="orders-empty">No ${ordersFilter==='all'?'':ordersFilter} orders yet.</td></tr>`;
     return;
   }
   tbody.innerHTML = filtered.map(o=>{
@@ -1525,6 +1558,15 @@ function renderOrders(){
           </select>
           <input type="text" id="trackno-${o._id}" value="${escO(o.tracking?.trackingNumber||'')}" placeholder="Tracking number" style="font-size:.72rem;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);width:100%;box-sizing:border-box"/>
           <button onclick="saveTracking('${o._id}')" style="font-size:.68rem;padding:4px 8px;border-radius:6px;background:var(--gold);color:#000;border:none;cursor:pointer;font-weight:700">Save</button>
+        </div>
+      </td>
+      <td>
+        <div style="display:flex;flex-direction:column;gap:5px;min-width:170px">
+          <select id="dp-sel-${o._id}" style="font-size:.72rem;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);width:100%" onchange="assignDeliveryPartner('${o._id}',this)">
+            <option value="">— Assign Delivery Guy —</option>
+            ${(window._deliveryPartners||[]).map(p=>`<option value="${p._id}" ${o.deliveryPartner?._id==p._id?'selected':''}>${escO(p.name)}</option>`).join('')}
+          </select>
+          ${o.deliveryPartner?.phone ? `<a href="https://wa.me/${escO(o.deliveryPartner.phone)}?text=${encodeURIComponent('🛵 Delivery Assignment - OG Accessories 47\n\nOrder #'+o.orderId+'\nCustomer: '+o.customer?.name+'\nPhone: '+o.customer?.phone+'\nAddress: '+o.customer?.address+'\nItems: '+o.items.map(i=>i.name+' ×'+i.qty).join(', ')+'\nTotal: ₹'+Number(o.total).toLocaleString('en-IN')+'\n\nPlease deliver at the earliest. Thank you!')}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;color:#fff;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.72rem;font-weight:700"><i class="fab fa-whatsapp"></i> Notify ${escO(o.deliveryPartner.name)}</a>` : ''}
         </div>
       </td>
       <td><div class="order-date">${date}</div><div class="order-date">${time}</div></td>
@@ -1626,6 +1668,95 @@ function exportOrdersCSV(){
 /* ═══════════════════════════════════════
    CUSTOMERS
 ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   DELIVERY PARTNERS
+═══════════════════════════════════════ */
+let allDeliveryPartners = [];
+window._deliveryPartners = [];
+
+async function loadDeliveryPartners(){
+  const tbody = document.getElementById('dpTableBody');
+  if(tbody) tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+  try{
+    const res = await fetch(`${API}/api/delivery`, { headers:{ Authorization:'Bearer '+getToken() } });
+    if(!res.ok) throw new Error();
+    allDeliveryPartners = await res.json();
+    window._deliveryPartners = allDeliveryPartners;
+    renderDeliveryPartners();
+  }catch(e){
+    if(tbody) tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--red);padding:20px">Failed to load delivery partners.</td></tr>';
+  }
+}
+
+function renderDeliveryPartners(){
+  const tbody = document.getElementById('dpTableBody');
+  if(!tbody) return;
+  if(!allDeliveryPartners.length){
+    tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:30px">No delivery partners yet. Add one above.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = allDeliveryPartners.map(p=>`<tr>
+    <td style="font-weight:600">${escO(p.name)}</td>
+    <td>${escO(p.phone)}</td>
+    <td style="font-size:.75rem;color:var(--muted)">${new Date(p.createdAt).toLocaleDateString('en-IN')}</td>
+    <td>
+      <a href="https://wa.me/${escO(p.phone)}" target="_blank" class="btn btn-outline btn-sm" style="border-color:#25D366;color:#25D366;margin-right:6px"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="btn btn-danger btn-sm" onclick="deleteDeliveryPartner('${p._id}','${escO(p.name)}')"><i class="fas fa-trash"></i> Remove</button>
+    </td>
+  </tr>`).join('');
+}
+
+async function addDeliveryPartner(){
+  const name  = document.getElementById('dpName').value.trim();
+  const phone = document.getElementById('dpPhone').value.trim();
+  const msg   = document.getElementById('dpAddMsg');
+  if(!name || !phone){ msg.innerHTML='<div class="msg error" style="display:block">Please enter both name and phone number.</div>'; return; }
+  try{
+    const res = await fetch(`${API}/api/delivery`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body: JSON.stringify({ name, phone })
+    });
+    if(!res.ok) throw new Error();
+    document.getElementById('dpName').value='';
+    document.getElementById('dpPhone').value='';
+    msg.innerHTML='<div class="msg success" style="display:block">Delivery partner added successfully!</div>';
+    setTimeout(()=>msg.innerHTML='', 3000);
+    await loadDeliveryPartners();
+  }catch(e){
+    msg.innerHTML='<div class="msg error" style="display:block">Failed to add partner. Please try again.</div>';
+  }
+}
+
+async function deleteDeliveryPartner(id, name){
+  if(!confirm(`Remove ${name} from delivery partners?`)) return;
+  try{
+    await fetch(`${API}/api/delivery/${id}`, { method:'DELETE', headers:{ Authorization:'Bearer '+getToken() } });
+    await loadDeliveryPartners();
+  }catch(e){
+    alert('Failed to remove delivery partner.');
+  }
+}
+
+async function assignDeliveryPartner(orderId, sel){
+  const partnerId = sel.value;
+  try{
+    const res = await fetch(`${API}/api/delivery/orders/${orderId}/assign`, {
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+getToken()},
+      body: JSON.stringify({ partnerId })
+    });
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    const order = allOrders.find(o=>o._id===orderId);
+    if(order) order.deliveryPartner = data.partner ? { _id: data.partner._id, name: data.partner.name, phone: data.partner.phone } : null;
+    renderOrders();
+  }catch(e){
+    alert('Failed to assign delivery partner. Please try again.');
+    loadOrders();
+  }
+}
+
 async function loadCustomers(){
   const tbody=document.getElementById('customersTableBody');
   if(tbody) tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px"><i class="fas fa-circle-notch fa-spin"></i> Loading...</td></tr>';
