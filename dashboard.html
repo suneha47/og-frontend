@@ -1569,7 +1569,7 @@ function renderOrders(){
         <div style="display:flex;flex-direction:column;gap:5px;min-width:170px">
           <select id="dp-sel-${o._id}" style="font-size:.72rem;padding:4px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);width:100%" onchange="assignDeliveryPartner('${o._id}',this)">
             <option value="">— Assign Delivery Guy —</option>
-            ${(window._deliveryPartners||[]).map(p=>`<option value="${p._id}" ${o.deliveryPartner?._id==p._id?'selected':''}>${escO(p.name)}</option>`).join('')}
+            ${(window._deliveryPartners||[]).map(p=>`<option value="${p._id}" ${o.deliveryPartner?.partnerId==p._id?'selected':''}>${escO(p.name)}</option>`).join('')}
           </select>
           ${o.deliveryPartner?.phone ? `<a href="https://wa.me/${escO(o.deliveryPartner.phone)}?text=${encodeURIComponent('🛵 Delivery Assignment - OG Accessories 47\n\nOrder #'+o.orderId+'\nCustomer: '+o.customer?.name+'\nPhone: '+o.customer?.phone+'\nAddress: '+o.customer?.address+'\nItems: '+o.items.map(i=>i.name+' ×'+i.qty).join(', ')+'\nTotal: ₹'+Number(o.total).toLocaleString('en-IN')+'\n\nPlease deliver at the earliest. Thank you!')}" target="_blank" style="display:inline-flex;align-items:center;gap:5px;background:#25D366;color:#fff;text-decoration:none;padding:5px 10px;border-radius:6px;font-size:.72rem;font-weight:700"><i class="fab fa-whatsapp"></i> Notify ${escO(o.deliveryPartner.name)}</a>` : ''}
         </div>
