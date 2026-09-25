@@ -600,6 +600,86 @@ footer{background:#080405;border-top:1px solid rgba(136,10,37,0.3)}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
+/* ── HERO ENHANCED HEIGHT ── */
+.carousel-slide{min-height:clamp(380px,62vw,720px)!important}
+
+/* ── BRAND EDITORIAL SPLIT ── */
+.brand-split{display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.brand-split-img{position:relative;overflow:hidden;min-height:420px}
+.brand-split-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.8);transition:transform .9s ease;display:block}
+.brand-split:hover .brand-split-img img{transform:scale(1.04)}
+.brand-split-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(12,7,8,.45),transparent 60%)}
+.brand-split-content{background:var(--bg2);display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,90px);border-left:1px solid var(--border-g)}
+.brand-split-eyebrow{font-size:.55rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.brand-split-eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+.brand-split-h{font-family:'Cormorant',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;line-height:1.05;color:var(--white);margin-bottom:18px}
+.brand-split-h em{color:var(--gold);font-style:italic}
+.brand-split-p{color:var(--muted);font-size:.9rem;line-height:1.95;margin-bottom:28px;max-width:400px}
+.brand-split-stats{display:flex;gap:32px;margin-top:28px;padding-top:28px;border-top:1px solid var(--border)}
+.bss-item .bss-num{font-family:'Cormorant',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1}
+.bss-item .bss-label{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+@media(max-width:768px){.brand-split{grid-template-columns:1fr}.brand-split-img{min-height:260px}.brand-split-content{padding:32px 24px}.brand-split-stats{gap:24px}}
+
+/* ── CATEGORY MOSAIC (editorial grid) ── */
+.cat-mosaic-wrap{max-width:1320px;margin:0 auto;padding:0 24px 40px}
+.cat-mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto;gap:14px}
+.cat-mosaic-tile{position:relative;overflow:hidden;cursor:pointer;border-radius:8px;border:1px solid var(--border);background:var(--card2)}
+.cat-mosaic-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:brightness(.75)}
+.cat-mosaic-tile:hover img{transform:scale(1.06);filter:brightness(.85)}
+.cat-mosaic-tile .cmt-label{position:absolute;bottom:0;left:0;right:0;padding:18px 16px 14px;background:linear-gradient(transparent,rgba(12,7,8,.85));font-family:'Cormorant',serif;font-size:1.15rem;font-weight:600;color:#fff}
+.cat-mosaic-tile .cmt-sub{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-top:2px;font-family:'DM Sans',sans-serif;font-weight:700}
+.cat-mosaic-tile.tall{grid-row:span 2}
+.cat-mosaic-tile.wide{grid-column:span 2}
+.cat-mosaic-tile .cmt-overlay{position:absolute;inset:0;background:rgba(136,10,37,.0);transition:background .3s}
+.cat-mosaic-tile:hover .cmt-overlay{background:rgba(136,10,37,.15)}
+@media(max-width:900px){.cat-mosaic{grid-template-columns:repeat(2,1fr)}.cat-mosaic-tile.tall{grid-row:span 1}.cat-mosaic-tile.wide{grid-column:span 1}}
+@media(max-width:500px){.cat-mosaic{grid-template-columns:1fr}}
+
+/* ── HAMPERS CTA ── */
+.hampers-sec{position:relative;overflow:hidden;background:var(--bg)}
+.hampers-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.3) saturate(.7)}
+.hampers-sec::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(12,7,8,.92) 50%,rgba(136,10,37,.3));z-index:1}
+.hampers-inner{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:clamp(64px,8vw,110px) 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hampers-eyebrow{font-size:.55rem;letter-spacing:.55em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.hampers-eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+.hampers-h{font-family:'Cormorant',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:600;line-height:.97;color:#fff;margin-bottom:18px}
+.hampers-h span{color:var(--gold);font-style:italic}
+.hampers-p{color:rgba(255,255,255,.65);font-size:.92rem;line-height:1.95;max-width:440px;margin-bottom:30px}
+.hampers-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hampers-features{display:flex;flex-direction:column;gap:14px}
+.hf-item{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.05);border:1px solid rgba(201,169,110,.12);border-radius:8px;padding:16px 20px;backdrop-filter:blur(6px);transition:border-color .3s}
+.hf-item:hover{border-color:rgba(201,169,110,.3)}
+.hf-icon{width:40px;height:40px;border-radius:8px;background:rgba(201,169,110,.12);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;font-size:1rem}
+.hf-title{font-size:.88rem;font-weight:700;color:#fff;margin-bottom:3px}
+.hf-sub{font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.4}
+@media(max-width:900px){.hampers-inner{grid-template-columns:1fr}.hampers-features{display:none}}
+
+/* ── WHY OG ── */
+.why-og-sec{background:var(--bg);padding:clamp(64px,8vw,110px) 24px;border-top:1px solid var(--border)}
+.why-og-inner{max-width:1320px;margin:0 auto}
+.why-og-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 56px;margin-top:52px}
+.why-item{border-top:1px solid var(--border-g);padding-top:26px;transition:border-color .3s}
+.why-item:hover{border-top-color:var(--gold)}
+.why-num{font-family:'Cormorant',serif;font-size:3.5rem;font-weight:700;color:rgba(201,169,110,.15);line-height:1;margin-bottom:14px;transition:color .3s}
+.why-item:hover .why-num{color:rgba(201,169,110,.35)}
+.why-title{font-family:'Cormorant',serif;font-size:1.35rem;font-weight:600;color:var(--white);margin-bottom:10px}
+.why-text{font-size:.85rem;color:var(--muted);line-height:1.9}
+@media(max-width:900px){.why-og-grid{grid-template-columns:1fr 1fr;gap:28px 36px}}
+@media(max-width:560px){.why-og-grid{grid-template-columns:1fr;gap:24px}}
+
+/* ── NEWSLETTER ── */
+.newsletter-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:clamp(56px,7vw,90px) 24px;text-align:center}
+.newsletter-inner{max-width:620px;margin:0 auto}
+.newsletter-eyebrow{font-size:.55rem;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:16px}
+.newsletter-eyebrow::before,.newsletter-eyebrow::after{content:'';width:28px;height:1px;background:var(--gold)}
+.newsletter-h{font-family:'Cormorant',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:12px}
+.newsletter-h span{color:var(--gold);font-style:italic}
+.newsletter-p{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:32px}
+.newsletter-wa-btn{display:inline-flex;align-items:center;gap:12px;background:#25D366;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;padding:16px 40px;border-radius:4px;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s}
+.newsletter-wa-btn:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.3)}
+.newsletter-wa-btn i{font-size:1.15rem}
+.newsletter-note{font-size:.7rem;color:var(--muted2);margin-top:14px}
+
 /* ── TICKER ── */
 .ticker-bar{background:linear-gradient(135deg,#3A0815,#540D1E,#3A0815);border-bottom:1px solid rgba(201,169,110,.15);overflow:hidden;height:34px;display:flex;align-items:center}
 .ticker-inner{display:flex;align-items:center;white-space:nowrap;animation:tickerScroll 38s linear infinite}
@@ -838,6 +918,24 @@ footer{background:#080405;border-top:1px solid rgba(136,10,37,0.3)}
   </div>
 </div>
 
+<!-- BRAND EDITORIAL SPLIT -->
+<section class="brand-split" id="brand-sec">
+  <div class="brand-split-img">
+    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=85&auto=format&fit=crop" alt="Premium fashion accessories from OG Accessories 47" loading="lazy"/>
+  </div>
+  <div class="brand-split-content">
+    <div class="brand-split-eyebrow">Our Story</div>
+    <h2 class="brand-split-h reveal">Premium <em>Style</em><br>From the Heart<br>of Punjab</h2>
+    <p class="brand-split-p reveal reveal-d1">Born in Zira, Ferozepur — OG Accessories 47 brings you handpicked fashion accessories that speak volumes. Every wallet, watch, and bag is chosen with one intention: to make you look, feel, and carry yourself with confidence.</p>
+    <a href="#products-sec" class="btn-gold reveal reveal-d2" style="align-self:flex-start">Explore Collection</a>
+    <div class="brand-split-stats reveal reveal-d3">
+      <div class="bss-item"><div class="bss-num">500+</div><div class="bss-label">Happy Customers</div></div>
+      <div class="bss-item"><div class="bss-num">3 Yrs</div><div class="bss-label">In Business</div></div>
+      <div class="bss-item"><div class="bss-num">100+</div><div class="bss-label">Products</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- CATEGORY TILES -->
 <div id="categories-sec" style="background:var(--dark);padding:20px 0 32px;border-bottom:1px solid var(--border)">
   <div class="sec-wrap" style="padding-top:24px;padding-bottom:0">
@@ -1009,6 +1107,83 @@ footer{background:#080405;border-top:1px solid rgba(136,10,37,0.3)}
     <div class="pagination" id="pagination"></div>
   </div>
 </div>
+
+<!-- CUSTOM HAMPERS CTA -->
+<section class="hampers-sec" id="hampers-sec">
+  <img class="hampers-bg-img" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1600&q=80&auto=format&fit=crop" alt="Custom Gift Hampers" loading="lazy"/>
+  <div class="hampers-inner">
+    <div class="hampers-content reveal">
+      <div class="hampers-eyebrow">Exclusive Service</div>
+      <h2 class="hampers-h">Custom <span>Gift</span><br>Hampers</h2>
+      <p class="hampers-p">Create the perfect gift set for your loved ones — curated from our premium collection. Weddings, birthdays, festivals, or just because. We'll package it beautifully and deliver it to your door.</p>
+      <div class="hampers-btns">
+        <a href="https://wa.me/918146805002?text=Hi!%20I%20want%20to%20create%20a%20custom%20gift%20hamper" target="_blank" rel="noopener" class="btn-gold"><i class="fab fa-whatsapp"></i> &nbsp;Order on WhatsApp</a>
+        <a href="#products-sec" class="btn-outline-w">Browse Products</a>
+      </div>
+    </div>
+    <div class="hampers-features reveal reveal-d2">
+      <div class="hf-item"><div class="hf-icon"><i class="fas fa-gift"></i></div><div><div class="hf-title">Custom Curation</div><div class="hf-sub">We handpick items based on your budget &amp; preferences</div></div></div>
+      <div class="hf-item"><div class="hf-icon"><i class="fas fa-box-open"></i></div><div><div class="hf-title">Premium Packaging</div><div class="hf-sub">Beautifully boxed and ready to gift</div></div></div>
+      <div class="hf-item"><div class="hf-icon"><i class="fas fa-truck"></i></div><div><div class="hf-title">Pan-India Delivery</div><div class="hf-sub">Fast &amp; secure delivery across India</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY OG -->
+<section class="why-og-sec" id="why-og-sec">
+  <div class="why-og-inner">
+    <div class="sec-hdr reveal">
+      <div class="sec-hdr-left">
+        <div class="sec-eyebrow">Why Choose Us</div>
+        <div class="sec-title">The OG <span>Difference</span></div>
+        <div class="sec-divider"></div>
+      </div>
+    </div>
+    <div class="why-og-grid">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <div class="why-title">Handpicked Quality</div>
+        <p class="why-text">Every single product in our collection is hand-selected and quality-checked before it reaches you. We don't list it if we wouldn't buy it ourselves.</p>
+      </div>
+      <div class="why-item reveal reveal-d1">
+        <div class="why-num">02</div>
+        <div class="why-title">Best Prices in Zira</div>
+        <p class="why-text">Premium doesn't have to mean expensive. We source directly so you get genuine accessories at prices that make sense. No markups, no nonsense.</p>
+      </div>
+      <div class="why-item reveal reveal-d2">
+        <div class="why-num">03</div>
+        <div class="why-title">WhatsApp-First Service</div>
+        <p class="why-text">Talk to us on WhatsApp before you buy. Ask questions, see more photos, request videos — real people, real answers, no bots.</p>
+      </div>
+      <div class="why-item reveal reveal-d3">
+        <div class="why-num">04</div>
+        <div class="why-title">Fast Local Delivery</div>
+        <p class="why-text">Based in Zira, Ferozepur — we ship across India. Local orders can be picked up same day. Fast, reliable, and always tracked.</p>
+      </div>
+      <div class="why-item reveal reveal-d1">
+        <div class="why-num">05</div>
+        <div class="why-title">3 Years of Trust</div>
+        <p class="why-text">We've been serving customers in Zira for over 3 years. Over 500 happy customers and counting — built on honesty and genuine products.</p>
+      </div>
+      <div class="why-item reveal reveal-d2">
+        <div class="why-num">06</div>
+        <div class="why-title">Easy Returns</div>
+        <p class="why-text">Not happy with your purchase? We'll sort it out. No complicated process — just message us on WhatsApp and we make it right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER / WHATSAPP COMMUNITY -->
+<section class="newsletter-sec" id="newsletter-sec">
+  <div class="newsletter-inner reveal">
+    <div class="newsletter-eyebrow">Stay Updated</div>
+    <h2 class="newsletter-h">Get Early <span>Access</span><br>&amp; Exclusive Offers</h2>
+    <p class="newsletter-p">Join our WhatsApp community for first looks at new arrivals, exclusive deals, and style tips — straight to your phone.</p>
+    <a href="https://wa.me/918146805002?text=Hi!%20I'd%20like%20to%20join%20your%20WhatsApp%20community%20for%20updates%20and%20exclusive%20offers." target="_blank" rel="noopener" class="newsletter-wa-btn"><i class="fab fa-whatsapp"></i> Join on WhatsApp</a>
+    <p class="newsletter-note">Join 500+ customers already getting exclusive offers on WhatsApp.</p>
+  </div>
+</section>
 
 <!-- FEATURE STRIP -->
 <div class="feat-strip">
@@ -1309,7 +1484,7 @@ footer{background:#080405;border-top:1px solid rgba(136,10,37,0.3)}
           <div class="co-summary-ttl">Order Summary</div>
           <div id="coSummaryItems"></div>
         </div>
-        <div style="background:#f9f7f4;border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;margin-bottom:4px">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;margin-bottom:4px">
           <div style="font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Accepted Payment Methods</div>
           <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Google_Pay_Logo.svg/512px-Google_Pay_Logo.svg.png" alt="Google Pay" style="height:22px;object-fit:contain"/>
@@ -1343,7 +1518,7 @@ footer{background:#080405;border-top:1px solid rgba(136,10,37,0.3)}
         <div class="co-success-icon"><i class="fas fa-check-circle"></i></div>
         <h3>Order Placed!</h3>
         <p>Thank you! We'll call you on your number to confirm delivery details. You can track your order status in <strong>My Orders</strong>.</p>
-        <p style="font-size:.78rem;color:#6b7280;margin-top:8px;background:#f9fafb;border-radius:8px;padding:10px 12px;border:1px solid #e5e7eb">📧 A confirmation email has been sent to your email address. If you don't see it, please check your <strong>spam/junk folder</strong> and mark it as <strong>Not Spam</strong>.</p>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:8px;background:var(--bg2);border-radius:8px;padding:10px 12px;border:1px solid var(--border)">📧 A confirmation email has been sent to your email address. If you don't see it, please check your <strong>spam/junk folder</strong> and mark it as <strong>Not Spam</strong>.</p>
         <button class="co-done-btn" onclick="closeCheckout();openMyOrders()" style="margin-bottom:10px"><i class="fas fa-box"></i> &nbsp;Track My Order</button>
         <button onclick="closeCheckout()" style="background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;display:block;margin:0 auto;text-decoration:underline">Continue Shopping</button>
       </div>
