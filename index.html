@@ -22,28 +22,28 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0e0c0a;
-  --bg2:#1a1714;
-  --surface:#1a1714;
-  --card:#211e1a;
-  --card2:#2a2520;
-  --dark:#0a0908;
-  --dark2:#1a1714;
-  --black:#0e0c0a;
-  --border:rgba(201,160,48,.18);
-  --border-g:rgba(201,160,48,.12);
-  --gold:#c9a030;
-  --gold2:#d4af37;
-  --goldg:linear-gradient(135deg,#c9a030,#e8c84a,#c9a030);
-  --white:#f5f0e8;
-  --muted:rgba(245,240,232,.55);
-  --muted2:rgba(245,240,232,.3);
+  --bg:#faf8f5;
+  --bg2:#f5f0e8;
+  --surface:#ffffff;
+  --card:#ffffff;
+  --card2:#f5f1eb;
+  --dark:#111009;
+  --dark2:#1e1b16;
+  --black:#1c1917;
+  --border:#e8e2d9;
+  --border-g:rgba(0,0,0,.1);
+  --gold:#c8a415;
+  --gold2:#b8921e;
+  --goldg:#1c1917;
+  --white:#1c1917;
+  --muted:#6b6460;
+  --muted2:#a8a29e;
   --green:#25D366;
-  --red:#ef4444;
-  --star:#c9a030;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.4);
-  --shadow-md:0 4px 16px rgba(0,0,0,.5);
-  --shadow-lg:0 12px 40px rgba(0,0,0,.6);
+  --red:#dc2626;
+  --star:#d97706;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg:0 12px 40px rgba(0,0,0,.12);
   --radius:8px;
 }
 html{scroll-behavior:smooth}
@@ -127,6 +127,8 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .btn-gold:hover{box-shadow:0 6px 24px rgba(184,146,30,.35);transform:translateY(-2px);filter:brightness(1.1)}
 .btn-outline-w{background:transparent;color:#fff;font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:12px 32px;border:1px solid rgba(255,255,255,.35);border-radius:3px;text-decoration:none;display:inline-block;transition:border-color .3s,transform .2s}
 .btn-outline-w:hover{border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
+.hero-left .btn-outline-w{color:var(--white);border-color:var(--border)}
+.hero-left .btn-outline-w:hover{border-color:var(--white)}
 .car-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
 .car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,transform .3s}
 .car-dot.active{background:var(--gold2);transform:scale(1.4)}
@@ -221,7 +223,7 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .product-img-ph{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;background:var(--card2)}
 .product-badges{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:4px}
 .badge{font-size:.55rem;font-weight:700;letter-spacing:.1em;padding:3px 8px;text-transform:uppercase;border-radius:3px}
-.badge-cat{background:rgba(255,255,255,.92);color:var(--gold)}
+.badge-cat{background:var(--bg2);color:var(--muted)}
 .badge-new{background:var(--gold);color:#fff}
 .badge-hot{background:#dc2626;color:#fff}
 .product-quick{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
@@ -235,7 +237,7 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .stars-icon{color:var(--star);font-size:.72rem;letter-spacing:1px}
 .stars-count{font-size:.65rem;color:var(--muted2)}
 .product-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.product-price{font-family:'DM Sans',sans-serif;font-size:1.15rem;font-weight:800;color:var(--gold);line-height:1}
+.product-price{font-family:'DM Sans',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1}
 .product-mrp{font-size:.8rem;color:var(--muted2);text-decoration:line-through;font-family:'DM Sans',sans-serif}
 .product-discount{font-size:.68rem;font-weight:700;color:#15803d}
 .product-footer{display:flex;gap:8px;padding:0 14px 14px;margin-top:auto}
@@ -314,7 +316,7 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .cart-item-info{flex:1;min-width:0}
 .cart-item-cat{font-size:.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:.15em;font-weight:700}
 .cart-item-name{font-size:.85rem;font-weight:600;color:var(--white);line-height:1.3;margin:2px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cart-item-price{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--gold)}
+.cart-item-price{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--white)}
 .cart-item-actions{display:flex;align-items:center;gap:8px;margin-top:6px}
 .cart-qty-wrap{display:flex;align-items:center;border:1px solid var(--border);border-radius:4px;overflow:hidden}
 .cart-qty-btn{background:var(--bg2);border:none;color:var(--white);width:28px;height:28px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:'DM Sans',sans-serif}
@@ -511,7 +513,7 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
 .modal-cat-lbl{font-size:.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font-weight:700}
 .modal-name{font-family:'Cormorant',serif;font-size:2rem;font-weight:600;color:var(--white);line-height:1.05;margin:8px 0 4px}
 .modal-stars{display:flex;align-items:center;gap:6px;margin-bottom:10px}
-.modal-price{font-family:'DM Sans',sans-serif;font-size:1.8rem;font-weight:800;color:var(--gold)}
+.modal-price{font-family:'DM Sans',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white)}
 .modal-price-row{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
 .modal-mrp{font-size:.82rem;color:var(--muted2);text-decoration:line-through}
 .modal-disc{font-size:.78rem;font-weight:700;color:#15803d}
@@ -610,123 +612,124 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
 @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── ANNOUNCEMENT BAR ── */
-.ann-bar{background:#000;padding:9px 0;overflow:hidden;border-bottom:1px solid rgba(201,160,48,.2)}
-.ann-inner{display:flex;align-items:center;white-space:nowrap;animation:tickerScroll 40s linear infinite}
-.ann-inner span{font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.8);padding:0 28px}
-.ann-inner .adot{color:var(--gold);padding:0 4px;font-size:.45rem}
-.ann-bar:hover .ann-inner{animation-play-state:paused}
+.ann-bar{background:#111009;padding:8px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.ann-left{font-size:.6rem;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.75);white-space:nowrap}
+.ann-center{font-size:.6rem;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.55);white-space:nowrap;text-align:center}
+.ann-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ann-right a{color:rgba(255,255,255,.65);font-size:.75rem;transition:color .2s;text-decoration:none}
+.ann-right a:hover{color:#fff}
+.ann-wa-text{font-size:.58rem;color:rgba(255,255,255,.55);letter-spacing:.08em}
+@media(max-width:600px){.ann-center{display:none}.ann-bar{justify-content:space-between}}
 
-/* ── HEADER DARK OVERRIDES ── */
-header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!important}
-.hdr-logo-img{height:48px;width:auto;object-fit:contain;display:block}
+/* ── HEADER LIGHT ── */
+header{background:#fff!important;border-bottom:1px solid var(--border)!important}
+.hdr-logo-img{height:52px;width:auto;object-fit:contain;display:block}
 .hdr-logo-link{flex-shrink:0;text-decoration:none;display:block}
-.hdr-search{border-color:rgba(201,160,48,.25)!important;background:rgba(255,255,255,.04)!important;border-radius:3px!important}
-.hdr-search:focus-within{border-color:var(--gold)!important;box-shadow:0 0 0 2px rgba(201,160,48,.15)!important}
-.hdr-search input{background:transparent!important}
-.hdr-icon-btn{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.15)!important;color:rgba(255,255,255,.7)!important}
-.hdr-icon-btn:hover{border-color:var(--gold)!important;color:var(--gold)!important}
-.cat-nav{background:#0a0908!important;border-bottom:1px solid rgba(201,160,48,.15)!important}
-.cat-nav-item{color:rgba(245,240,232,.5)!important}
-.cat-nav-item:hover{color:var(--white)!important}
-.cat-nav-item.active{color:var(--gold)!important;border-bottom-color:var(--gold)!important}
-.cat-nav-divider{background:rgba(255,255,255,.1)!important}
-.hdr-search-cat{background:#111!important;color:rgba(255,255,255,.6)!important;border-right-color:rgba(255,255,255,.1)!important}
-/* Main nav links in header */
+/* Main nav links */
 .hdr-nav{display:none;align-items:center;gap:0;flex-shrink:0}
-.hdr-nav a{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.65);padding:0 14px;text-decoration:none;transition:color .2s;white-space:nowrap}
-.hdr-nav a:hover,.hdr-nav a.active{color:var(--gold)}
-@media(min-width:1024px){.hdr-nav{display:flex}}
+.hdr-nav a{font-size:.7rem;font-weight:500;letter-spacing:.06em;color:var(--muted);padding:0 14px;text-decoration:none;transition:color .2s;white-space:nowrap}
+.hdr-nav a:hover,.hdr-nav a.active{color:var(--white)}
+@media(min-width:1060px){.hdr-nav{display:flex}}
+.cat-nav{background:#fff!important;border-bottom:1px solid var(--border)!important}
+.cat-nav-item.active{color:var(--white)!important;border-bottom-color:var(--white)!important}
 
 /* ── SPLIT HERO ── */
-.hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(400px,52vw,620px);background:var(--dark)}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,90px) clamp(28px,5vw,72px);position:relative;overflow:hidden}
-.hero-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(201,160,48,.07),transparent 65%);pointer-events:none}
-.hero-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
-.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
-.hero-h{font-family:'Cormorant',serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:700;line-height:.95;color:var(--white);margin-bottom:20px;letter-spacing:-.01em}
-.hero-h span{color:var(--gold);font-style:italic}
-.hero-occasions{list-style:none;margin-bottom:32px;display:flex;flex-direction:column;gap:11px}
-.hero-occasions li{font-size:.82rem;color:var(--muted);padding-left:22px;position:relative;line-height:1.4}
-.hero-occasions li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:10px;height:1px;background:var(--gold)}
-.hero-right{position:relative;overflow:hidden;background:#111}
+.hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(380px,50vw,580px);background:var(--bg2)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,90px) clamp(28px,5vw,72px)}
+.hero-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.hero-label{font-family:'Cormorant',serif;font-size:clamp(1rem,1.6vw,1.3rem);font-weight:600;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+.hero-h{font-family:'Cormorant',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:700;line-height:.95;color:var(--white);margin-bottom:18px;letter-spacing:-.01em}
+.hero-occasions{font-size:.8rem;color:var(--muted);margin-bottom:28px;line-height:1.8;letter-spacing:.03em}
+.hero-right{position:relative;overflow:hidden;background:var(--card2)}
 .hero-right img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
 .hero-right:hover img{transform:scale(1.03)}
-@media(max-width:768px){.hero-split{grid-template-columns:1fr}.hero-right{height:280px;order:-1}.hero-left{padding:36px 24px}}
+@media(max-width:768px){.hero-split{grid-template-columns:1fr}.hero-right{height:260px;order:-1}.hero-left{padding:36px 24px}}
+
+/* ── BENEFIT STRIP ── */
+.benefit-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px}
+.benefit-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
+.benefit-item{padding:16px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px}
+.benefit-item:last-child{border-right:none}
+.benefit-icon{font-size:1.4rem;color:var(--gold)}
+.benefit-title{font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.04em;line-height:1.3}
+.benefit-sub{font-size:.68rem;color:var(--muted);line-height:1.4}
+@media(max-width:700px){.benefit-inner{grid-template-columns:repeat(2,1fr)}.benefit-item{border-right:none;border-bottom:1px solid var(--border)}.benefit-item:nth-child(odd){border-right:1px solid var(--border)}.benefit-item:nth-last-child(-n+2){border-bottom:none}}
 
 /* ── CIRCLE CATEGORIES ── */
-.cat-circles-sec{background:var(--bg2);padding:48px 0;border-bottom:1px solid var(--border)}
-.cat-circles-scroll{display:flex;gap:28px;padding:8px 32px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-circles-sec{background:var(--bg);padding:52px 0;border-bottom:1px solid var(--border)}
+.cat-circles-scroll{display:flex;gap:24px;padding:8px 32px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .cat-circles-scroll::-webkit-scrollbar{display:none}
 .cat-circ{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;text-decoration:none;transition:transform .3s}
-.cat-circ:hover{transform:translateY(-5px)}
-.cat-circ-img{width:88px;height:88px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,160,48,.25);position:relative;transition:border-color .3s,box-shadow .3s;background:var(--card)}
-.cat-circ:hover .cat-circ-img,.cat-circ.active .cat-circ-img{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,160,48,.18)}
+.cat-circ:hover{transform:translateY(-4px)}
+.cat-circ-img{width:86px;height:86px;border-radius:50%;overflow:hidden;border:2px solid var(--border);position:relative;transition:border-color .3s,box-shadow .3s;background:var(--card2)}
+.cat-circ:hover .cat-circ-img,.cat-circ.active .cat-circ-img{border-color:var(--white);box-shadow:0 0 0 3px rgba(28,25,23,.12)}
 .cat-circ-img img{width:100%;height:100%;object-fit:cover;display:block}
-.cat-circ-name{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:color .3s}
-.cat-circ:hover .cat-circ-name,.cat-circ.active .cat-circ-name{color:var(--gold)}
-@media(max-width:600px){.cat-circ-img{width:70px;height:70px}.cat-circles-scroll{gap:20px;padding:8px 20px}}
+.cat-circ-name{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:color .3s}
+.cat-circ:hover .cat-circ-name,.cat-circ.active .cat-circ-name{color:var(--white)}
+@media(max-width:600px){.cat-circ-img{width:68px;height:68px}.cat-circles-scroll{gap:16px;padding:8px 16px}}
 
-/* ── BEST SELLERS ── */
-.bs-sec{padding:56px 0;background:var(--bg)}
-.bs-scroll{display:flex;gap:20px;padding:8px 32px 20px;overflow-x:auto;scrollbar-width:none}
+/* ── BEST SELLERS (split layout) ── */
+.bs-sec{padding:64px 0;background:var(--bg2)}
+.bs-inner{max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+.bs-left h4{font-size:.6rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.bs-left .bs-title{font-family:'Cormorant',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:12px}
+.bs-left .bs-sub{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.bs-scroll{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
 .bs-scroll::-webkit-scrollbar{display:none}
-.bs-card{flex:0 0 220px;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .3s,border-color .3s,box-shadow .3s}
-.bs-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.bs-card{flex:0 0 200px;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .3s,border-color .3s,box-shadow .3s}
+.bs-card:hover{transform:translateY(-4px);border-color:rgba(28,25,23,.25);box-shadow:var(--shadow-md)}
 .bs-card-img{aspect-ratio:3/4;overflow:hidden;background:var(--card2)}
 .bs-card-img img{width:100%;height:100%;object-fit:contain;padding:8px;transition:transform .5s;box-sizing:border-box}
-.bs-card:hover .bs-card-img img{transform:scale(1.06)}
-.bs-card-body{padding:12px 14px 14px}
-.bs-card-cat{font-size:.52rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
-.bs-card-name{font-size:.82rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.bs-card-price{font-family:'DM Sans',sans-serif;font-size:.98rem;font-weight:800;color:var(--gold)}
-.bs-card-atc{width:100%;margin-top:10px;background:var(--gold);border:none;color:#0e0c0a;font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:9px;border-radius:4px;cursor:pointer;transition:filter .2s,transform .15s}
-.bs-card-atc:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.bs-card:hover .bs-card-img img{transform:scale(1.05)}
+.bs-card-body{padding:10px 12px 13px}
+.bs-card-cat{font-size:.5rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
+.bs-card-name{font-size:.8rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bs-card-price{font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:800;color:var(--white)}
+.bs-card-atc{width:100%;margin-top:9px;background:var(--white);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px;border-radius:3px;cursor:pointer;transition:opacity .2s}
+.bs-card-atc:hover{opacity:.85}
+@media(max-width:900px){.bs-inner{grid-template-columns:1fr}.bs-left{text-align:center}}
 
-/* ── HAMPER PROMO ── */
-.hamper-promo{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 0}
-.hamper-promo-inner{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
-.hamper-promo-img-wrap{border-radius:10px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.7);position:relative}
+/* ── HAMPER PROMO (DARK section only) ── */
+.hamper-promo{background:var(--dark);padding:72px 0}
+.hamper-promo-inner{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hamper-promo-content .hp-brand{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hamper-promo-content h2{font-family:'Cormorant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:#f5f0e8;line-height:1.05;margin-bottom:10px}
+.hamper-promo-content .hp-tagline{font-size:.85rem;color:rgba(245,240,232,.55);margin-bottom:24px;line-height:1.7}
+.hamper-promo-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:30px}
+.hamper-promo-list li{font-size:.82rem;color:rgba(245,240,232,.65);padding-left:16px;position:relative;line-height:1.5}
+.hamper-promo-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.6rem}
+.hamper-promo-img-wrap{border-radius:8px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .hamper-promo-img-wrap img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
-.hamper-promo-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:12px}
-.hamper-promo-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
-.hamper-promo-content h2{font-family:'Cormorant',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:22px}
-.hamper-promo-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
-.hamper-promo-list li{display:flex;align-items:center;gap:14px;font-size:.88rem;color:var(--muted);line-height:1.5}
-.hamper-promo-list li::before{content:'';width:18px;height:1px;flex-shrink:0;background:var(--gold)}
-@media(max-width:768px){.hamper-promo-inner{grid-template-columns:1fr;gap:32px}.hamper-promo{padding:44px 0}.hamper-promo-img-wrap{max-width:400px}}
+@media(max-width:768px){.hamper-promo-inner{grid-template-columns:1fr;gap:32px}.hamper-promo{padding:44px 0}}
 
 /* ── WHY CHOOSE US ── */
-.why-sec{background:var(--bg2);padding:64px 0}
+.why-sec{background:var(--bg);padding:64px 0}
 .why-inner{max-width:1160px;margin:0 auto;padding:0 32px}
-.why-header{text-align:center;margin-bottom:44px}
+.why-header{text-align:center;margin-bottom:40px}
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.why-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px 20px;text-align:center;transition:border-color .3s,transform .3s,box-shadow .3s}
-.why-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5)}
-.why-icon{width:54px;height:54px;margin:0 auto 14px;background:rgba(201,160,48,.08);border:1px solid rgba(201,160,48,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--gold)}
-.why-title{font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:8px;letter-spacing:.02em}
-.why-text{font-size:.76rem;color:var(--muted);line-height:1.65}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:28px 20px;text-align:center;transition:border-color .3s,transform .3s,box-shadow .3s}
+.why-card:hover{border-color:rgba(28,25,23,.2);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.why-icon{width:52px;height:52px;margin:0 auto 14px;background:var(--bg2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gold)}
+.why-title{font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:6px}
+.why-subtitle{font-size:.7rem;font-weight:500;color:var(--muted);margin-bottom:6px}
+.why-text{font-size:.75rem;color:var(--muted);line-height:1.6}
 @media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:500px){.why-grid{grid-template-columns:1fr}}
 
-/* ── OVERRIDE PRODUCT CARD FOR DARK ── */
-.product-card{background:var(--card)!important}
-.badge-cat{background:rgba(201,160,48,.15)!important;color:var(--gold)!important}
-.product-wa-btn{background:rgba(37,211,102,.06)!important;border-color:rgba(37,211,102,.2)!important;color:#4ade80!important}
-.product-wa-btn:hover{background:rgba(37,211,102,.12)!important;border-color:rgba(37,211,102,.4)!important;color:#4ade80!important}
-/* ── SKEL DARK ── */
-.skel{background:var(--card)!important}.skel-img,.skel-line,.skel-price{background:var(--card2)!important}
-.shimmer::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent)!important}
-/* ── FEAT STRIP DARK ── */
-.feat-strip{background:var(--bg2)!important}.feat-item{background:var(--card)!important}
-/* ── DEAL BANNER ── */
-.deal-banner{background:linear-gradient(135deg,#1a1400,#2a2000)!important;border-top:1px solid rgba(201,160,48,.3);border-bottom:1px solid rgba(201,160,48,.3)}
-.deal-text,.deal-sub{color:rgba(245,240,232,.85)!important}
-.deal-cta{background:var(--gold)!important;color:#0e0c0a!important}
-/* ── STATS BAR ── */
-.stats-bar{background:var(--dark)!important;border-color:var(--border)!important}
-/* ── CONTACT STRIP ── */
-.cstrip{background:var(--bg2)!important}
-.ci-icon{background:rgba(201,160,48,.08)!important;border-color:rgba(201,160,48,.2)!important}
+/* ── PRODUCTS SECTION WITH SIDEBAR ── */
+.shop-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
+.shop-sidebar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;position:sticky;top:80px}
+.sidebar-section{margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.sidebar-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.sidebar-heading{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.sidebar-cat-list{display:flex;flex-direction:column;gap:4px}
+.sidebar-cat-item{font-size:.82rem;color:var(--muted);padding:6px 10px;border-radius:4px;cursor:pointer;transition:background .15s,color .15s;border:none;background:none;text-align:left;width:100%;font-family:'DM Sans',sans-serif}
+.sidebar-cat-item:hover{background:var(--bg2);color:var(--white)}
+.sidebar-cat-item.active{background:var(--white);color:#fff;font-weight:600}
+.price-range-wrap{display:flex;flex-direction:column;gap:8px}
+.price-range-input{width:100%;accent-color:var(--white);cursor:pointer}
+.price-range-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+@media(max-width:900px){.shop-layout{grid-template-columns:1fr}.shop-sidebar{display:none}}
 </style>
 </head>
 <body>
@@ -854,36 +857,27 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="ann-bar" id="tickerBar">
-  <div class="ann-inner" id="tickerInner">
-    <span>Free Delivery on Orders Above ₹999</span><span class="adot">✦</span>
-    <span>New Watches Collection In Stock</span><span class="adot">✦</span>
-    <span>Premium Wallets — Best Prices in Zira</span><span class="adot">✦</span>
-    <span>Sunglasses from ₹299</span><span class="adot">✦</span>
-    <span>WhatsApp: +91 81468-05002</span><span class="adot">✦</span>
-    <span>100% Genuine Products — Zira, Punjab</span><span class="adot">✦</span>
-    <span>Free Delivery on Orders Above ₹999</span><span class="adot">✦</span>
-    <span>New Watches Collection In Stock</span><span class="adot">✦</span>
-    <span>Premium Wallets — Best Prices in Zira</span><span class="adot">✦</span>
-    <span>Sunglasses from ₹299</span><span class="adot">✦</span>
-    <span>WhatsApp: +91 81468-05002</span><span class="adot">✦</span>
-    <span>100% Genuine Products — Zira, Punjab</span><span class="adot">✦</span>
+  <span class="ann-left">Free Delivery on Orders Above ₹999</span>
+  <span class="ann-center">Premium Gifts &nbsp;|&nbsp; Accessories &nbsp;|&nbsp; Lifestyle</span>
+  <div class="ann-right">
+    <a href="https://www.instagram.com/ogaccessories47" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/ogaccessories47" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <span class="ann-wa-text">Official WhatsApp: 81468-05002</span>
   </div>
 </div>
+<!-- Hidden ticker elements kept for JS compatibility -->
+<div style="display:none"><div id="tickerInner"></div></div>
 
 <!-- SPLIT HERO -->
 <section class="hero-split" id="home">
   <div class="hero-left">
-    <div class="hero-eyebrow">Premium Fashion &amp; Gifts</div>
-    <h1 class="hero-h">Thoughtful Gifts<br>for <span>Every</span><br>Occasion</h1>
-    <ul class="hero-occasions">
-      <li>Birthdays &amp; Anniversaries</li>
-      <li>Corporate &amp; Wedding Gifting</li>
-      <li>Festival &amp; Special Celebrations</li>
-      <li>Personal Style Accessories</li>
-    </ul>
+    <div class="hero-eyebrow">OG Accessories 47</div>
+    <div class="hero-label">Customized Gift Hampers</div>
+    <h1 class="hero-h">Thoughtful Gifts<br>for Every<br>Occasion</h1>
+    <p class="hero-occasions">Birthdays &amp; Anniversaries &nbsp;·&nbsp; Weddings &nbsp;·&nbsp; Corporate<br>Festivals &amp; Celebrations &nbsp;·&nbsp; Personal Style</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="#products-sec" class="btn-gold">Explore Collection</a>
-      <a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20order%20a%20hamper." target="_blank" rel="noopener" class="btn-outline-w">Order a Hamper</a>
+      <a href="#hamper-promo-sec" class="btn-gold">SHOP HAMPERS &rarr;</a>
+      <a href="#products-sec" class="btn-outline-w">Explore Collection</a>
     </div>
   </div>
   <div class="hero-right">
@@ -899,24 +893,40 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
   <button id="carNext"></button>
 </div>
 
-<!-- DEAL BANNER -->
-<div class="deal-banner">
-  <div class="deal-icon">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+<!-- BENEFIT STRIP -->
+<div class="benefit-strip">
+  <div class="benefit-inner">
+    <div class="benefit-item reveal">
+      <div class="benefit-icon"><i class="fas fa-truck"></i></div>
+      <div class="benefit-title">Free Delivery</div>
+      <div class="benefit-sub">On all orders above ₹999</div>
+    </div>
+    <div class="benefit-item reveal reveal-d1">
+      <div class="benefit-icon"><i class="fas fa-gift"></i></div>
+      <div class="benefit-title">Custom Hampers</div>
+      <div class="benefit-sub">Personalised for every occasion</div>
+    </div>
+    <div class="benefit-item reveal reveal-d2">
+      <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+      <div class="benefit-title">100% Genuine</div>
+      <div class="benefit-sub">Authentic products guaranteed</div>
+    </div>
+    <div class="benefit-item reveal reveal-d3">
+      <div class="benefit-icon"><i class="fas fa-undo-alt"></i></div>
+      <div class="benefit-title">Easy Returns</div>
+      <div class="benefit-sub">Hassle-free return policy</div>
+    </div>
   </div>
-  <span class="deal-text" id="dealText">Free Delivery</span>
-  <span class="deal-sub" id="dealSub">on all orders above &#8377;999 &nbsp;|&nbsp; 100% Genuine Products &nbsp;|&nbsp; Easy Returns</span>
-  <a href="#products-sec" class="deal-cta" id="dealCta">Shop Now</a>
 </div>
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="reveal"><div class="stat-num" data-count="500" data-suffix="+">0</div><div class="stat-label">Happy Customers</div></div>
-    <div class="reveal reveal-d1"><div class="stat-num" data-count="9" data-suffix="">0</div><div class="stat-label">Categories</div></div>
-    <div class="reveal reveal-d2"><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Products</div></div>
-    <div class="reveal reveal-d3"><div class="stat-num" data-count="3" data-suffix=" Yrs">0</div><div class="stat-label">In Business</div></div>
-  </div>
+<!-- Hidden deal/stats elements kept for JS compatibility -->
+<div style="display:none">
+  <span id="dealText"></span><span id="dealSub"></span><a id="dealCta"></a>
+  <div class="stats-bar"><div class="stats-inner">
+    <div class="stat-num" data-count="500" data-suffix="+">0</div>
+    <div class="stat-num" data-count="9" data-suffix="">0</div>
+    <div class="stat-num" data-count="100" data-suffix="+">0</div>
+    <div class="stat-num" data-count="3" data-suffix=" Yrs">0</div>
+  </div></div>
 </div>
 
 <!-- CATEGORY CIRCLES -->
@@ -1105,31 +1115,27 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
 
 <!-- BEST SELLERS -->
 <section class="bs-sec" id="best-sellers-sec">
-  <div class="sec-wrap" style="padding-bottom:0">
-    <div class="sec-hdr reveal">
-      <div class="sec-hdr-left">
-        <div class="sec-eyebrow">Top Picks</div>
-        <div class="sec-title">Our Best <span>Sellers</span></div>
-        <div class="sec-divider"></div>
-      </div>
-      <a href="#products-sec" class="sec-see-all" onclick="navFilter('all',null)">View All <i class="fas fa-arrow-right" style="font-size:.6rem"></i></a>
+  <div class="bs-inner">
+    <div class="bs-left reveal">
+      <h4>Top Picks</h4>
+      <div class="bs-title">Our Best<br>Sellers</div>
+      <p class="bs-sub">Handpicked favourites — the products our customers love most.</p>
+      <a href="#products-sec" class="btn-gold" onclick="navFilter('all',null)" style="font-size:.65rem;padding:12px 22px">VIEW ALL PRODUCTS &rarr;</a>
     </div>
-  </div>
-  <div class="bs-scroll" id="bestSellersGrid">
-    <!-- JS renders cards here -->
-    <div style="color:var(--muted);font-size:.82rem;padding:20px 32px">Loading best sellers…</div>
+    <div class="bs-scroll" id="bestSellersGrid">
+      <!-- JS renders cards here -->
+      <div style="color:var(--muted);font-size:.82rem;padding:20px 0">Loading best sellers…</div>
+    </div>
   </div>
 </section>
 
 <!-- HAMPER PROMO -->
 <section class="hamper-promo" id="hamper-promo-sec">
   <div class="hamper-promo-inner">
-    <div class="hamper-promo-img-wrap reveal">
-      <img src="hamper2.jpg" alt="Luxury Gift Hamper — OG Accessories 47"/>
-    </div>
-    <div class="hamper-promo-content reveal reveal-d1">
-      <div class="hamper-promo-eyebrow">Our Speciality</div>
-      <h2>Luxury Hampers for<br>Every Moment</h2>
+    <div class="hamper-promo-content reveal">
+      <div class="hp-brand">Our Speciality</div>
+      <h2>Luxury Hampers<br>for Every Moment</h2>
+      <p class="hp-tagline">Curated with love — the perfect gift for every person and every occasion.</p>
       <ul class="hamper-promo-list">
         <li>Birthday &amp; Anniversary Hampers</li>
         <li>Wedding &amp; Engagement Gift Boxes</li>
@@ -1139,8 +1145,11 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
       </ul>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
         <a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20order%20a%20luxury%20hamper." target="_blank" rel="noopener" class="btn-gold">Order a Hamper</a>
-        <a href="#products-sec" class="btn-outline-w">Browse Collection</a>
+        <a href="#products-sec" class="btn-outline-w" style="border-color:rgba(245,240,232,.3);color:#f5f0e8">Browse Collection</a>
       </div>
+    </div>
+    <div class="hamper-promo-img-wrap reveal reveal-d1">
+      <img src="hamper2.jpg" alt="Luxury Gift Hamper — OG Accessories 47"/>
     </div>
   </div>
 </section>
@@ -1157,29 +1166,33 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
       <div class="why-card reveal">
         <div class="why-icon"><i class="fas fa-gem"></i></div>
         <div class="why-title">Premium Quality</div>
-        <div class="why-text">Every item curated for luxury and lasting impression. Only the finest accessories reach our shelves.</div>
+        <div class="why-subtitle">Handpicked with care</div>
+        <div class="why-text">Only the finest accessories reach our shelves — curated for quality and lasting impression.</div>
       </div>
       <div class="why-card reveal reveal-d1">
         <div class="why-icon"><i class="fas fa-gift"></i></div>
         <div class="why-title">Beautifully Curated</div>
-        <div class="why-text">Thoughtfully assembled hampers and gift sets that make every occasion unforgettable.</div>
+        <div class="why-subtitle">For every occasion</div>
+        <div class="why-text">Thoughtfully assembled hampers and gift sets that make every celebration unforgettable.</div>
       </div>
       <div class="why-card reveal reveal-d2">
-        <div class="why-icon"><i class="fas fa-box"></i></div>
-        <div class="why-title">Safe &amp; Secure Packaging</div>
+        <div class="why-icon"><i class="fas fa-box-open"></i></div>
+        <div class="why-title">Secure Packaging</div>
+        <div class="why-subtitle">Delivered perfectly</div>
         <div class="why-text">Products packed with care to arrive in perfect condition — every single time.</div>
       </div>
       <div class="why-card reveal reveal-d3">
         <div class="why-icon"><i class="fas fa-heart"></i></div>
         <div class="why-title">Make Moments Special</div>
-        <div class="why-text">We don't just sell products — we help you create memories that last a lifetime.</div>
+        <div class="why-subtitle">More than a gift</div>
+        <div class="why-text">We help you create memories — not just products. Each order carries a personal touch.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS SECTION -->
-<div id="products-sec" style="padding:32px 0 48px">
+<div id="products-sec" style="padding:32px 0 48px;background:var(--bg)">
   <div class="sec-wrap" style="padding-top:0">
     <div class="sec-hdr reveal">
       <div class="sec-hdr-left">
@@ -1189,27 +1202,58 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
       </div>
       <span class="filter-count" id="filterCount"></span>
     </div>
-    <div class="prod-controls reveal reveal-d1">
-      <div class="search-wrap">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="search-box" type="text" id="searchInput2" placeholder="Search within collection..." aria-label="Search products" oninput="syncSearch(this.value)"/>
+    <div class="shop-layout">
+      <aside class="shop-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Categories</div>
+          <div class="sidebar-cat-list">
+            <button class="sidebar-cat-item active" data-cat="all" onclick="filterCat('all',this)">All Products</button>
+            <button class="sidebar-cat-item" data-cat="Belts" onclick="filterCat('Belts',this)">Belts</button>
+            <button class="sidebar-cat-item" data-cat="Wallets" onclick="filterCat('Wallets',this)">Wallets</button>
+            <button class="sidebar-cat-item" data-cat="Watches" onclick="filterCat('Watches',this)">Watches</button>
+            <button class="sidebar-cat-item" data-cat="Side Bags" onclick="filterCat('Side Bags',this)">Side Bags</button>
+            <button class="sidebar-cat-item" data-cat="Sunglasses" onclick="filterCat('Sunglasses',this)">Sunglasses</button>
+            <button class="sidebar-cat-item" data-cat="Perfumes" onclick="filterCat('Perfumes',this)">Perfumes</button>
+            <button class="sidebar-cat-item" data-cat="T-Shirts" onclick="filterCat('T-Shirts',this)">T-Shirts</button>
+            <button class="sidebar-cat-item" data-cat="Shirts" onclick="filterCat('Shirts',this)">Shirts</button>
+            <button class="sidebar-cat-item" data-cat="Caps" onclick="filterCat('Caps',this)">Caps</button>
+            <button class="sidebar-cat-item" data-cat="Pants" onclick="filterCat('Pants',this)">Pants</button>
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Sort By</div>
+          <select class="sort-select" id="sortSelect" aria-label="Sort" onchange="renderProducts()" style="width:100%">
+            <option value="default">Default</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name-asc">Name: A → Z</option>
+            <option value="rating-desc">Top Rated</option>
+          </select>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Size</div>
+          <select class="sort-select" id="sizeFilter" aria-label="Filter by size" onchange="renderProducts()" style="width:100%">
+            <option value="">All Sizes</option>
+          </select>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Color</div>
+          <select class="sort-select" id="colorFilter" aria-label="Filter by color" onchange="renderProducts()" style="width:100%">
+            <option value="">All Colors</option>
+          </select>
+        </div>
+      </aside>
+      <div>
+        <div class="prod-controls reveal reveal-d1">
+          <div class="search-wrap">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input class="search-box" type="text" id="searchInput2" placeholder="Search products..." aria-label="Search products" oninput="syncSearch(this.value)"/>
+          </div>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+        <div class="pagination" id="pagination"></div>
       </div>
-      <select class="sort-select" id="sizeFilter" aria-label="Filter by size" onchange="renderProducts()" style="min-width:100px">
-        <option value="">All Sizes</option>
-      </select>
-      <select class="sort-select" id="colorFilter" aria-label="Filter by color" onchange="renderProducts()" style="min-width:110px">
-        <option value="">All Colors</option>
-      </select>
-      <select class="sort-select" id="sortSelect" aria-label="Sort" onchange="renderProducts()">
-        <option value="default">Sort: Default</option>
-        <option value="price-asc">Price: Low &rarr; High</option>
-        <option value="price-desc">Price: High &rarr; Low</option>
-        <option value="name-asc">Name: A &rarr; Z</option>
-        <option value="rating-desc">Top Rated</option>
-      </select>
     </div>
-    <div class="products-grid" id="productsGrid"></div>
-    <div class="pagination" id="pagination"></div>
   </div>
 </div>
 
@@ -1249,8 +1293,8 @@ header{background:#000!important;border-bottom:1px solid rgba(201,160,48,.2)!imp
 <footer>
   <div class="ft-top">
     <div class="reveal">
-      <div class="ft-logo">OG Accessories 47</div>
-      <p class="ft-desc">Premium fashion accessories for those who define their own standard — straight from Zira, Ferozepur, Punjab.</p>
+      <img src="logo.jpg" alt="OG Accessories 47" style="height:48px;width:auto;object-fit:contain;margin-bottom:12px;filter:brightness(0) invert(1);opacity:.85">
+      <p class="ft-desc">Premium fashion accessories &amp; gift hampers — crafted for those who define their own standard. Straight from Zira, Ferozepur, Punjab.</p>
       <div class="ft-socials">
         <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram" id="ftSocInsta"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank" rel="noopener" aria-label="Facebook" id="ftSocFb"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -1810,6 +1854,7 @@ function filterCat(cat,el,fromNav=false){
   document.querySelectorAll('.cat-tile,.cat-circ').forEach(c=>c.classList.remove('active'));
   if(el){el.classList.add('active')}
   else{document.querySelectorAll(`.cat-tile[data-cat="${cat}"],.cat-circ[data-cat="${cat}"]`).forEach(c=>c.classList.add('active'))}
+  document.querySelectorAll('.sidebar-cat-item').forEach(b=>{b.classList.toggle('active',b.dataset.cat===cat)})
   if(!fromNav){
     document.querySelectorAll('.cat-nav-item').forEach(i=>i.classList.remove('active'));
     document.querySelectorAll(`.cat-nav-item[data-cat="${cat}"]`).forEach(i=>i.classList.add('active'));
@@ -2201,7 +2246,7 @@ function renderBestSellers(){
         <div class="bs-card-name">${escHtml(p.name)}</div>
         <div style="display:flex;align-items:baseline;gap:8px">
           <div class="bs-card-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-          ${hasMrp?`<div style="font-size:.7rem;color:var(--muted2);text-decoration:line-through">&#8377;${Number(p.mrp).toLocaleString('en-IN')}</div><div style="font-size:.65rem;font-weight:700;color:#4ade80">${disc}% off</div>`:''}
+          ${hasMrp?`<div style="font-size:.7rem;color:var(--muted2);text-decoration:line-through">&#8377;${Number(p.mrp).toLocaleString('en-IN')}</div><div style="font-size:.65rem;font-weight:700;color:#16a34a">${disc}% off</div>`:''}
         </div>
         <button class="bs-card-atc" onclick="addToCart('${p._id}');event.stopPropagation()"${p.stock===0?' disabled':''}>
           ${p.stock===0?'Out of Stock':'<i class="fas fa-shopping-bag"></i> Add to Cart'}
