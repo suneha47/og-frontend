@@ -123,12 +123,12 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .car-h .gold{color:var(--gold2);font-style:italic}
 .car-p{font-size:clamp(.78rem,1.4vw,.95rem);color:rgba(255,255,255,.7);margin-bottom:28px;line-height:1.75;max-width:460px}
 .car-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-gold{background:var(--goldg);color:#fff;font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:13px 32px;text-decoration:none;border:none;cursor:pointer;display:inline-block;border-radius:3px;transition:box-shadow .3s,transform .2s,filter .2s}
-.btn-gold:hover{box-shadow:0 6px 24px rgba(184,146,30,.35);transform:translateY(-2px);filter:brightness(1.1)}
-.btn-outline-w{background:transparent;color:#fff;font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;padding:12px 32px;border:1px solid rgba(255,255,255,.35);border-radius:3px;text-decoration:none;display:inline-block;transition:border-color .3s,transform .2s}
-.btn-outline-w:hover{border-color:rgba(255,255,255,.7);transform:translateY(-2px)}
-.hero-left .btn-outline-w{color:var(--white);border-color:var(--border)}
-.hero-left .btn-outline-w:hover{border-color:var(--white)}
+.btn-gold{background:var(--gold);color:#fff;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:12px 28px;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:4px;transition:filter .2s,transform .2s}
+.btn-gold:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-outline-w{background:transparent;color:#fff;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:11px 28px;border:1.5px solid rgba(255,255,255,.4);border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:border-color .3s,transform .2s}
+.btn-outline-w:hover{border-color:rgba(255,255,255,.8);transform:translateY(-1px)}
+.btn-outline-dark{background:transparent;color:#1c1917;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:11px 28px;border:1.5px solid #1c1917;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background .2s,color .2s}
+.btn-outline-dark:hover{background:#1c1917;color:#fff}
 .car-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
 .car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:background .3s,transform .3s}
 .car-dot.active{background:var(--gold2);transform:scale(1.4)}
@@ -198,9 +198,10 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .sort-select:focus{border-color:var(--gold)}
 .sort-select option{background:var(--surface)}
 .filter-count{font-size:.72rem;color:var(--muted);padding:0 4px;white-space:nowrap}
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:900px){.products-grid{grid-template-columns:repeat(2,1fr);gap:20px}}
-@media(max-width:560px){.products-grid{grid-template-columns:repeat(1,1fr);gap:16px}}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:1100px){.products-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.products-grid{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(max-width:420px){.products-grid{grid-template-columns:repeat(1,1fr);gap:12px}}
 
 /* skeleton */
 .skel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
@@ -230,19 +231,21 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .product-card:hover .product-quick{opacity:1}
 .quick-btn{background:#fff;color:#0e0c0a;font-weight:700;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border:none;border-radius:3px;cursor:pointer;transform:translateY(8px);transition:transform .3s}
 .product-card:hover .quick-btn{transform:translateY(0)}
-.product-body{padding:14px;flex:1;display:flex;flex-direction:column}
-.product-cat-lbl{font-size:.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:.2em;font-weight:700;margin-bottom:4px}
-.product-name{font-size:.9rem;font-weight:600;color:var(--white);line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
-.product-stars{display:flex;align-items:center;gap:4px;margin-bottom:8px}
-.stars-icon{color:var(--star);font-size:.72rem;letter-spacing:1px}
-.stars-count{font-size:.65rem;color:var(--muted2)}
-.product-price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.product-price{font-family:'DM Sans',sans-serif;font-size:1.15rem;font-weight:800;color:var(--white);line-height:1}
-.product-mrp{font-size:.8rem;color:var(--muted2);text-decoration:line-through;font-family:'DM Sans',sans-serif}
-.product-discount{font-size:.68rem;font-weight:700;color:#15803d}
-.product-footer{display:flex;gap:8px;padding:0 14px 14px;margin-top:auto}
-.product-wa-btn{flex:1;background:rgba(37,211,102,.06);border:1px solid rgba(37,211,102,.25);color:#15803d;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 8px;border-radius:4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,color .2s,border-color .2s;cursor:pointer}
-.product-wa-btn:hover{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.product-body{padding:12px;flex:1;display:flex;flex-direction:column}
+.product-cat-lbl{font-size:.6rem;color:#888;text-transform:none;letter-spacing:.02em;font-weight:400;margin-bottom:2px}
+.product-name{font-size:.85rem;font-weight:600;color:#1c1917;line-height:1.35;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.product-stars{display:flex;align-items:center;gap:4px;margin-bottom:6px}
+.stars-icon{color:var(--star);font-size:.7rem;letter-spacing:1px}
+.stars-count{font-size:.62rem;color:var(--muted2)}
+.product-price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+.product-price{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:#1c1917;line-height:1}
+.product-mrp{font-size:.75rem;color:#aaa;text-decoration:line-through;font-family:'DM Sans',sans-serif}
+.product-discount{font-size:.65rem;font-weight:700;color:var(--gold)}
+.product-footer{display:flex;gap:8px;padding:0 12px 12px;margin-top:auto;align-items:center}
+.product-cart-icon-btn{width:34px;height:34px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#555;font-size:.82rem;transition:border-color .2s,background .2s,color .2s}
+.product-cart-icon-btn:hover{border-color:var(--gold);background:var(--gold);color:#fff}
+.product-wa-btn{flex:1;background:#1c1917;border:none;color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:9px 10px;border-radius:4px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:5px;transition:background .2s;cursor:pointer}
+.product-wa-btn:hover{background:#333}
 .no-products{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1}
 
 /* ── AUTH MODAL ── */
@@ -475,24 +478,33 @@ header{position:sticky;top:0;z-index:600;background:var(--surface);border-bottom
 .ci-val a:hover{color:var(--gold)}
 
 /* ── FOOTER ── */
-footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
-.ft-top{max-width:1320px;margin:0 auto;padding:52px 24px 40px;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px}
-.ft-logo{font-family:'DM Sans',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.01em;background:var(--goldg);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
-.ft-desc{color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.85;max-width:240px;margin-bottom:16px}
-.ft-socials{display:flex;gap:8px}
-.ft-socials a{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);text-decoration:none;font-size:.82rem;transition:all .2s}
-.ft-socials a:hover{border-color:var(--gold2);color:var(--gold2)}
-.ft-col h4{font-family:'Cormorant',serif;font-size:1rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;color:var(--gold2)}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.ft-col ul a{color:rgba(255,255,255,.4);text-decoration:none;font-size:.8rem;cursor:pointer;transition:color .2s}
+footer{background:#1a1209;border-top:none}
+.ft-top{max-width:1320px;margin:0 auto;padding:52px 40px 36px;display:grid;grid-template-columns:1.6fr 1fr 1.2fr 1.4fr;gap:40px}
+.ft-brand-logo{height:64px;width:auto;object-fit:contain;display:block;margin-bottom:8px}
+.ft-brand-name{font-family:'Cormorant',serif;font-size:1.2rem;font-weight:600;color:#f5f0e8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.ft-brand-tag{font-size:.65rem;color:rgba(245,240,232,.35);letter-spacing:.18em;margin-bottom:14px}
+.ft-desc{color:rgba(255,255,255,.35);font-size:.78rem;line-height:1.8;max-width:220px}
+.ft-col h4{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px;color:rgba(255,255,255,.85)}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft-col ul a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.8rem;cursor:pointer;transition:color .2s;display:flex;align-items:center;gap:8px}
 .ft-col ul a:hover{color:rgba(255,255,255,.85)}
-.ft-bottom{border-top:1px solid rgba(255,255,255,.06);padding:16px 24px;max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.ft-copy{color:rgba(255,255,255,.3);font-size:.72rem}
-.ft-copy span{color:var(--gold2)}
+.ft-col ul a i{width:14px;text-align:center;color:rgba(255,255,255,.4);flex-shrink:0}
+.ft-newsletter{display:flex;flex-direction:column;gap:0}
+.ft-newsletter p{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:14px}
+.ft-email-wrap{display:flex;border:1px solid rgba(255,255,255,.15);border-radius:4px;overflow:hidden}
+.ft-email-input{flex:1;background:rgba(255,255,255,.06);border:none;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;font-size:.78rem;padding:10px 14px;outline:none}
+.ft-email-input::placeholder{color:rgba(255,255,255,.3)}
+.ft-email-btn{background:var(--gold);border:none;color:#fff;padding:0 14px;cursor:pointer;font-size:.85rem;transition:filter .2s}
+.ft-email-btn:hover{filter:brightness(1.08)}
+.ft-bottom{border-top:1px solid rgba(255,255,255,.06);padding:14px 40px;max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-copy{color:rgba(255,255,255,.3);font-size:.7rem}
+.ft-follow{display:flex;align-items:center;gap:10px;font-size:.7rem;color:rgba(255,255,255,.3)}
+.ft-follow a{color:rgba(255,255,255,.45);font-size:.88rem;transition:color .2s;text-decoration:none}
+.ft-follow a:hover{color:rgba(255,255,255,.85)}
 .ft-admin{font-size:.5rem;color:rgba(255,255,255,.04);text-decoration:none;transition:color .2s}
 .ft-admin:hover{color:rgba(255,255,255,.25)}
-@media(max-width:900px){.ft-top{grid-template-columns:1fr 1fr;gap:28px}}
-@media(max-width:560px){.ft-top{grid-template-columns:1fr}}
+@media(max-width:960px){.ft-top{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:560px){.ft-top{grid-template-columns:1fr;padding:36px 24px 28px}.ft-bottom{padding:14px 24px}}
 
 /* ── MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(8px)}
@@ -612,123 +624,166 @@ footer{background:#1a1714;border-top:1px solid rgba(255,255,255,.06)}
 @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── ANNOUNCEMENT BAR ── */
-.ann-bar{background:#111009;padding:8px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.ann-left{font-size:.6rem;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.75);white-space:nowrap}
-.ann-center{font-size:.6rem;font-weight:500;letter-spacing:.12em;color:rgba(255,255,255,.55);white-space:nowrap;text-align:center}
-.ann-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.ann-right a{color:rgba(255,255,255,.65);font-size:.75rem;transition:color .2s;text-decoration:none}
+.ann-bar{background:#1a1714;padding:7px 32px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ann-left{font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.7);white-space:nowrap}
+.ann-center{font-size:.6rem;font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.5);white-space:nowrap;text-align:center}
+.ann-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.ann-right a{color:rgba(255,255,255,.6);font-size:.78rem;transition:color .2s;text-decoration:none}
 .ann-right a:hover{color:#fff}
-.ann-wa-text{font-size:.58rem;color:rgba(255,255,255,.55);letter-spacing:.08em}
-@media(max-width:600px){.ann-center{display:none}.ann-bar{justify-content:space-between}}
+.ann-wa-wrap{display:flex;align-items:center;gap:6px}
+.ann-wa-wrap i{color:rgba(255,255,255,.6);font-size:.72rem}
+.ann-wa-text{font-size:.6rem;font-weight:400;color:rgba(255,255,255,.6);letter-spacing:.04em;white-space:nowrap}
+@media(max-width:680px){.ann-center{display:none}}
 
-/* ── HEADER LIGHT ── */
-header{background:#fff!important;border-bottom:1px solid var(--border)!important}
-.hdr-logo-img{height:52px;width:auto;object-fit:contain;display:block}
+/* ── HEADER ── */
+header{background:#fff!important;border-bottom:1px solid var(--border)!important;box-shadow:none!important}
+.hdr-top{padding:0 32px;height:72px}
+.hdr-logo-img{height:56px;width:auto;object-fit:contain;display:block}
 .hdr-logo-link{flex-shrink:0;text-decoration:none;display:block}
-/* Main nav links */
-.hdr-nav{display:none;align-items:center;gap:0;flex-shrink:0}
-.hdr-nav a{font-size:.7rem;font-weight:500;letter-spacing:.06em;color:var(--muted);padding:0 14px;text-decoration:none;transition:color .2s;white-space:nowrap}
-.hdr-nav a:hover,.hdr-nav a.active{color:var(--white)}
-@media(min-width:1060px){.hdr-nav{display:flex}}
-.cat-nav{background:#fff!important;border-bottom:1px solid var(--border)!important}
-.cat-nav-item.active{color:var(--white)!important;border-bottom-color:var(--white)!important}
+.hdr-search{display:none!important}
+.hdr-nav{display:none;align-items:center;gap:0;flex-shrink:0;height:100%}
+.hdr-nav a{font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:400;color:#555;padding:0 18px;text-decoration:none;transition:color .2s;white-space:nowrap;height:100%;display:flex;align-items:center;border-bottom:2px solid transparent;position:relative;top:1px}
+.hdr-nav a:hover{color:#1c1917}
+.hdr-nav a.active{color:#1c1917;border-bottom-color:var(--gold);font-weight:500}
+@media(min-width:900px){.hdr-nav{display:flex}}
+.hdr-right{gap:6px}
+.hdr-icon-btn{background:none!important;border:none!important;color:#555!important;width:32px!important;height:32px!important;font-size:1rem!important}
+.hdr-icon-btn:hover{color:#1c1917!important}
+.cat-nav{display:none!important}
 
 /* ── SPLIT HERO ── */
-.hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(380px,50vw,580px);background:var(--bg2)}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,90px) clamp(28px,5vw,72px)}
-.hero-eyebrow{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.hero-label{font-family:'Cormorant',serif;font-size:clamp(1rem,1.6vw,1.3rem);font-weight:600;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
-.hero-h{font-family:'Cormorant',serif;font-size:clamp(2.4rem,4.5vw,4.2rem);font-weight:700;line-height:.95;color:var(--white);margin-bottom:18px;letter-spacing:-.01em}
-.hero-occasions{font-size:.8rem;color:var(--muted);margin-bottom:28px;line-height:1.8;letter-spacing:.03em}
+.hero-split{display:grid;grid-template-columns:42fr 58fr;min-height:480px;background:#fff;position:relative}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:48px 48px 48px 60px}
+.hero-eyebrow{font-size:.62rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.hero-h{font-family:'Cormorant',serif;font-size:clamp(2.2rem,3.8vw,3.4rem);font-weight:600;line-height:1.08;color:#1c1917;margin-bottom:16px;letter-spacing:-.01em}
+.hero-h .gold-text{color:var(--gold);font-style:italic}
+.hero-occasions{font-size:.82rem;color:#6b6460;margin-bottom:28px;line-height:1.75}
 .hero-right{position:relative;overflow:hidden;background:var(--card2)}
-.hero-right img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.hero-right:hover img{transform:scale(1.03)}
-@media(max-width:768px){.hero-split{grid-template-columns:1fr}.hero-right{height:260px;order:-1}.hero-left{padding:36px 24px}}
+.hero-right img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-watermark{position:absolute;bottom:20px;right:24px;opacity:.18;width:80px;pointer-events:none}
+@media(max-width:768px){.hero-split{grid-template-columns:1fr}.hero-right{height:300px;order:-1}.hero-left{padding:32px 24px}}
 
 /* ── BENEFIT STRIP ── */
-.benefit-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px}
-.benefit-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
-.benefit-item{padding:16px 20px;border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px}
+.benefit-strip{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0}
+.benefit-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:0 32px;position:relative}
+.benefit-item{padding:22px 24px;display:flex;align-items:center;gap:14px;border-right:1px solid var(--border)}
 .benefit-item:last-child{border-right:none}
-.benefit-icon{font-size:1.4rem;color:var(--gold)}
-.benefit-title{font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.04em;line-height:1.3}
-.benefit-sub{font-size:.68rem;color:var(--muted);line-height:1.4}
-@media(max-width:700px){.benefit-inner{grid-template-columns:repeat(2,1fr)}.benefit-item{border-right:none;border-bottom:1px solid var(--border)}.benefit-item:nth-child(odd){border-right:1px solid var(--border)}.benefit-item:nth-last-child(-n+2){border-bottom:none}}
+.benefit-icon-wrap{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold)}
+.benefit-icon-wrap svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.benefit-text-wrap{}
+.benefit-title{font-size:.78rem;font-weight:600;color:#1c1917;line-height:1.35}
+.benefit-sub{font-size:.7rem;color:#6b6460;line-height:1.3}
+.benefit-watermark{position:absolute;right:16px;top:50%;transform:translateY(-50%);opacity:.08;width:64px;display:none}
+@media(max-width:800px){.benefit-inner{grid-template-columns:repeat(2,1fr)}.benefit-item:nth-child(2){border-right:none}.benefit-item:nth-child(3){border-top:1px solid var(--border)}.benefit-item:nth-child(4){border-right:none;border-top:1px solid var(--border)}}
 
-/* ── CIRCLE CATEGORIES ── */
-.cat-circles-sec{background:var(--bg);padding:52px 0;border-bottom:1px solid var(--border)}
-.cat-circles-scroll{display:flex;gap:24px;padding:8px 32px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* ── CATEGORIES SECTION ── */
+.cat-circles-sec{background:#fff;padding:52px 0;border-bottom:1px solid var(--border)}
+.cat-section-header{text-align:center;margin-bottom:32px;padding:0 32px}
+.cat-section-eyebrow{font-size:.6rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.cat-section-title{font-family:'Cormorant',serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:600;color:#1c1917;display:flex;align-items:center;justify-content:center;gap:18px;letter-spacing:-.01em}
+.cat-section-title::before,.cat-section-title::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(to right,transparent,var(--border));display:block}
+.cat-section-title::after{background:linear-gradient(to left,transparent,var(--border))}
+.cat-circles-scroll{display:flex;gap:0;padding:8px 32px 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;justify-content:space-between}
 .cat-circles-scroll::-webkit-scrollbar{display:none}
-.cat-circ{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;text-decoration:none;transition:transform .3s}
-.cat-circ:hover{transform:translateY(-4px)}
-.cat-circ-img{width:86px;height:86px;border-radius:50%;overflow:hidden;border:2px solid var(--border);position:relative;transition:border-color .3s,box-shadow .3s;background:var(--card2)}
-.cat-circ:hover .cat-circ-img,.cat-circ.active .cat-circ-img{border-color:var(--white);box-shadow:0 0 0 3px rgba(28,25,23,.12)}
+.cat-circ{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;text-decoration:none;transition:transform .3s;min-width:80px}
+.cat-circ:hover{transform:translateY(-3px)}
+.cat-circ-img{width:82px;height:82px;border-radius:50%;overflow:hidden;border:1.5px solid var(--border);transition:border-color .3s,box-shadow .3s;background:#f5f5f0}
+.cat-circ:hover .cat-circ-img,.cat-circ.active .cat-circ-img{border-color:var(--gold);box-shadow:0 0 0 2px rgba(200,164,21,.18)}
 .cat-circ-img img{width:100%;height:100%;object-fit:cover;display:block}
-.cat-circ-name{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;transition:color .3s}
-.cat-circ:hover .cat-circ-name,.cat-circ.active .cat-circ-name{color:var(--white)}
-@media(max-width:600px){.cat-circ-img{width:68px;height:68px}.cat-circles-scroll{gap:16px;padding:8px 16px}}
+.cat-circ-name{font-size:.65rem;font-weight:500;color:#555;white-space:nowrap;transition:color .3s;text-align:center}
+.cat-circ:hover .cat-circ-name,.cat-circ.active .cat-circ-name{color:#1c1917;font-weight:600}
+@media(max-width:700px){.cat-circ-img{width:62px;height:62px}.cat-circles-scroll{gap:12px;justify-content:flex-start;padding:8px 20px 16px}}
 
-/* ── BEST SELLERS (split layout) ── */
-.bs-sec{padding:64px 0;background:var(--bg2)}
-.bs-inner{max-width:1240px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
-.bs-left h4{font-size:.6rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.bs-left .bs-title{font-family:'Cormorant',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--white);line-height:1.05;margin-bottom:12px}
-.bs-left .bs-sub{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:24px}
-.bs-scroll{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
-.bs-scroll::-webkit-scrollbar{display:none}
-.bs-card{flex:0 0 200px;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:transform .3s,border-color .3s,box-shadow .3s}
-.bs-card:hover{transform:translateY(-4px);border-color:rgba(28,25,23,.25);box-shadow:var(--shadow-md)}
-.bs-card-img{aspect-ratio:3/4;overflow:hidden;background:var(--card2)}
-.bs-card-img img{width:100%;height:100%;object-fit:contain;padding:8px;transition:transform .5s;box-sizing:border-box}
+/* ── BEST SELLERS ── */
+.bs-sec{padding:56px 0;background:var(--bg2)}
+.bs-inner{max-width:1260px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:240px 1fr;gap:40px;align-items:center}
+.bs-left{padding-right:8px}
+.bs-left h4{font-size:.6rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.bs-left .bs-title{font-family:'Cormorant',serif;font-size:clamp(1.8rem,2.6vw,2.4rem);font-weight:600;color:#1c1917;line-height:1.1;margin-bottom:12px}
+.bs-left .bs-sub{font-size:.78rem;color:#6b6460;line-height:1.7;margin-bottom:24px;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:rgba(107,100,96,.3)}
+.bs-view-all{display:inline-flex;align-items:center;gap:8px;border:1.5px solid #1c1917;color:#1c1917;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border-radius:3px;text-decoration:none;transition:background .2s,color .2s}
+.bs-view-all:hover{background:#1c1917;color:#fff}
+.bs-carousel{position:relative;overflow:hidden}
+.bs-cards-wrap{display:flex;gap:16px;transition:transform .4s ease}
+.bs-card{flex:0 0 calc(25% - 12px);background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;cursor:pointer;transition:box-shadow .3s,transform .3s}
+.bs-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.09);transform:translateY(-3px)}
+.bs-card-img{aspect-ratio:1/1;overflow:hidden;background:#f8f7f4;display:flex;align-items:center;justify-content:center}
+.bs-card-img img{width:100%;height:100%;object-fit:contain;padding:12px;box-sizing:border-box;transition:transform .4s}
 .bs-card:hover .bs-card-img img{transform:scale(1.05)}
-.bs-card-body{padding:10px 12px 13px}
-.bs-card-cat{font-size:.5rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:4px}
-.bs-card-name{font-size:.8rem;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.bs-card-price{font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:800;color:var(--white)}
-.bs-card-atc{width:100%;margin-top:9px;background:var(--white);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:8px;border-radius:3px;cursor:pointer;transition:opacity .2s}
-.bs-card-atc:hover{opacity:.85}
-@media(max-width:900px){.bs-inner{grid-template-columns:1fr}.bs-left{text-align:center}}
+.bs-card-body{padding:10px 12px 12px}
+.bs-card-cat{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.bs-card-name{font-size:.8rem;font-weight:600;color:#1c1917;line-height:1.3;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.bs-card-footer{display:flex;align-items:center;justify-content:space-between}
+.bs-card-price{font-size:.82rem;font-weight:700;color:#1c1917}
+.bs-card-price span{font-size:.7rem;color:#aaa;text-decoration:line-through;margin-left:4px;font-weight:400}
+.bs-cart-btn{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,background .2s;flex-shrink:0;color:#555;font-size:.8rem}
+.bs-cart-btn:hover{border-color:var(--gold);background:var(--gold);color:#fff}
+.bs-arrow{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;font-size:.75rem;color:#555;transition:border-color .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.bs-arrow:hover{border-color:var(--gold);color:var(--gold)}
+.bs-arrow-prev{left:-16px}.bs-arrow-next{right:-16px}
+@media(max-width:960px){.bs-inner{grid-template-columns:1fr;gap:28px}.bs-left{text-align:center}.bs-card{flex:0 0 calc(50% - 8px)}}
 
-/* ── HAMPER PROMO (DARK section only) ── */
-.hamper-promo{background:var(--dark);padding:72px 0}
-.hamper-promo-inner{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.hamper-promo-content .hp-brand{font-size:.58rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.hamper-promo-content h2{font-family:'Cormorant',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:#f5f0e8;line-height:1.05;margin-bottom:10px}
-.hamper-promo-content .hp-tagline{font-size:.85rem;color:rgba(245,240,232,.55);margin-bottom:24px;line-height:1.7}
-.hamper-promo-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:30px}
-.hamper-promo-list li{font-size:.82rem;color:rgba(245,240,232,.65);padding-left:16px;position:relative;line-height:1.5}
-.hamper-promo-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:.6rem}
-.hamper-promo-img-wrap{border-radius:8px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.hamper-promo-img-wrap img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
-@media(max-width:768px){.hamper-promo-inner{grid-template-columns:1fr;gap:32px}.hamper-promo{padding:44px 0}}
+/* ── HAMPER PROMO ── */
+.hamper-promo{background:#1a1209;padding:0;overflow:hidden}
+.hamper-promo-inner{max-width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;min-height:360px;align-items:stretch}
+.hamper-promo-left{display:flex;flex-direction:column;justify-content:center;padding:52px 48px 52px 60px}
+.hp-brand{font-size:.58rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hamper-promo-left h2{font-family:'Cormorant',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:600;color:#f5f0e8;line-height:1.1;margin-bottom:10px}
+.hp-tagline{font-size:.8rem;color:rgba(245,240,232,.5);margin-bottom:28px;line-height:1.7}
+.hamper-promo-img-col{overflow:hidden;position:relative}
+.hamper-promo-img-col img{width:100%;height:100%;object-fit:cover;display:block}
+.hamper-promo-right{display:flex;flex-direction:column;justify-content:center;padding:52px 48px 52px 40px}
+.hamper-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.hamper-list li{display:flex;align-items:center;gap:12px;font-size:.82rem;color:rgba(245,240,232,.75);line-height:1.4}
+.hamper-list li i{color:var(--gold);font-size:.78rem;width:14px;flex-shrink:0}
+@media(max-width:900px){.hamper-promo-inner{grid-template-columns:1fr}.hamper-promo-img-col{height:260px}.hamper-promo-left,.hamper-promo-right{padding:36px 28px}}
 
 /* ── WHY CHOOSE US ── */
-.why-sec{background:var(--bg);padding:64px 0}
+.why-sec{background:#fff;padding:60px 0}
 .why-inner{max-width:1160px;margin:0 auto;padding:0 32px}
-.why-header{text-align:center;margin-bottom:40px}
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.why-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:28px 20px;text-align:center;transition:border-color .3s,transform .3s,box-shadow .3s}
-.why-card:hover{border-color:rgba(28,25,23,.2);transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.why-icon{width:52px;height:52px;margin:0 auto 14px;background:var(--bg2);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gold)}
-.why-title{font-weight:700;font-size:.88rem;color:var(--white);margin-bottom:6px}
-.why-subtitle{font-size:.7rem;font-weight:500;color:var(--muted);margin-bottom:6px}
-.why-text{font-size:.75rem;color:var(--muted);line-height:1.6}
-@media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.why-grid{grid-template-columns:1fr}}
+.why-header{text-align:center;margin-bottom:44px}
+.why-eyebrow{font-size:.6rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.why-heading{font-family:'Cormorant',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:#1c1917;display:flex;align-items:center;justify-content:center;gap:18px;letter-spacing:-.01em}
+.why-heading::before,.why-heading::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(to right,transparent,var(--border));display:block}
+.why-heading::after{background:linear-gradient(to left,transparent,var(--border))}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.why-card{padding:28px 28px;text-align:center;border-right:1px solid var(--border)}
+.why-card:last-child{border-right:none}
+.why-icon{width:54px;height:54px;margin:0 auto 16px;border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.why-icon svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.why-title{font-weight:600;font-size:.88rem;color:#1c1917;margin-bottom:5px}
+.why-subtitle{font-size:.75rem;color:#6b6460;line-height:1.5}
+@media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr)}.why-card:nth-child(2){border-right:none}.why-card:nth-child(3),.why-card:nth-child(4){border-top:1px solid var(--border)}.why-card:nth-child(4){border-right:none}}
 
-/* ── PRODUCTS SECTION WITH SIDEBAR ── */
-.shop-layout{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
-.shop-sidebar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;position:sticky;top:80px}
-.sidebar-section{margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-.sidebar-section:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.sidebar-heading{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.sidebar-cat-list{display:flex;flex-direction:column;gap:4px}
-.sidebar-cat-item{font-size:.82rem;color:var(--muted);padding:6px 10px;border-radius:4px;cursor:pointer;transition:background .15s,color .15s;border:none;background:none;text-align:left;width:100%;font-family:'DM Sans',sans-serif}
-.sidebar-cat-item:hover{background:var(--bg2);color:var(--white)}
-.sidebar-cat-item.active{background:var(--white);color:#fff;font-weight:600}
-.price-range-wrap{display:flex;flex-direction:column;gap:8px}
-.price-range-input{width:100%;accent-color:var(--white);cursor:pointer}
-.price-range-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted)}
+/* ── PRODUCTS WITH SIDEBAR ── */
+.shop-layout{display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start}
+.shop-sidebar{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;position:sticky;top:82px}
+.sidebar-section{padding:16px 18px;border-bottom:1px solid var(--border)}
+.sidebar-section:last-child{border-bottom:none}
+.sidebar-heading{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#555;margin-bottom:12px}
+.sidebar-cat-row{display:flex;align-items:center;gap:8px;padding:7px 0;cursor:pointer;border-bottom:1px solid rgba(0,0,0,.04);text-decoration:none}
+.sidebar-cat-row:last-child{border-bottom:none}
+.sidebar-cat-icon{width:26px;height:26px;border-radius:4px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#888;font-size:.72rem}
+.sidebar-cat-label{flex:1;font-size:.8rem;color:#444;font-family:'DM Sans',sans-serif}
+.sidebar-cat-count{font-size:.7rem;color:#aaa;font-family:'DM Sans',sans-serif}
+.sidebar-cat-arrow{color:#ccc;font-size:.6rem}
+.sidebar-cat-row:hover .sidebar-cat-label,.sidebar-cat-row.active .sidebar-cat-label{color:var(--gold);font-weight:600}
+.sidebar-cat-row.active .sidebar-cat-arrow{color:var(--gold)}
+.sidebar-cat-item{font-size:.82rem;color:var(--muted);padding:6px 0;border-radius:0;cursor:pointer;transition:color .15s;border:none;background:none;text-align:left;width:100%;font-family:'DM Sans',sans-serif}
+.sidebar-cat-item:hover,.sidebar-cat-item.active{color:var(--gold);font-weight:600}
+.price-slider-wrap{padding:4px 0 8px}
+.price-slider{width:100%;-webkit-appearance:none;height:3px;background:linear-gradient(to right,var(--gold) 0%,var(--gold) 60%,var(--border) 60%);border-radius:2px;cursor:pointer;margin:8px 0}
+.price-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.price-labels{display:flex;justify-content:space-between;font-size:.7rem;color:#888;margin-bottom:10px}
+.sidebar-apply-btn{width:100%;background:var(--gold);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:9px;border-radius:3px;cursor:pointer;transition:filter .2s}
+.sidebar-apply-btn:hover{filter:brightness(1.08)}
+.sidebar-check-list{display:flex;flex-direction:column;gap:8px}
+.sidebar-check-row{display:flex;align-items:center;gap:8px;cursor:pointer}
+.sidebar-check-row input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.sidebar-check-label{font-size:.78rem;color:#444;font-family:'DM Sans',sans-serif;flex:1}
+.sidebar-check-count{font-size:.7rem;color:#aaa}
+.sidebar-promo-img{width:100%;display:block;border-radius:0;overflow:hidden}
+.sidebar-promo-img img{width:100%;display:block}
 @media(max-width:900px){.shop-layout{grid-template-columns:1fr}.shop-sidebar{display:none}}
 </style>
 </head>
@@ -861,7 +916,7 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
   <span class="ann-center">Premium Gifts &nbsp;|&nbsp; Accessories &nbsp;|&nbsp; Lifestyle</span>
   <div class="ann-right">
     <a href="https://www.instagram.com/ogaccessories47" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.facebook.com/ogaccessories47" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     <span class="ann-wa-text">Official WhatsApp: 81468-05002</span>
   </div>
 </div>
@@ -871,14 +926,10 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <!-- SPLIT HERO -->
 <section class="hero-split" id="home">
   <div class="hero-left">
-    <div class="hero-eyebrow">OG Accessories 47</div>
-    <div class="hero-label">Customized Gift Hampers</div>
-    <h1 class="hero-h">Thoughtful Gifts<br>for Every<br>Occasion</h1>
-    <p class="hero-occasions">Birthdays &amp; Anniversaries &nbsp;·&nbsp; Weddings &nbsp;·&nbsp; Corporate<br>Festivals &amp; Celebrations &nbsp;·&nbsp; Personal Style</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <a href="#hamper-promo-sec" class="btn-gold">SHOP HAMPERS &rarr;</a>
-      <a href="#products-sec" class="btn-outline-w">Explore Collection</a>
-    </div>
+    <div class="hero-eyebrow">Customized Gift Hampers</div>
+    <h1 class="hero-h">Thoughtful Gifts<br>for <span class="gold-text">Every Occasion</span></h1>
+    <p class="hero-occasions">Birthdays | Anniversaries | Surprises | Rakhi<br>Couple Hampers | &amp; More</p>
+    <a href="#hamper-promo-sec" class="btn-gold">SHOP HAMPERS &rarr;</a>
   </div>
   <div class="hero-right">
     <img src="hamper-hero.jpg" alt="Luxury Gift Hamper — OG Accessories 47"/>
@@ -897,24 +948,36 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <div class="benefit-strip">
   <div class="benefit-inner">
     <div class="benefit-item reveal">
-      <div class="benefit-icon"><i class="fas fa-truck"></i></div>
-      <div class="benefit-title">Free Delivery</div>
-      <div class="benefit-sub">On all orders above ₹999</div>
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M12 8V4"/><path d="M8 4h8"/><path d="M3 12h18"/></svg>
+      </div>
+      <div class="benefit-text-wrap">
+        <div class="benefit-title">Premium<br>Quality Products</div>
+      </div>
     </div>
     <div class="benefit-item reveal reveal-d1">
-      <div class="benefit-icon"><i class="fas fa-gift"></i></div>
-      <div class="benefit-title">Custom Hampers</div>
-      <div class="benefit-sub">Personalised for every occasion</div>
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.518 3.493 1 6.627 1c1.837 0 3.461.95 4.37 2.545C11.912 1.95 13.537 1 15.373 1 18.507 1 21 3.518 21 7.191c0 4.105-5.37 8.863-11 14.402z"/></svg>
+      </div>
+      <div class="benefit-text-wrap">
+        <div class="benefit-title">Beautifully<br>Customized</div>
+      </div>
     </div>
     <div class="benefit-item reveal reveal-d2">
-      <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
-      <div class="benefit-title">100% Genuine</div>
-      <div class="benefit-sub">Authentic products guaranteed</div>
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="benefit-text-wrap">
+        <div class="benefit-title">Safe &amp; Secure<br>Packaging</div>
+      </div>
     </div>
     <div class="benefit-item reveal reveal-d3">
-      <div class="benefit-icon"><i class="fas fa-undo-alt"></i></div>
-      <div class="benefit-title">Easy Returns</div>
-      <div class="benefit-sub">Hassle-free return policy</div>
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="benefit-text-wrap">
+        <div class="benefit-title">Make Moments<br>More Special</div>
+      </div>
     </div>
   </div>
 </div>
@@ -931,60 +994,50 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 
 <!-- CATEGORY CIRCLES -->
 <div id="categories-sec" class="cat-circles-sec">
-  <div class="sec-wrap" style="padding-bottom:0;padding-top:0">
-    <div class="sec-hdr reveal" style="margin-bottom:20px">
-      <div class="sec-hdr-left">
-        <div class="sec-eyebrow">Browse by</div>
-        <div class="sec-title">Explore Our <span>Collection</span></div>
-        <div class="sec-divider"></div>
-      </div>
-      <a href="#products-sec" class="sec-see-all" onclick="navFilter('all',null)">See All <i class="fas fa-arrow-right" style="font-size:.6rem"></i></a>
-    </div>
+  <div class="cat-section-header reveal">
+    <div class="cat-section-eyebrow">Shop by Category</div>
+    <div class="cat-section-title">Explore Our Collection</div>
   </div>
   <div class="cat-circles-scroll" id="catCirclesScroll">
-    <a class="cat-circ active" data-cat="all" href="#products-sec" onclick="filterCat('all',this)">
-      <div class="cat-circ-img" style="display:flex;align-items:center;justify-content:center;background:rgba(201,160,48,.1)"><i class="fas fa-th-large" style="font-size:1.6rem;color:var(--gold)"></i></div>
-      <div class="cat-circ-name">All</div>
+    <a class="cat-circ active" data-cat="Watches" href="#products-sec" onclick="filterCat('Watches',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&q=90&auto=format&fit=crop" alt="Watches" loading="lazy"/></div>
+      <div class="cat-circ-name">Watches</div>
     </a>
-    <a class="cat-circ" data-cat="Belts" href="#products-sec" onclick="filterCat('Belts',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=90&auto=format&fit=crop" alt="Belts" loading="lazy"/></div>
-      <div class="cat-circ-name">Belts</div>
+    <a class="cat-circ" data-cat="Sunglasses" href="#products-sec" onclick="filterCat('Sunglasses',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200&q=90&auto=format&fit=crop" alt="Shades" loading="lazy"/></div>
+      <div class="cat-circ-name">Shades</div>
     </a>
     <a class="cat-circ" data-cat="Wallets" href="#products-sec" onclick="filterCat('Wallets',this)">
       <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=200&q=90&auto=format&fit=crop" alt="Wallets" loading="lazy"/></div>
       <div class="cat-circ-name">Wallets</div>
     </a>
-    <a class="cat-circ" data-cat="Watches" href="#products-sec" onclick="filterCat('Watches',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&q=90&auto=format&fit=crop" alt="Watches" loading="lazy"/></div>
-      <div class="cat-circ-name">Watches</div>
+    <a class="cat-circ" data-cat="Belts" href="#products-sec" onclick="filterCat('Belts',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&q=90&auto=format&fit=crop" alt="Belts" loading="lazy"/></div>
+      <div class="cat-circ-name">Belts</div>
     </a>
     <a class="cat-circ" data-cat="Side Bags" href="#products-sec" onclick="filterCat('Side Bags',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&q=90&auto=format&fit=crop" alt="Side Bags" loading="lazy"/></div>
-      <div class="cat-circ-name">Side Bags</div>
-    </a>
-    <a class="cat-circ" data-cat="Sunglasses" href="#products-sec" onclick="filterCat('Sunglasses',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=200&q=90&auto=format&fit=crop" alt="Sunglasses" loading="lazy"/></div>
-      <div class="cat-circ-name">Sunglasses</div>
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&q=90&auto=format&fit=crop" alt="Bags" loading="lazy"/></div>
+      <div class="cat-circ-name">Bags</div>
     </a>
     <a class="cat-circ" data-cat="Perfumes" href="#products-sec" onclick="filterCat('Perfumes',this)">
       <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=200&q=90&auto=format&fit=crop" alt="Perfumes" loading="lazy"/></div>
       <div class="cat-circ-name">Perfumes</div>
     </a>
-    <a class="cat-circ" data-cat="T-Shirts" href="#products-sec" onclick="filterCat('T-Shirts',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=90&auto=format&fit=crop" alt="T-Shirts" loading="lazy"/></div>
-      <div class="cat-circ-name">T-Shirts</div>
+    <a class="cat-circ" data-cat="Jewellery" href="#products-sec" onclick="filterCat('Jewellery',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&q=90&auto=format&fit=crop" alt="Jewellery" loading="lazy"/></div>
+      <div class="cat-circ-name">Jewellery</div>
     </a>
-    <a class="cat-circ" data-cat="Shirts" href="#products-sec" onclick="filterCat('Shirts',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=200&q=90&auto=format&fit=crop" alt="Shirts" loading="lazy"/></div>
-      <div class="cat-circ-name">Shirts</div>
+    <a class="cat-circ" data-cat="T-Shirts" href="#products-sec" onclick="filterCat('T-Shirts',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200&q=90&auto=format&fit=crop" alt="Clothing" loading="lazy"/></div>
+      <div class="cat-circ-name">Clothing</div>
+    </a>
+    <a class="cat-circ" data-cat="Shoes" href="#products-sec" onclick="filterCat('Shoes',this)">
+      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=90&auto=format&fit=crop" alt="Shoes" loading="lazy"/></div>
+      <div class="cat-circ-name">Shoes</div>
     </a>
     <a class="cat-circ" data-cat="Caps" href="#products-sec" onclick="filterCat('Caps',this)">
       <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=200&q=90&auto=format&fit=crop" alt="Caps" loading="lazy"/></div>
       <div class="cat-circ-name">Caps</div>
-    </a>
-    <a class="cat-circ" data-cat="Pants" href="#products-sec" onclick="filterCat('Pants',this)">
-      <div class="cat-circ-img"><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=200&q=90&auto=format&fit=crop" alt="Pants" loading="lazy"/></div>
-      <div class="cat-circ-name">Pants</div>
     </a>
   </div>
   <!-- hidden cat-tiles div kept for JS buildCatTiles() compatibility -->
@@ -1117,14 +1170,19 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <section class="bs-sec" id="best-sellers-sec">
   <div class="bs-inner">
     <div class="bs-left reveal">
-      <h4>Top Picks</h4>
-      <div class="bs-title">Our Best<br>Sellers</div>
-      <p class="bs-sub">Handpicked favourites — the products our customers love most.</p>
-      <a href="#products-sec" class="btn-gold" onclick="navFilter('all',null)" style="font-size:.65rem;padding:12px 22px">VIEW ALL PRODUCTS &rarr;</a>
+      <h4>Featured Products</h4>
+      <div class="bs-title">Our Best Sellers</div>
+      <p class="bs-sub">Premium quality. Trendy styles. Unlimited choices.</p>
+      <a href="#products-sec" class="bs-view-all" onclick="navFilter('all',null)">VIEW ALL &rarr;</a>
     </div>
-    <div class="bs-scroll" id="bestSellersGrid">
-      <!-- JS renders cards here -->
-      <div style="color:var(--muted);font-size:.82rem;padding:20px 0">Loading best sellers…</div>
+    <div class="bs-carousel reveal reveal-d1">
+      <button class="bs-arrow bs-arrow-prev" onclick="bsSlide(-1)" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+      <div style="overflow:hidden">
+        <div class="bs-cards-wrap" id="bestSellersGrid">
+          <div style="color:#aaa;font-size:.8rem;padding:20px 0">Loading…</div>
+        </div>
+      </div>
+      <button class="bs-arrow bs-arrow-next" onclick="bsSlide(1)" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
@@ -1132,24 +1190,25 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <!-- HAMPER PROMO -->
 <section class="hamper-promo" id="hamper-promo-sec">
   <div class="hamper-promo-inner">
-    <div class="hamper-promo-content reveal">
-      <div class="hp-brand">Our Speciality</div>
+    <div class="hamper-promo-left reveal">
+      <div class="hp-brand">OG Gift Hampers 47</div>
       <h2>Luxury Hampers<br>for Every Moment</h2>
-      <p class="hp-tagline">Curated with love — the perfect gift for every person and every occasion.</p>
-      <ul class="hamper-promo-list">
-        <li>Birthday &amp; Anniversary Hampers</li>
-        <li>Wedding &amp; Engagement Gift Boxes</li>
-        <li>Corporate Gifting Solutions</li>
-        <li>Festival &amp; Celebration Hampers</li>
-        <li>Personalised Luxury Packages</li>
-      </ul>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20order%20a%20luxury%20hamper." target="_blank" rel="noopener" class="btn-gold">Order a Hamper</a>
-        <a href="#products-sec" class="btn-outline-w" style="border-color:rgba(245,240,232,.3);color:#f5f0e8">Browse Collection</a>
-      </div>
+      <p class="hp-tagline">Customised with love, packed with elegance.</p>
+      <a href="https://wa.me/918146805002?text=Hi%20OG%20Accessories%2047!%20I%20want%20to%20order%20a%20luxury%20hamper." target="_blank" rel="noopener" class="btn-gold">EXPLORE HAMPERS &rarr;</a>
     </div>
-    <div class="hamper-promo-img-wrap reveal reveal-d1">
+    <div class="hamper-promo-img-col reveal reveal-d1">
       <img src="hamper2.jpg" alt="Luxury Gift Hamper — OG Accessories 47"/>
+    </div>
+    <div class="hamper-promo-right reveal reveal-d2">
+      <ul class="hamper-list">
+        <li><i class="fas fa-gift"></i> Birthday Hampers</li>
+        <li><i class="fas fa-heart"></i> Anniversary Hampers</li>
+        <li><i class="fas fa-star"></i> Surprise Hampers</li>
+        <li><i class="fas fa-gift"></i> Rakhi Hampers</li>
+        <li><i class="fas fa-heart"></i> Couple Hampers</li>
+        <li><i class="fas fa-leaf"></i> Artificial &amp; Rose Bouquets</li>
+        <li><i class="fas fa-birthday-cake"></i> Cakes &amp; More</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1158,93 +1217,114 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <section class="why-sec">
   <div class="why-inner">
     <div class="why-header reveal">
-      <div class="sec-eyebrow" style="text-align:center;margin-bottom:10px">Our Promise</div>
-      <div class="sec-title" style="text-align:center">More Than <span>Just a Gift</span></div>
-      <div class="sec-divider" style="margin:10px auto 0"></div>
+      <div class="why-eyebrow">Why Choose Us</div>
+      <div class="why-heading">More Than Just a Gift</div>
     </div>
     <div class="why-grid">
       <div class="why-card reveal">
-        <div class="why-icon"><i class="fas fa-gem"></i></div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.8 5.3.8-3.85 3.75.9 5.3L12 14.25l-4.75 2.4.9-5.3L4.3 7.6l5.3-.8L12 2z"/></svg>
+        </div>
         <div class="why-title">Premium Quality</div>
-        <div class="why-subtitle">Handpicked with care</div>
-        <div class="why-text">Only the finest accessories reach our shelves — curated for quality and lasting impression.</div>
+        <div class="why-subtitle">Only the best for you</div>
       </div>
       <div class="why-card reveal reveal-d1">
-        <div class="why-icon"><i class="fas fa-gift"></i></div>
-        <div class="why-title">Beautifully Curated</div>
-        <div class="why-subtitle">For every occasion</div>
-        <div class="why-text">Thoughtfully assembled hampers and gift sets that make every celebration unforgettable.</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M12 8V4"/><path d="M8.5 4a3.5 3.5 0 017 0"/><path d="M3 12h18"/></svg>
+        </div>
+        <div class="why-title">Customised Hampers</div>
+        <div class="why-subtitle">As per your choice</div>
       </div>
       <div class="why-card reveal reveal-d2">
-        <div class="why-icon"><i class="fas fa-box-open"></i></div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <div class="why-title">Secure Packaging</div>
-        <div class="why-subtitle">Delivered perfectly</div>
-        <div class="why-text">Products packed with care to arrive in perfect condition — every single time.</div>
+        <div class="why-subtitle">Safe till it reaches you</div>
       </div>
       <div class="why-card reveal reveal-d3">
-        <div class="why-icon"><i class="fas fa-heart"></i></div>
-        <div class="why-title">Make Moments Special</div>
-        <div class="why-subtitle">More than a gift</div>
-        <div class="why-text">We help you create memories — not just products. Each order carries a personal touch.</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.9 9.73a19.79 19.79 0 01-3.07-8.67A2 2 0 012.81 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.45-1.45a2 2 0 012.12-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+        </div>
+        <div class="why-title">Fast Support</div>
+        <div class="why-subtitle">We're always here</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS SECTION -->
-<div id="products-sec" style="padding:32px 0 48px;background:var(--bg)">
-  <div class="sec-wrap" style="padding-top:0">
-    <div class="sec-hdr reveal">
-      <div class="sec-hdr-left">
-        <div class="sec-eyebrow">Hand Picked</div>
-        <div class="sec-title">Full <span>Collection</span></div>
-        <div class="sec-divider"></div>
-      </div>
-      <span class="filter-count" id="filterCount"></span>
-    </div>
+<div id="products-sec" style="padding:32px 0 52px;background:var(--bg)">
+  <div class="sec-wrap" style="padding-top:16px">
     <div class="shop-layout">
       <aside class="shop-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-heading">Categories</div>
-          <div class="sidebar-cat-list">
-            <button class="sidebar-cat-item active" data-cat="all" onclick="filterCat('all',this)">All Products</button>
-            <button class="sidebar-cat-item" data-cat="Belts" onclick="filterCat('Belts',this)">Belts</button>
-            <button class="sidebar-cat-item" data-cat="Wallets" onclick="filterCat('Wallets',this)">Wallets</button>
-            <button class="sidebar-cat-item" data-cat="Watches" onclick="filterCat('Watches',this)">Watches</button>
-            <button class="sidebar-cat-item" data-cat="Side Bags" onclick="filterCat('Side Bags',this)">Side Bags</button>
-            <button class="sidebar-cat-item" data-cat="Sunglasses" onclick="filterCat('Sunglasses',this)">Sunglasses</button>
-            <button class="sidebar-cat-item" data-cat="Perfumes" onclick="filterCat('Perfumes',this)">Perfumes</button>
-            <button class="sidebar-cat-item" data-cat="T-Shirts" onclick="filterCat('T-Shirts',this)">T-Shirts</button>
-            <button class="sidebar-cat-item" data-cat="Shirts" onclick="filterCat('Shirts',this)">Shirts</button>
-            <button class="sidebar-cat-item" data-cat="Caps" onclick="filterCat('Caps',this)">Caps</button>
-            <button class="sidebar-cat-item" data-cat="Pants" onclick="filterCat('Pants',this)">Pants</button>
+          <a class="sidebar-cat-row active" data-cat="all" href="#products-sec" onclick="filterCat('all',this)"><span class="sidebar-cat-icon"><i class="fas fa-th"></i></span><span class="sidebar-cat-label">All Products</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Watches" href="#products-sec" onclick="filterCat('Watches',this)"><span class="sidebar-cat-icon"><i class="fas fa-clock"></i></span><span class="sidebar-cat-label">Watches</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Sunglasses" href="#products-sec" onclick="filterCat('Sunglasses',this)"><span class="sidebar-cat-icon"><i class="fas fa-glasses"></i></span><span class="sidebar-cat-label">Shades</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Wallets" href="#products-sec" onclick="filterCat('Wallets',this)"><span class="sidebar-cat-icon"><i class="fas fa-wallet"></i></span><span class="sidebar-cat-label">Wallets &amp; Card Holders</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Belts" href="#products-sec" onclick="filterCat('Belts',this)"><span class="sidebar-cat-icon"><i class="fas fa-grip-lines"></i></span><span class="sidebar-cat-label">Belts</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Perfumes" href="#products-sec" onclick="filterCat('Perfumes',this)"><span class="sidebar-cat-icon"><i class="fas fa-spray-can"></i></span><span class="sidebar-cat-label">Perfumes</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Side Bags" href="#products-sec" onclick="filterCat('Side Bags',this)"><span class="sidebar-cat-icon"><i class="fas fa-shopping-bag"></i></span><span class="sidebar-cat-label">Bags</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="T-Shirts" href="#products-sec" onclick="filterCat('T-Shirts',this)"><span class="sidebar-cat-icon"><i class="fas fa-tshirt"></i></span><span class="sidebar-cat-label">Clothing</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Caps" href="#products-sec" onclick="filterCat('Caps',this)"><span class="sidebar-cat-icon"><i class="fas fa-hat-cowboy"></i></span><span class="sidebar-cat-label">Caps</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Jewellery" href="#products-sec" onclick="filterCat('Jewellery',this)"><span class="sidebar-cat-icon"><i class="fas fa-gem"></i></span><span class="sidebar-cat-label">Jewellery</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+          <a class="sidebar-cat-row" data-cat="Shoes" href="#products-sec" onclick="filterCat('Shoes',this)"><span class="sidebar-cat-icon"><i class="fas fa-shoe-prints"></i></span><span class="sidebar-cat-label">Shoes</span><span class="sidebar-cat-arrow"><i class="fas fa-chevron-right"></i></span></a>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Filter by Price</div>
+          <div class="price-slider-wrap">
+            <input type="range" class="price-slider" id="priceRangeFilter" min="0" max="5000" value="5000" oninput="updatePriceLabel(this.value)"/>
+            <div class="price-labels"><span>₹0</span><span id="priceRangeLabel">₹5,000</span></div>
+            <button class="sidebar-apply-btn" onclick="applyPriceFilter()">APPLY</button>
           </div>
         </div>
         <div class="sidebar-section">
-          <div class="sidebar-heading">Sort By</div>
-          <select class="sort-select" id="sortSelect" aria-label="Sort" onchange="renderProducts()" style="width:100%">
-            <option value="default">Default</option>
+          <div class="sidebar-heading">Brand</div>
+          <div class="sidebar-check-list">
+            <label class="sidebar-check-row"><input type="checkbox" onchange="renderProducts()"/><span class="sidebar-check-label">Gucci</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" onchange="renderProducts()"/><span class="sidebar-check-label">Ray-Ban</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" onchange="renderProducts()"/><span class="sidebar-check-label">Nike</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" onchange="renderProducts()"/><span class="sidebar-check-label">Louis Vuitton</span></label>
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-heading">Size</div>
+          <div class="sidebar-check-list" style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+            <label class="sidebar-check-row"><input type="checkbox" id="sizeS" onchange="renderProducts()"/><span class="sidebar-check-label">S</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" id="sizeM" onchange="renderProducts()"/><span class="sidebar-check-label">M</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" id="sizeL" onchange="renderProducts()"/><span class="sidebar-check-label">L</span></label>
+            <label class="sidebar-check-row"><input type="checkbox" id="sizeXL" onchange="renderProducts()"/><span class="sidebar-check-label">XL</span></label>
+            <label class="sidebar-check-row" style="grid-column:1/-1"><input type="checkbox" id="sizeFree" onchange="renderProducts()"/><span class="sidebar-check-label">Free Size</span></label>
+          </div>
+        </div>
+        <div class="sidebar-promo-img">
+          <img src="hamper3.jpg" alt="Luxury In Every Detail" style="width:100%;display:block" onerror="this.parentElement.style.display='none'"/>
+        </div>
+        <!-- Hidden selects kept for JS compatibility -->
+        <div style="display:none">
+          <select id="sortSelect" onchange="renderProducts()"><option value="default">Default</option><option value="price-asc">Price: Low → High</option><option value="price-desc">Price: High → Low</option><option value="name-asc">Name: A → Z</option><option value="rating-desc">Top Rated</option></select>
+          <select id="sizeFilter" onchange="renderProducts()"><option value="">All Sizes</option></select>
+          <select id="colorFilter" onchange="renderProducts()"><option value="">All Colors</option></select>
+        </div>
+      </aside>
+      <div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px">
+          <div>
+            <div style="font-size:.7rem;color:#888;margin-bottom:4px">Home &rsaquo; Shop</div>
+            <h2 style="font-family:'Cormorant',serif;font-size:1.8rem;font-weight:600;color:#1c1917;margin-bottom:2px">All Products</h2>
+            <p style="font-size:.78rem;color:#888;margin-bottom:14px">Discover the latest and most loved products from OG Accessories 47. <span class="filter-count" id="filterCount"></span></p>
+          </div>
+          <select class="sort-select" id="sortSelectMain" aria-label="Sort" onchange="document.getElementById('sortSelect').value=this.value;renderProducts()" style="font-size:.75rem;padding:8px 12px">
+            <option value="default">Sort by: Featured</option>
             <option value="price-asc">Price: Low → High</option>
             <option value="price-desc">Price: High → Low</option>
             <option value="name-asc">Name: A → Z</option>
             <option value="rating-desc">Top Rated</option>
           </select>
         </div>
-        <div class="sidebar-section">
-          <div class="sidebar-heading">Size</div>
-          <select class="sort-select" id="sizeFilter" aria-label="Filter by size" onchange="renderProducts()" style="width:100%">
-            <option value="">All Sizes</option>
-          </select>
-        </div>
-        <div class="sidebar-section">
-          <div class="sidebar-heading">Color</div>
-          <select class="sort-select" id="colorFilter" aria-label="Filter by color" onchange="renderProducts()" style="width:100%">
-            <option value="">All Colors</option>
-          </select>
-        </div>
-      </aside>
-      <div>
-        <div class="prod-controls reveal reveal-d1">
+        <div class="prod-controls" style="margin-bottom:16px">
           <div class="search-wrap">
             <i class="fas fa-search" aria-hidden="true"></i>
             <input class="search-box" type="text" id="searchInput2" placeholder="Search products..." aria-label="Search products" oninput="syncSearch(this.value)"/>
@@ -1293,51 +1373,52 @@ header{background:#fff!important;border-bottom:1px solid var(--border)!important
 <footer>
   <div class="ft-top">
     <div class="reveal">
-      <img src="logo.jpg" alt="OG Accessories 47" style="height:48px;width:auto;object-fit:contain;margin-bottom:12px;filter:brightness(0) invert(1);opacity:.85">
-      <p class="ft-desc">Premium fashion accessories &amp; gift hampers — crafted for those who define their own standard. Straight from Zira, Ferozepur, Punjab.</p>
-      <div class="ft-socials">
-        <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram" id="ftSocInsta"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-        <a href="https://www.facebook.com/ogaccessoriesogstyles" target="_blank" rel="noopener" aria-label="Facebook" id="ftSocFb"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-        <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp" id="ftSocWa"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-      </div>
+      <img src="logo.jpg" alt="OG Accessories 47" class="ft-brand-logo" style="filter:brightness(0) invert(1);opacity:.9">
+      <div class="ft-brand-name">OG Accessories 47</div>
+      <div class="ft-brand-tag">Style &bull; Luxury &bull; You</div>
     </div>
     <div class="ft-col reveal reveal-d1">
-      <h4>Shop</h4>
+      <h4>Quick Links</h4>
       <ul>
-        <li><a href="#products-sec" onclick="navFilter('Belts',null)">Belts</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Wallets',null)">Wallets</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Watches',null)">Watches</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Side Bags',null)">Side Bags</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Perfumes',null)">Perfumes</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Sunglasses',null)">Sunglasses</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#products-sec" onclick="navFilter('all',null)">Shop</a></li>
+        <li><a href="#hamper-promo-sec">Hampers</a></li>
+        <li><a href="#categories-sec">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
     <div class="ft-col reveal reveal-d2">
-      <h4>More</h4>
+      <h4>Contact Us</h4>
       <ul>
-        <li><a href="#products-sec" onclick="navFilter('T-Shirts',null)">T-Shirts</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Shirts',null)">Shirts</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Pants',null)">Pants</a></li>
-        <li><a href="#products-sec" onclick="navFilter('Caps',null)">Caps</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="policy.html">Privacy Policy</a></li>
-        <li><a href="returns.html">Returns Policy</a></li>
+        <li><a href="tel:+918146805002"><i class="fas fa-phone"></i> 81468-05002</a></li>
+        <li><a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" id="ftSocInsta"><i class="fab fa-instagram"></i> @og_accessories47</a></li>
+        <li><a href="https://ogaccessories.netlify.app" target="_blank"><i class="fas fa-globe"></i> ogaccessories.netlify.app</a></li>
+        <li><a href="https://g.co/kgs/ogaccessories" target="_blank"><i class="fab fa-google"></i> Google Reviews</a></li>
       </ul>
     </div>
     <div class="ft-col reveal reveal-d3">
-      <h4>Info</h4>
-      <ul>
-        <li><a href="tel:+918146805002">+91 81468-05002</a></li>
-        <li><a href="mailto:bhullarsam162@gmail.com">Email Us</a></li>
-        <li><a href="https://wa.me/918146805002" target="_blank" rel="noopener">WhatsApp Order</a></li>
-        <li><a href="contact.html">Store Location</a></li>
-        <li><a href="policy.html">Terms &amp; Conditions</a></li>
-      </ul>
+      <h4>Join Our Community</h4>
+      <div class="ft-newsletter">
+        <p>Get the latest updates, offers &amp; new arrivals.</p>
+        <div class="ft-email-wrap">
+          <input type="email" class="ft-email-input" placeholder="Your email address"/>
+          <button class="ft-email-btn" aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="ft-bottom">
-    <p class="ft-copy">&copy; 2026 <span>OG Accessories 47</span>. All rights reserved. Made with &hearts; in <span>Zira, Punjab</span></p>
+    <p class="ft-copy">&copy; 2025 OG Accessories 47. All Rights Reserved.</p>
+    <div class="ft-follow">
+      Follow Us
+      <a href="https://www.instagram.com/og_accessories47" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/918146805002" target="_blank" rel="noopener" aria-label="WhatsApp" id="ftSocWa"><i class="fab fa-whatsapp"></i></a>
+    </div>
     <a href="admin.html" class="ft-admin">&#9679;</a>
+  </div>
+  <!-- Hidden elements for JS compatibility -->
+  <div style="display:none">
+    <a id="ftSocFb" href="#"></a>
   </div>
 </footer>
 
@@ -1935,13 +2016,15 @@ function renderProducts(){
   const szFilter=document.getElementById('sizeFilter')?.value||'';
   const clFilter=document.getElementById('colorFilter')?.value||'';
   const sort=document.getElementById('sortSelect').value;
+  const maxPr=typeof _maxPriceFilter!=='undefined'?_maxPriceFilter:99999;
   let list=allProducts.filter(p=>{
     const mc=activeCategory==='all'||p.category===activeCategory;
     const cc=!catFilter||p.category===catFilter;
     const ms=p.name.toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)||(p.category||'').toLowerCase().includes(search);
     const szOk=!szFilter||(p.sizes||[]).includes(szFilter);
     const clOk=!clFilter||(p.colors||[]).includes(clFilter);
-    return mc&&cc&&ms&&szOk&&clOk;
+    const prOk=Number(p.price)<=maxPr;
+    return mc&&cc&&ms&&szOk&&clOk&&prOk;
   });
   if(sort==='price-asc')   list.sort((a,b)=>a.price-b.price);
   if(sort==='price-desc')  list.sort((a,b)=>b.price-a.price);
@@ -1955,47 +2038,39 @@ function renderProducts(){
   if(!list.length){grid.innerHTML='<div class="no-products">No products found. Try a different category or search.</div>';renderPagination(0);return}
   const start=(currentPage-1)*PER_PAGE;
   list=list.slice(start,start+PER_PAGE);
-  const badges={'0':'badge-new','1':'badge-hot','2':'badge-new','3':'','4':'badge-hot','5':'badge-new','6':'badge-hot','7':'','8':'badge-new','9':'badge-hot'};
+  const bsLabels=['Bestseller','New','','Bestseller','New','','','Bestseller','New',''];
   grid.innerHTML=list.map((p,i)=>{
     const stars=buildStars(p.avgRating),reviews=p.reviewCount||0;
-    const starTip=p.avgRating?Number(p.avgRating).toFixed(1)+' / 5':'No ratings yet';
-    const badgeClass=badges[String(i%10)]||'';
-    const badgeLabel=badgeClass==='badge-new'?'New':badgeClass==='badge-hot'?'Hot':'';
     const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
     const realMrp=hasMrp?Number(p.mrp):null;
     const realDisc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
     const oos=p.stock===0;
     const wished=isWished(p._id);
+    const blbl=bsLabels[i%10];
+    const bbg=blbl==='Bestseller'?'background:var(--gold);color:#fff':'background:#22c55e;color:#fff';
     return `
     <div class="product-card" style="animation-delay:${i*.04}s" onclick="openModal('${p._id}')">
       <div class="product-img-wrap">
         ${p.image?'<img class="product-img" src="'+escHtml(p.image)+'" alt="'+escHtml(p.name)+'" loading="lazy" data-cat="'+escHtml(p.category)+'" onerror="imgErr(this)"/>':`<div class="product-img-ph">${catIcon(p.category)}</div>`}
         <div class="product-badges">
-          <span class="badge badge-cat">${escHtml(p.category)}</span>
-          ${oos?'<span class="badge badge-oos">Out of Stock</span>':(badgeLabel?'<span class="badge '+badgeClass+'">'+badgeLabel+'</span>':'')}
+          ${oos?'<span class="badge" style="background:#dc2626;color:#fff">Out of Stock</span>':(blbl?`<span class="badge" style="${bbg}">${blbl}</span>`:'')}
         </div>
-        <button class="wish-btn${wished?' active':''}" onclick="toggleWish('${p._id}');event.stopPropagation()" title="${wished?'Remove from wishlist':'Add to wishlist'}"><i class="${wished?'fas':'far'} fa-heart"></i></button>
+        <button class="wish-btn${wished?' active':''}" onclick="toggleWish('${p._id}');event.stopPropagation()" title="${wished?'Remove':'Wishlist'}"><i class="${wished?'fas':'far'} fa-heart"></i></button>
         <div class="product-quick"><button class="quick-btn">Quick View</button></div>
       </div>
       <div class="product-body">
-        <div class="product-cat-lbl">${escHtml(p.category)}</div>
         <div class="product-name">${escHtml(p.name)}</div>
-        <div class="product-stars" title="${starTip}">
-          <span class="stars-icon">${reviews?stars:'☆☆☆☆☆'}</span>
-          <span class="stars-count">${reviews?'('+reviews+')':'No reviews yet'}</span>
-        </div>
+        <div class="product-cat-lbl">${escHtml(p.category)}</div>
         <div class="product-price-row">
           <div class="product-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-          ${hasMrp?'<div class="product-mrp">&#8377;'+realMrp.toLocaleString('en-IN')+'</div><div class="product-discount">'+realDisc+'% off</div>':''}
+          ${hasMrp?'<div class="product-mrp">&#8377;'+realMrp.toLocaleString('en-IN')+'</div><div class="product-discount">'+realDisc+'% OFF</div>':''}
         </div>
       </div>
       <div class="product-footer">
-        <button class="product-atc-btn"${oos?' disabled':''} id="atc-${p._id}" onclick="addToCart('${p._id}');event.stopPropagation()" aria-label="Add to cart">
-          ${oos?'<i class="fas fa-ban"></i> Out of Stock':'<i class="fas fa-shopping-bag" aria-hidden="true"></i> Add to Cart'}
+        <button class="product-cart-icon-btn" onclick="addToCart('${p._id}');event.stopPropagation()" ${oos?'disabled':''} title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+        <button class="product-wa-btn"${oos?' disabled':''} id="atc-${p._id}" onclick="addToCart('${p._id}');event.stopPropagation()">
+          <i class="fas fa-shopping-bag"></i> Add to Cart
         </button>
-        <a class="product-wa-btn" href="${waLink(p)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Order on WhatsApp" style="flex:0 0 auto;padding:9px 10px" title="Order via WhatsApp">
-          <i class="fab fa-whatsapp" aria-hidden="true"></i>
-        </a>
       </div>
     </div>`}).join('');
   renderPagination(totalPages);
@@ -2227,33 +2302,57 @@ async function loadSiteSettings(){
 }
 
 /* ── BEST SELLERS ── */
+let _bsOffset=0;
 function renderBestSellers(){
   const el=document.getElementById('bestSellersGrid');
   if(!el)return;
   let list=[...allProducts];
   list.sort((a,b)=>(b.avgRating||0)-(a.avgRating||0)||(b.reviewCount||0)-(a.reviewCount||0));
   const top=list.slice(0,8);
-  if(!top.length){el.innerHTML='<div style="color:var(--muted);font-size:.82rem;padding:20px 32px">No products yet.</div>';return;}
+  if(!top.length){el.innerHTML='<div style="color:#aaa;font-size:.8rem;padding:20px 0">No products yet.</div>';return;}
   el.innerHTML=top.map(p=>{
     const hasMrp=p.mrp&&Number(p.mrp)>Number(p.price);
-    const disc=hasMrp?Math.round((1-Number(p.price)/Number(p.mrp))*100):null;
     return `<div class="bs-card" onclick="openModal('${p._id}')">
       <div class="bs-card-img">
-        ${p.image?`<img src="${escHtml(p.image)}" alt="${escHtml(p.name)}" loading="lazy" onerror="this.style.display='none'"/>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--gold);opacity:.4">${catIcon(p.category)}</div>`}
+        ${p.image?`<img src="${escHtml(p.image)}" alt="${escHtml(p.name)}" loading="lazy" onerror="this.style.display='none'"/>`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2rem;opacity:.3">${catIcon(p.category)}</div>`}
       </div>
       <div class="bs-card-body">
         <div class="bs-card-cat">${escHtml(p.category)}</div>
         <div class="bs-card-name">${escHtml(p.name)}</div>
-        <div style="display:flex;align-items:baseline;gap:8px">
-          <div class="bs-card-price">&#8377;${Number(p.price).toLocaleString('en-IN')}</div>
-          ${hasMrp?`<div style="font-size:.7rem;color:var(--muted2);text-decoration:line-through">&#8377;${Number(p.mrp).toLocaleString('en-IN')}</div><div style="font-size:.65rem;font-weight:700;color:#16a34a">${disc}% off</div>`:''}
+        <div class="bs-card-footer">
+          <div class="bs-card-price">&#8377;${Number(p.price).toLocaleString('en-IN')}${hasMrp?`<span>&#8377;${Number(p.mrp).toLocaleString('en-IN')}</span>`:''}</div>
+          <button class="bs-cart-btn" onclick="addToCart('${p._id}');event.stopPropagation()" ${p.stock===0?'disabled':''} title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
         </div>
-        <button class="bs-card-atc" onclick="addToCart('${p._id}');event.stopPropagation()"${p.stock===0?' disabled':''}>
-          ${p.stock===0?'Out of Stock':'<i class="fas fa-shopping-bag"></i> Add to Cart'}
-        </button>
       </div>
     </div>`;
   }).join('');
+  _bsOffset=0;
+}
+
+function bsSlide(dir){
+  const wrap=document.querySelector('.bs-cards-wrap');
+  if(!wrap)return;
+  const cards=wrap.querySelectorAll('.bs-card');
+  if(!cards.length)return;
+  const cardW=cards[0].offsetWidth+16;
+  const maxOff=Math.max(0,(cards.length-4)*cardW);
+  _bsOffset=Math.min(Math.max(0,_bsOffset+dir*cardW*2),maxOff);
+  wrap.style.transform=`translateX(-${_bsOffset}px)`;
+}
+
+function updatePriceLabel(v){
+  const el=document.getElementById('priceRangeLabel');
+  if(el)el.textContent='₹'+Number(v).toLocaleString('en-IN');
+  const slider=document.getElementById('priceRangeFilter');
+  if(slider){const pct=(v/slider.max)*100;slider.style.background=`linear-gradient(to right,var(--gold) 0%,var(--gold) ${pct}%,var(--border) ${pct}%)`;}
+}
+
+let _maxPriceFilter=99999;
+function applyPriceFilter(){
+  const slider=document.getElementById('priceRangeFilter');
+  if(slider)_maxPriceFilter=Number(slider.value);
+  currentPage=1;
+  renderProducts();
 }
 
 /* ── INIT ── */
